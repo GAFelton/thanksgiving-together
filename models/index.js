@@ -1,15 +1,13 @@
-/*
- const user = require("./User");
-const family = require("./Family");
-const recipe = require("./Recipe");
+const User = require("./User");
+const Family = require("./Family");
+const Recipe = require("./Recipe");
 
 module.exports = {
   // Family Schema
-  Family: family,
+  Family,
   // User Schema (populates Family)
-  User: user,
+  User,
   // Recipes DB Schema (populates Family)
-  Recipe: recipe,
+  Recipe,
 
 };
-*/
