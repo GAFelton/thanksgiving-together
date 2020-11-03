@@ -1,1 +1,4 @@
 node_modules
+
+# Ignoring Example Files:
+/client/src/pages/Books.js

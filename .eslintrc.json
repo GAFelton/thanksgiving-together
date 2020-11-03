@@ -43,6 +43,9 @@
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
         "vars-on-top": "error",
-        "yoda": "error"
+        "yoda": "error",
+        "react/jsx-props-no-spreading": "warn",
+        "react/jsx-filename-extension": "off",
+        "react/prop-types": "off"
       }
 }
