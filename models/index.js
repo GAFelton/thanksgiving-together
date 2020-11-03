@@ -1,4 +1,5 @@
-const user = require("./User");
+/*
+ const user = require("./User");
 const family = require("./Family");
 const recipe = require("./Recipe");
 
@@ -11,3 +12,4 @@ module.exports = {
   Recipe: recipe,
 
 };
+*/
