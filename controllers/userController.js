@@ -12,4 +12,12 @@ module.exports = {
   // TODO update
 
   // TODO archive
+  archiveUser(req, res) {
+    // is req.params.id the correct way to get ID from React?
+    const { id } = req.params.id;
+    User
+      .findByIdAndUpdate(id, { archived: true }, { new: true })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
 };
