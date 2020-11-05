@@ -1,6 +1,7 @@
 const familyController = require("./familyController");
 const userController = require("./userController");
 const recipeController = require("./recipeController");
+const discussTopicsController = require("./discussTopicsController");
 
 module.exports = {
   // Family Controller
@@ -9,4 +10,6 @@ module.exports = {
   userController,
   // Recipe Controller
   recipeController,
+  // Discussion Topics Controller
+  discussTopicsController,
 };
