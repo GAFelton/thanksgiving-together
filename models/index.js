@@ -1,6 +1,7 @@
 const User = require("./User");
 const Family = require("./Family");
 const Recipe = require("./Recipe");
+const Book = require("./book")
 
 module.exports = {
   // Family Schema
@@ -9,5 +10,6 @@ module.exports = {
   User,
   // Recipes DB Schema (populates Family)
   Recipe,
-
+  // Legacy Book schema to prevent errors
+  Book,
 };
