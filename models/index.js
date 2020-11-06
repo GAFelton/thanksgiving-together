@@ -13,5 +13,6 @@ module.exports = {
   Recipe,
   // Discussion Topics Schema
   DiscussionTopic,
+  // Legacy Book schema to prevent errors
   Book,
 };

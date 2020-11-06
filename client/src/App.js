@@ -1,6 +1,6 @@
 import React from "react";
-import Books from "./pages/Books";
 import Nav from "./components/Nav";
+import Zoom from "./pages/Zoom";
 
 // AUTHENTICATION NOTES
 // Wrap providers around MAIN app.
@@ -10,7 +10,7 @@ function App() {
   return (
     <div>
       <Nav />
-      <Books />
+      <Zoom />
     </div>
   );
 }
