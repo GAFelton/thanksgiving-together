@@ -1,7 +1,7 @@
 const User = require("./User");
 const Family = require("./Family");
 const Recipe = require("./Recipe");
-const Book = require("./book")
+const Book = require("./book");
 
 module.exports = {
   // Family Schema
