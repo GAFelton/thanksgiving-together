@@ -1,7 +1,8 @@
 const User = require("./User");
 const Family = require("./Family");
 const Recipe = require("./Recipe");
-const DiscussionTopics = require("./DiscussionTopics");
+const DiscussionTopic = require("./DiscussionTopic");
+const Book = require("./book");
 
 module.exports = {
   // Family Schema
@@ -11,5 +12,6 @@ module.exports = {
   // Recipes DB Schema (populates Family)
   Recipe,
   // Discussion Topics Schema
-  DiscussionTopics,
+  DiscussionTopic,
+  Book,
 };

@@ -5,6 +5,12 @@ const { Schema } = mongoose;
 const recipeSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String },
+  instructions: [
+    {
+      item: String,
+      checked: { type: Boolean, default: false },
+    },
+  ],
   ingredients: [
     {
       item: String,
@@ -14,6 +20,7 @@ const recipeSchema = new Schema({
   ],
   prepTime: { type: Number },
   cookTime: { type: Number },
+  photo: {},
   author: { type: Schema.Types.ObjectId, ref: "User", required: true },
   archived: { type: Boolean, required: true, default: false },
 }, { toJSON: { virtuals: true } });
@@ -21,9 +28,9 @@ const recipeSchema = new Schema({
 recipeSchema.set("toObject", { virtuals: true });
 
 // eslint-disable-next-line func-names
-recipeSchema.virtual("totalTime".get(function () {
+recipeSchema.virtual("totalTime").get(function () {
   return this.prepTime + this.cookTime;
-}));
+});
 
 const Recipe = mongoose.model("Recipe", recipeSchema);
 
