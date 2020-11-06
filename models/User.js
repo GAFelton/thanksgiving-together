@@ -17,9 +17,9 @@ const userSchema = new Schema({
 userSchema.set("toObject", { virtuals: true });
 
 // eslint-disable-next-line func-names
-userSchema.virtual("fullName".get(function () {
+userSchema.virtual("fullName").get(function () {
   return `${this.firstName} ${this.lastName}`;
-}));
+});
 
 // Example Password hashing / comparison functions from https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
 // eslint-disable-next-line func-names

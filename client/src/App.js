@@ -1,12 +1,12 @@
 import React from "react";
-import Books from "./pages/Books";
 import Nav from "./components/Nav";
+import Zoom from "./pages/Zoom";
 
 function App() {
   return (
     <div>
       <Nav />
-      <Books />
+      <Zoom />
     </div>
   );
 }

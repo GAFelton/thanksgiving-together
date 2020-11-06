@@ -21,9 +21,9 @@ const recipeSchema = new Schema({
 recipeSchema.set("toObject", { virtuals: true });
 
 // eslint-disable-next-line func-names
-recipeSchema.virtual("totalTime".get(function () {
+recipeSchema.virtual("totalTime").get(function () {
   return this.prepTime + this.cookTime;
-}));
+});
 
 const Recipe = mongoose.model("Recipe", recipeSchema);
 
