@@ -15,7 +15,7 @@ app.use((req, res, next) => {
   const whitelist = ["localhost:3001", "localhost:3000"];
   const host = req.get("host");
 
-  whitelist.forEach((val, key) => {
+  whitelist.forEach((val) => {
     if (host.indexOf(val) > -1) {
       res.setHeader("Access-Control-Allow-Origin", host);
     }
