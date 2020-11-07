@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
-// import "./style.css";
 import API from "../../utils/API";
 
 function DiscussTopicBtn() {
   const [topics, setTopics] = useState([]);
-
+  const [topicIndex, setTopicIndex] = useState(-1);
 
   function loadDiscussionTopics() {
     API.getDiscussTopics()
-      .then((res) => setTopics(res.data))
+      .then((res) => {
+        const result = Array.from(res.data);
+        const response = result.map((resObj) => resObj.topic);
+        setTopics(response);
+      })
       .catch((err) => console.log(err));
   }
 
-  
   useEffect(() => {
-    loadDiscussionTopics(); // eslint-disable-line no-use-before-define
-    console.log(topics, setTopics);
+    loadDiscussionTopics();
   }, []);
 
   function showDiscussionTopic() {
     const randomTopic = Math.floor((Math.random() * topics.length));
-    return topics[randomTopic];
+    setTopicIndex(randomTopic);
   }
 
   return (
@@ -30,8 +31,10 @@ function DiscussTopicBtn() {
       </button>
       { // TODO: Figure out where to display the fetched discussion topic.
       }
-      <div className="DiscussTopicArea"> {topics}
-      
+      <div className="DiscussTopicArea">
+        <p>
+          {topics[topicIndex]}
+        </p>
       </div>
     </div>
   );
