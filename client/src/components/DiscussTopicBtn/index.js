@@ -3,12 +3,13 @@ import API from "../../utils/API";
 
 // Discussion Topic Button Functional Component
 function DiscussTopicBtn() {
-  // The topics state is populated when the page first loads (via useEffect). topic Index is changed by user input.
+  // The topics state is populated when the page first loads (via useEffect).
+  // The topicIndex state is changed by user input.
   const [topics, setTopics] = useState([]);
   const [topicIndex, setTopicIndex] = useState(-1);
 
-  // This function asks axios to return the full list of discussion topics from the database.
-  // It then disregards the _id from each one and sets the topics state to an array of discussion topics.
+  // This function asks axios to get the full list of discussion topics from the database.
+  // It disregards the _id from each and sets the topics state to an array of discussion topics.
   function loadDiscussionTopics() {
     API.getDiscussTopics()
       .then((res) => {
@@ -24,13 +25,15 @@ function DiscussTopicBtn() {
     loadDiscussionTopics();
   }, []);
 
-  // onClick, a random number is generated and used to set the TopicIndex state. This determines which topic is displayed.
+  // onClick, a random number is generated and used to set the TopicIndex state.
+  // This determines which topic is displayed.
   function showDiscussionTopic() {
     const randomTopic = Math.floor((Math.random() * topics.length));
     setTopicIndex(randomTopic);
   }
 
-  // The core of this rendering is just the button. For now, DiscussTopicArea is the div in which topics are displayed.
+  // The core of this rendering is just the button.
+  // For now, DiscussTopicArea is the div in which topics are displayed.
   // Topics should be displayed in a child component, which can be placed elsewhere on the page.
   return (
     <div>
