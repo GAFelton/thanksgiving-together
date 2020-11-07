@@ -1,6 +1,7 @@
 import React from "react";
 import Nav from "./components/Nav";
 import Zoom from "./pages/Zoom";
+import DiscussTopicBtn from "./components/DiscussTopicBtn";
 
 // AUTHENTICATION NOTES
 // Wrap providers around MAIN app.
@@ -11,6 +12,7 @@ function App() {
     <div>
       <Nav />
       <Zoom />
+      <DiscussTopicBtn />
     </div>
   );
 }
