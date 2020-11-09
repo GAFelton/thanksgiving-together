@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const { DiscussionTopics } = require("../models");
+const { DiscussionTopic } = require("../models");
 
 // This file empties the Discussion Topics collection and inserts the topics below
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogetherdb",
+  process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogetherdb", { useNewUrlParser: true, useUnifiedTopology: true },
 );
 
 const discussionTopicsSeed = [
@@ -100,9 +100,9 @@ const discussionTopicsSeed = [
   },
 ];
 
-DiscussionTopics
+DiscussionTopic
   .remove({})
-  .then(() => DiscussionTopics.collection.insertMany(discussionTopicsSeed))
+  .then(() => DiscussionTopic.collection.insertMany(discussionTopicsSeed))
   .then((data) => {
     console.log(`${data.result.n} records inserted!`);
     process.exit(0);
