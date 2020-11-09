@@ -4,7 +4,7 @@ const { DiscussionTopics } = require("../models");
 // This file empties the Discussion Topics collection and inserts the topics below
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogether",
+  process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogetherdb",
 );
 
 const discussionTopicsSeed = [
