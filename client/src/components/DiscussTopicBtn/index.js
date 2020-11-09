@@ -11,7 +11,7 @@ function DiscussTopicBtn() {
   // This function asks axios to get the full list of discussion topics from the database.
   // It disregards the _id from each and sets the topics state to an array of discussion topics.
   function loadDiscussionTopics() {
-    API.getDiscussTopics()
+    API.discussionTopics.get()
       .then((res) => {
         const result = Array.from(res.data);
         const response = result.map((resObj) => resObj.topic);

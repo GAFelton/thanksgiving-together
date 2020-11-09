@@ -1,27 +1,41 @@
-const { Family } = require("../models");
+const db = require("../models");
 
-// TODO: Set up routes
+// Family routes
 module.exports = {
-  // TODO findById
-
-  // TODO findbyRoomCode
-
+  // findById "GET /api/family/:id"
+  findById(req, res) {
+    db.Family
+      .findById(req.params.id)
+      .populate("members")
+      .populate("recipes")
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
   // TODO findAllRecipes
 
   // TODO findAllUsers
 
-  // TODO create
-
-  // TODO update
-
-  // TODO archive
-  archiveFamily(req, res) {
-    // is req.params.id the correct way to get ID from React?
-    const { id } = req.params.id;
-    Family
-      .findByIdAndUpdate(id, { archived: true }, { new: true })
+  // create "POST /api/family/"
+  create(req, res) {
+    db.Family
+      .create(req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-
+  // update "PUT /api/family/:id"
+  update(req, res) {
+    db.Family
+      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  // archive "PUT /api/family/archive/:id"
+  archiveFamily(req, res) {
+    // is req.params.id the correct way to get ID from React?
+    const { _id } = req.params.id;
+    db.Family
+      .findByIdAndUpdate(_id, { archived: true }, { new: true })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
 };
