@@ -9,7 +9,7 @@ const userSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true, index: { unique: true } },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   familyAdmin: { type: Boolean, required: true, default: false },
   archived: { type: Boolean, required: true, default: false },
 }, { toJSON: { virtuals: true } });
