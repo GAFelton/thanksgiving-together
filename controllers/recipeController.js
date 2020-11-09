@@ -14,7 +14,7 @@ module.exports = {
 
   // TODO findAllByAuthor
 
-  // create (adding recipe to correct family) "POST /api/recipe/:(family)id"
+  // create (adding recipe to correct family) "POST /api/recipe/family/:(family)id"
   create(req, res) {
     db.Recipe
       .create(req.body)

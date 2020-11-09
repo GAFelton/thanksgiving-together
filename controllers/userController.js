@@ -29,7 +29,7 @@ module.exports = {
       })
       .catch((err) => res.status(422).json(err));
   },
-  // create (adding user to correct family) "POST /api/user/:(family)id"
+  // create (adding user to correct family) "POST /api/user/family/:(family)id"
   // Need to use constructor method to allow Mongoose middleware to run.
   create(req, res) {
     const newUser = new db.User(req.body);
