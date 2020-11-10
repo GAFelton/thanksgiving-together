@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
-const { DiscussionTopic } = require("../models");
+const {
+  Family, User, Recipe, DiscussionTopic,
+} = require("../models");
 
+const connectionErrors = 0;
 // This file empties the Discussion Topics collection and inserts the topics below
 
 mongoose.connect(
