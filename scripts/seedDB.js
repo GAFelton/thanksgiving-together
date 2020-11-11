@@ -5,9 +5,11 @@ const {
 
 const connectionErrors = [];
 
-// This file empties the Discussion Topics, Family, User, and Recipe collections
+// This script empties the Discussion Topics, Family, User, and Recipe collections
 // and inserts the seed data below.
+// THE DELETION IS IRREVERSIBLE! Make sure you back up records that you wish to keep.
 
+// Connect to MongoDB Database.
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogetherdb", {
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false,
@@ -15,6 +17,7 @@ mongoose.connect(
 );
 console.log("Database Connection made, seeding data:");
 
+// Seed Data for discussion topics. 30 Records.
 const discussionTopicsSeed = [
   {
     topic: "What is one thing that you really appreciate about someone at the table?",
@@ -108,10 +111,12 @@ const discussionTopicsSeed = [
   },
 ];
 
+// Seed Data for family. 1 Record.
 const familySeed = {
   title: "testFam",
 };
 
+// Seed Data for user. 1 Record.
 const userSeed = {
   firstName: "Abby",
   lastName: "Testersmith",
@@ -119,8 +124,11 @@ const userSeed = {
   password: "test",
 };
 
+// Seed Data for recipe. 1 Record. Requires a userID, so must be seeded after user is seeded.
 const recipeSeed = (authorID) => ({ title: "Acorn Squash Soup", author: authorID });
 
+// Deletes existing records and Inserts family seed data into database.
+// Takes in seed data.
 async function familyInsert(seed) {
   try {
     const deleted = await Family.deleteMany();
@@ -128,6 +136,7 @@ async function familyInsert(seed) {
     const famData = await Family.create(seed);
     const famID = famData._id; // eslint-disable-line no-underscore-dangle
     console.log(`Family Inserted: ObjectID: ${famID}`);
+    // Returns famID so that userInsert and recipeInsert can add their _ids to this family record.
     return famID;
   } catch (err) {
     console.error(err);
@@ -136,6 +145,8 @@ async function familyInsert(seed) {
   return null;
 }
 
+// Deletes existing records and Inserts user seed data into database.
+// Takes in seed data and family ID from familyInsert().
 async function userInsert(seed, familyID) {
   try {
     const deleted = await User.deleteMany();
@@ -146,6 +157,7 @@ async function userInsert(seed, familyID) {
     const userID = newUser.id;
     console.log(`User Inserted: ObjectID: ${userID}`);
     const saved = await newUser.save(); // eslint-disable-line no-unused-vars
+    // Returns userID so that it can be used in the recipeSeed.
     return userID;
   } catch (err) {
     console.error(err);
@@ -154,6 +166,8 @@ async function userInsert(seed, familyID) {
   return null;
 }
 
+// Deletes existing records and Inserts recipe seed data into database.
+// Takes in seed data, family ID from familyInsert(), and memberID from userInsert().
 async function recipeInsert(seed, familyID, memberID) {
   try {
     const authorID = memberID;
@@ -172,6 +186,8 @@ async function recipeInsert(seed, familyID, memberID) {
   return null;
 }
 
+// Deletes existing records and Inserts discussion topic seed data into database.
+// Takes in seed data.
 async function discussionInsert(seed) {
   DiscussionTopic
     .remove({})
@@ -186,6 +202,7 @@ async function discussionInsert(seed) {
     });
 }
 
+// This function ends the database connection at the end of the seeding script.
 function errorHandler(errArray) {
   const errNumber = errArray.length;
   if (errNumber > 0) {
@@ -197,6 +214,8 @@ function errorHandler(errArray) {
   }
 }
 
+// init() is the controller for all inserting functions.
+// It ensures that famID and userID are accessible for later use.
 async function init() {
   const famID = await familyInsert(familySeed);
   const userID = await userInsert(userSeed, famID);
@@ -205,4 +224,5 @@ async function init() {
   errorHandler(connectionErrors);
 }
 
+// Calls init() and runs the script.
 init();
