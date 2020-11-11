@@ -1,13 +1,17 @@
+// THIS FILE DOES NOT FUNCTION CORRECTLY RIGHT NOW!
+
 const mongoose = require("mongoose");
 const {
   Family, User, Recipe, DiscussionTopic,
 } = require("../models");
 
-const connectionErrors = 0;
-// This file empties the Discussion Topics collection and inserts the topics below
+const connectionErrors = [];
+
+// This file empties the Discussion Topics, Family, User, and Recipe collections
+// and inserts the seed data below.
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogetherdb", { useNewUrlParser: true, useUnifiedTopology: true },
+  process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogetherdb", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
 );
 
 const discussionTopicsSeed = [
@@ -103,14 +107,109 @@ const discussionTopicsSeed = [
   },
 ];
 
-DiscussionTopic
-  .remove({})
-  .then(() => DiscussionTopic.collection.insertMany(discussionTopicsSeed))
-  .then((data) => {
-    console.log(`${data.result.n} records inserted!`);
+const familySeed = {
+  title: "testFam",
+};
+
+const userSeed = {
+  firstName: "Abby",
+  lastName: "Testersmith",
+  email: "tester@test.com",
+  password: "test",
+};
+
+const recipeSeed = (authorID) => ({ title: "Acorn Squash Soup", author: authorID });
+
+async function familyInsert(seed) {
+  try {
+    Family.remove({});
+    const famData = new Family(seed);
+    const famID = famData.insertedId;
+    console.log(famID);
+    console.log(`Family Inserted? ObjectID: ${famData.insertedId}`);
+    famData.save((err) => {
+      if (err) throw err;
+    });
+    return famID;
+  } catch (err) {
+    console.error(err);
+    connectionErrors.push(err);
+  }
+  return null;
+}
+
+async function userInsert(seed, familyID) {
+  try {
+    User.remove({});
+    const newUser = new User(seed); // eslint-disable-next-line no-unused-vars
+    const dbFamilyModel = await Family.findOneAndUpdate({ _id: familyID },
+      { $push: { members: newUser.id } }, { new: true });
+    const userID = newUser.id;
+    console.log(`User Inserted? ObjectID: ${userID}`);
+    newUser.save((err) => {
+      if (err) throw err;
+    });
+    return userID;
+  } catch (err) {
+    console.error(err);
+    connectionErrors.push(err);
+  }
+  return null;
+}
+
+async function recipeInsert(seed, familyID, memberID) {
+  try {
+    const authorID = memberID;
+    Recipe.remove({});
+    const newRecipe = new Recipe(seed(authorID)); // eslint-disable-next-line no-unused-vars
+    const dbFamilyModel = await Family.findOneAndUpdate({ _id: familyID },
+      { $push: { recipes: newRecipe.id } }, { new: true });
+    console.log(`Recipe Inserted? ObjectID: ${newRecipe.id}`);
+    newRecipe.save((err) => {
+      if (err) throw err;
+    });
+    return newRecipe;
+  } catch (err) {
+    console.error(err);
+    connectionErrors.push(err);
+  }
+  return null;
+}
+
+function discussionInsert(seed) {
+  DiscussionTopic
+    .remove({})
+    .then(() => DiscussionTopic.collection.insertMany(seed))
+    .then((data) => {
+      console.log(`${data.result.n} records inserted!`);
+      return data;
+    })
+    .catch((err) => {
+      console.error(err);
+      connectionErrors.push(err);
+    });
+}
+
+function errorHandler(errArray) {
+  const errNumber = errArray.length;
+  if (errNumber > 0) {
+    process.exit(1);
+  } else {
     process.exit(0);
-  })
-  .catch((err) => {
+  }
+}
+
+async function init() {
+  try {
+    const famID = await familyInsert(familySeed);
+    const userID = await userInsert(userSeed, famID);
+    await recipeInsert(recipeSeed, famID, userID)
+      .then(() => discussionInsert(discussionTopicsSeed));
+  } catch (err) {
     console.error(err);
     process.exit(1);
-  });
+  }
+  errorHandler(connectionErrors);
+}
+
+init();
