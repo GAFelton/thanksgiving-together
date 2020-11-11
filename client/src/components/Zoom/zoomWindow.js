@@ -56,7 +56,6 @@ const createMeeting = (meetConfig) => {
     // Converts string to obj and retrieves signature value
     .then((response) => {
       const { signature } = JSON.parse(response);
-      console.log(signature);
       // Rather then continue nesting code, call fn declared above
       joinMeeting(signature, meetConfig);
     });
