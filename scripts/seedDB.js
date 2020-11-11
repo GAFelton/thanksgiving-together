@@ -1,5 +1,3 @@
-// THIS FILE DOES NOT FUNCTION CORRECTLY RIGHT NOW!
-
 const mongoose = require("mongoose");
 const {
   Family, User, Recipe, DiscussionTopic,
@@ -11,8 +9,11 @@ const connectionErrors = [];
 // and inserts the seed data below.
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogetherdb", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
+  process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogetherdb", {
+    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false,
+  },
 );
+console.log("Database Connection made, seeding data:");
 
 const discussionTopicsSeed = [
   {
@@ -122,14 +123,11 @@ const recipeSeed = (authorID) => ({ title: "Acorn Squash Soup", author: authorID
 
 async function familyInsert(seed) {
   try {
-    Family.remove({});
-    const famData = new Family(seed);
-    const famID = famData.insertedId;
-    console.log(famID);
-    console.log(`Family Inserted? ObjectID: ${famData.insertedId}`);
-    famData.save((err) => {
-      if (err) throw err;
-    });
+    const deleted = await Family.deleteMany();
+    console.log(`Number of Family records deleted: ${deleted.deletedCount}`);
+    const famData = await Family.create(seed);
+    const famID = famData._id; // eslint-disable-line no-underscore-dangle
+    console.log(`Family Inserted: ObjectID: ${famID}`);
     return famID;
   } catch (err) {
     console.error(err);
@@ -140,15 +138,14 @@ async function familyInsert(seed) {
 
 async function userInsert(seed, familyID) {
   try {
-    User.remove({});
+    const deleted = await User.deleteMany();
+    console.log(`Number of User records deleted: ${deleted.deletedCount}`);
     const newUser = new User(seed); // eslint-disable-next-line no-unused-vars
     const dbFamilyModel = await Family.findOneAndUpdate({ _id: familyID },
       { $push: { members: newUser.id } }, { new: true });
     const userID = newUser.id;
-    console.log(`User Inserted? ObjectID: ${userID}`);
-    newUser.save((err) => {
-      if (err) throw err;
-    });
+    console.log(`User Inserted: ObjectID: ${userID}`);
+    const saved = await newUser.save(); // eslint-disable-line no-unused-vars
     return userID;
   } catch (err) {
     console.error(err);
@@ -160,15 +157,14 @@ async function userInsert(seed, familyID) {
 async function recipeInsert(seed, familyID, memberID) {
   try {
     const authorID = memberID;
-    Recipe.remove({});
+    const deleted = await Recipe.deleteMany();
+    console.log(`Number of Recipe records deleted: ${deleted.deletedCount}`);
     const newRecipe = new Recipe(seed(authorID)); // eslint-disable-next-line no-unused-vars
     const dbFamilyModel = await Family.findOneAndUpdate({ _id: familyID },
       { $push: { recipes: newRecipe.id } }, { new: true });
-    console.log(`Recipe Inserted? ObjectID: ${newRecipe.id}`);
-    newRecipe.save((err) => {
-      if (err) throw err;
-    });
-    return newRecipe;
+    console.log(`Recipe Inserted: ObjectID: ${newRecipe.id}`);
+    const savedRecipe = await newRecipe.save();
+    return savedRecipe;
   } catch (err) {
     console.error(err);
     connectionErrors.push(err);
@@ -176,7 +172,7 @@ async function recipeInsert(seed, familyID, memberID) {
   return null;
 }
 
-function discussionInsert(seed) {
+async function discussionInsert(seed) {
   DiscussionTopic
     .remove({})
     .then(() => DiscussionTopic.collection.insertMany(seed))
@@ -193,22 +189,19 @@ function discussionInsert(seed) {
 function errorHandler(errArray) {
   const errNumber = errArray.length;
   if (errNumber > 0) {
+    console.log(`Errors: ${errArray}`);
     process.exit(1);
   } else {
+    console.log("Connection Successful, now terminating node process.");
     process.exit(0);
   }
 }
 
 async function init() {
-  try {
-    const famID = await familyInsert(familySeed);
-    const userID = await userInsert(userSeed, famID);
-    await recipeInsert(recipeSeed, famID, userID)
-      .then(() => discussionInsert(discussionTopicsSeed));
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
+  const famID = await familyInsert(familySeed);
+  const userID = await userInsert(userSeed, famID);
+  await recipeInsert(recipeSeed, famID, userID);
+  await discussionInsert(discussionTopicsSeed);
   errorHandler(connectionErrors);
 }
 
