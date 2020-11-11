@@ -6,8 +6,14 @@ module.exports = {
   findById(req, res) {
     db.Family
       .findById(req.params.id)
-      .populate("members")
-      .populate("recipes")
+      .populate({
+        path: "members",
+        match: { archived: false },
+      })
+      .populate({
+        path: "recipes",
+        match: { archived: false },
+      })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
@@ -25,16 +31,14 @@ module.exports = {
   // update "PUT /api/family/:id"
   update(req, res) {
     db.Family
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   // archive "PUT /api/family/archive/:id"
   archiveFamily(req, res) {
-    // is req.params.id the correct way to get ID from React?
-    const { _id } = req.params.id;
     db.Family
-      .findByIdAndUpdate(_id, { archived: true }, { new: true })
+      .findByIdAndUpdate(req.params.id, { archived: true }, { new: true })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },

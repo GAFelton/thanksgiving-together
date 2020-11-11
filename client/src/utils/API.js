@@ -29,6 +29,7 @@ const users = {
 
 // Recipe axios routes
 // Note that for creating a new recipe, the param must be the FAMILY id.
+// Also for create, data must contain the author's _id (from the user object).
 const recipes = {
   get: (params) => API.get("/recipe", { params }),
   update: (data, params) => API.put("/recipe", data, { params }),
