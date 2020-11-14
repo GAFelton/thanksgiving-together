@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { ACCESS_TOKEN_NAME, API_BASE_URL } from "../constants/apiConstants";
+import { ACCESS_TOKEN_NAME, API_BASE_URL } from "../../constants/apiConstants";
 
 function Home(props) {
   useEffect(() => {
-    validateToken();
+    validateToken(); // eslint-disable-line no-use-before-define
   });
 
   function redirectToLogin() {

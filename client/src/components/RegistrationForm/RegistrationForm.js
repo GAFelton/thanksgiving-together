@@ -66,39 +66,45 @@ function RegistrationForm(props) {
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>
         <div className="form-group text-left">
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            value={state.email}
-            onChange={handleChange}
-          />
+          <label htmlFor="email">
+            Email address
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+              value={state.email}
+              onChange={handleChange}
+            />
+          </label>
           <small id="emailHelp" className="form-text text-muted">We&apos;ll never share your email with anyone else.</small>
         </div>
         <div className="form-group text-left">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            placeholder="Password"
-            value={state.password}
-            onChange={handleChange}
-          />
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              placeholder="Password"
+              value={state.password}
+              onChange={handleChange}
+            />
+          </label>
         </div>
         <div className="form-group text-left">
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="confirmPassword"
-            placeholder="Confirm Password"
-            value={state.confirmPassword}
-            onChange={handleChange}
-          />
+          <label htmlFor="confirmPassword">
+            Confirm Password
+            <input
+              type="password"
+              className="form-control"
+              id="confirmPassword"
+              placeholder="Confirm Password"
+              value={state.confirmPassword}
+              onChange={handleChange}
+            />
+          </label>
         </div>
         <button
           type="submit"
@@ -113,7 +119,7 @@ function RegistrationForm(props) {
       </div>
       <div className="mt-2">
         <span>Already have an account? </span>
-        <span className="loginText" onClick={() => redirectToLogin()}>Login here</span>
+        <span className="loginText" onClick={() => redirectToLogin()}>Login here</span> {/* eslint-disable-line */}
       </div>
 
     </div>

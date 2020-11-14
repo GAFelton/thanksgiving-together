@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./LoginForm.css";
 import { withRouter } from "react-router-dom";
-import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../constants/apiConstants";
+import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 
 function LoginForm(props) {
   const [state, setState] = useState({
@@ -58,20 +58,23 @@ function LoginForm(props) {
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>
         <div className="form-group text-left">
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            value={state.email}
-            onChange={handleChange}
-          />
+          <label htmlFor="email">
+            Email address
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+              value={state.email}
+              onChange={handleChange}
+            />
+          </label>
           <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
         </div>
         <div className="form-group text-left">
-          <label htmlFor="password">Password
+          <label htmlFor="password">
+            Password
             <input
               type="password"
               className="form-control"
