@@ -1,12 +1,23 @@
 const mongoose = require("mongoose");
-const { DiscussionTopic } = require("../models");
+const {
+  Family, User, Recipe, DiscussionTopic,
+} = require("../models");
 
-// This file empties the Discussion Topics collection and inserts the topics below
+const connectionErrors = [];
 
+// This script empties the Discussion Topics, Family, User, and Recipe collections
+// and inserts the seed data below.
+// THE DELETION IS IRREVERSIBLE! Make sure you back up records that you wish to keep.
+
+// Connect to MongoDB Database.
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogetherdb", { useNewUrlParser: true, useUnifiedTopology: true },
+  process.env.MONGODB_URI || "mongodb://localhost/thanksgivingtogetherdb", {
+    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false,
+  },
 );
+console.log("Database Connection made, seeding data:");
 
+// Seed Data for discussion topics. 30 Records.
 const discussionTopicsSeed = [
   {
     topic: "What is one thing that you really appreciate about someone at the table?",
@@ -100,14 +111,118 @@ const discussionTopicsSeed = [
   },
 ];
 
-DiscussionTopic
-  .remove({})
-  .then(() => DiscussionTopic.collection.insertMany(discussionTopicsSeed))
-  .then((data) => {
-    console.log(`${data.result.n} records inserted!`);
-    process.exit(0);
-  })
-  .catch((err) => {
+// Seed Data for family. 1 Record.
+const familySeed = {
+  title: "testFam",
+};
+
+// Seed Data for user. 1 Record.
+const userSeed = {
+  firstName: "Abby",
+  lastName: "Testersmith",
+  email: "tester@test.com",
+  password: "test",
+};
+
+// Seed Data for recipe. 1 Record. Requires a userID, so must be seeded after user is seeded.
+const recipeSeed = (authorID) => ({ title: "Acorn Squash Soup", author: authorID });
+
+// Deletes existing records and Inserts family seed data into database.
+// Takes in seed data.
+async function familyInsert(seed) {
+  try {
+    const deleted = await Family.deleteMany();
+    console.log(`Number of Family records deleted: ${deleted.deletedCount}`);
+    const famData = await Family.create(seed);
+    const famID = famData._id; // eslint-disable-line no-underscore-dangle
+    console.log(`Family Inserted: ObjectID: ${famID}`);
+    // Returns famID so that userInsert and recipeInsert can add their _ids to this family record.
+    return famID;
+  } catch (err) {
     console.error(err);
+    connectionErrors.push(err);
+  }
+  return null;
+}
+
+// Deletes existing records and Inserts user seed data into database.
+// Takes in seed data and family ID from familyInsert().
+async function userInsert(seed, familyID) {
+  try {
+    const deleted = await User.deleteMany();
+    console.log(`Number of User records deleted: ${deleted.deletedCount}`);
+    const newUser = new User(seed); // eslint-disable-next-line no-unused-vars
+    const dbFamilyModel = await Family.findOneAndUpdate({ _id: familyID },
+      { $push: { members: newUser.id } }, { new: true });
+    const userID = newUser.id;
+    console.log(`User Inserted: ObjectID: ${userID}`);
+    const saved = await newUser.save(); // eslint-disable-line no-unused-vars
+    // Returns userID so that it can be used in the recipeSeed.
+    return userID;
+  } catch (err) {
+    console.error(err);
+    connectionErrors.push(err);
+  }
+  return null;
+}
+
+// Deletes existing records and Inserts recipe seed data into database.
+// Takes in seed data, family ID from familyInsert(), and memberID from userInsert().
+async function recipeInsert(seed, familyID, memberID) {
+  try {
+    const authorID = memberID;
+    const deleted = await Recipe.deleteMany();
+    console.log(`Number of Recipe records deleted: ${deleted.deletedCount}`);
+    const newRecipe = new Recipe(seed(authorID)); // eslint-disable-next-line no-unused-vars
+    const dbFamilyModel = await Family.findOneAndUpdate({ _id: familyID },
+      { $push: { recipes: newRecipe.id } }, { new: true });
+    console.log(`Recipe Inserted: ObjectID: ${newRecipe.id}`);
+    const savedRecipe = await newRecipe.save();
+    return savedRecipe;
+  } catch (err) {
+    console.error(err);
+    connectionErrors.push(err);
+  }
+  return null;
+}
+
+// Deletes existing records and Inserts discussion topic seed data into database.
+// Takes in seed data.
+async function discussionInsert(seed) {
+  DiscussionTopic
+    .remove({})
+    .then(() => DiscussionTopic.collection.insertMany(seed))
+    .then((data) => {
+      console.log(`${data.result.n} records inserted!`);
+      return data;
+    })
+    .catch((err) => {
+      console.error(err);
+      connectionErrors.push(err);
+    });
+}
+
+// This function ends the database connection at the end of the seeding script.
+function errorHandler(errArray) {
+  const errNumber = errArray.length;
+  if (errNumber > 0) {
+    console.log(`Errors: ${errArray}`);
     process.exit(1);
-  });
+  } else {
+    console.log("Connection Successful, now terminating node process.");
+    process.exit(0);
+  }
+}
+
+// init() is the controller for all inserting functions.
+// It ensures that famID and userID are accessible for later use.
+async function init() {
+  const famID = await familyInsert(familySeed);
+  const userID = await userInsert(userSeed, famID);
+  await recipeInsert(recipeSeed, famID, userID);
+  await discussionInsert(discussionTopicsSeed);
+  errorHandler(connectionErrors);
+}
+
+// Calls init() and runs the script.
+init();
