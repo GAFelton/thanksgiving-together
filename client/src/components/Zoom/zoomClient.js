@@ -6,6 +6,7 @@ const frameStyle = {
   minWidth: "1000px",
   minHeight: "500px",
   transform: "scale(.5,.5)",
+  transformOrigin: "left",
 };
 
 // Export embedded link to our zoom client
