@@ -27,6 +27,7 @@ const Zoom = () => {
   // Set submission status for user input, button in ZoomControl
   const [isSubmitted, setIsSubmitted] = useState({
     status: false,
+    display: "block",
   });
 
   // Sets value in configObject per user input
@@ -37,6 +38,7 @@ const Zoom = () => {
     });
   };
 
+  // Refs userName for use below
   const { userName } = config;
 
   // Event handler for form submission, changes submit status if userName is valid
@@ -46,6 +48,7 @@ const Zoom = () => {
 
     setIsSubmitted({
       status: true,
+      display: "none",
     });
   };
 
@@ -53,6 +56,7 @@ const Zoom = () => {
   return (
     <>
       <ZoomControl
+        status={isSubmitted.display}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         config={config}

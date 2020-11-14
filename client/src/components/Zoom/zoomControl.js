@@ -8,12 +8,21 @@ import "./zoomControlStyle.css";
 //   -assuming smoother integration can't be found
 
 // This fn defines the modal; takes fns and the meetingConfig object as props from parent Zoom.js
-const ZoomControl = ({ handleSubmit, config, handleChange }) => {
+const ZoomControl = (
+  {
+    status,
+    handleSubmit,
+    config,
+    handleChange,
+  },
+) => {
   // Accesses the relevant properties of the meeting configuration through a template literal
   const { userName, userEmail } = config;
+  // Writes line of css as key value pair, shows/hides modal based on submission status
+  const show = { display: status };
   return (
     <>
-      <div className="custom-zn__container">
+      <div className="custom-zn__container" style={show}>
         <div className="custom-zm__modal">
           <div className="custom-zm__title__box">
             <h1 className="custom-zm__title">Welcome to Zoom</h1>
