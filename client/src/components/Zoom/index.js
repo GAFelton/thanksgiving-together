@@ -1,26 +1,17 @@
-// import ZoomWindow from "./zoomWindow";
-// import ZoomControl from "./zoomControl";
 import React from "react";
+import ZoomClient from "./zoomClient";
+// import ZoomControl from "./zoomControl";
 
-// Defining functional style code here for now-
-// Messages from zoom client display correctly at at least this size
-const frameStyle = {
-  minWidth: "500px",
-  minHeight: "250px",
-};
+// next step: rewrite zoomControl as button sending request to client
+// from our db, to follow zoom frame- maybe better done as entirely
+// separate component
 
-// Export embedded link to our zoom client
-// Next step is to move iframe to zoomWindow as components,
-// rewrite zoomControl to include button sending request to client
-// from our db
+// Exports a div containing our zoom client-these could be merged into a single component,
+// but this structure might make styling easier-
 function Zoom() {
   return (
     <>
-      <iframe
-        src="https://ttzoomclient.herokuapp.com/"
-        title="Zoom Client"
-        style={frameStyle}
-      />
+      <ZoomClient />
     </>
   );
 }
