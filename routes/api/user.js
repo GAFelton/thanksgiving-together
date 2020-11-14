@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const auth = require("../../middleware/auth");
 const userController = require("../../controllers/userController");
 
 // Matches with "/api/${version}/user"
@@ -7,7 +8,7 @@ router.route("/")
 
 // Matches with "/api/${version}/user/:id"
 router.route("/:id")
-  .get(userController.findById)
+  .get(auth, userController.findById)
   .put(userController.update);
 
 // Matches with "/api/${version}/user/family/:(family)id"
