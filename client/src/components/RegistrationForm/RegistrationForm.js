@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./RegistrationForm.css";
 import { withRouter } from "react-router-dom";
-import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
+import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
+import API from "../../utils/API";
 
 function RegistrationForm(props) {
   const [state, setState] = useState({
@@ -26,16 +27,19 @@ function RegistrationForm(props) {
     if (state.email.length && state.password.length) {
       props.showError(null);
       const payload = {
+        // TODO: Must add firstName and lastName to registration form.
         email: state.email,
         password: state.password,
       };
-      axios.post(`${API_BASE_URL}/user/register`, payload)
+      // TODO: Must get family id first - then create user at POST "/api/v1/user/family/:(family)id"
+      axios.post(API.users.create, payload)
         .then((response) => {
           if (response.status === 200) {
             setState((prevState) => ({
               ...prevState,
               successMessage: "Registration successful. Redirecting to home page..",
             }));
+            // TODO: is localStorage the best place to store the JWT? Maybe for now.
             localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
             redirectToHome();
             props.showError(null);
