@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Nav from "../components/Nav";
 import Zoom from "./Zoom";
 import DiscussTopicBtn from "../components/DiscussTopicBtn";
+import Spotify from "../components/Spotify";
 
 // AUTHENTICATION NOTES
 // Wrap providers around MAIN app.
@@ -20,6 +21,9 @@ function Main() {
       </Row>
       <Row>
         <DiscussTopicBtn />
+      </Row>
+      <Row>
+        <Spotify />
       </Row>
     </Container>
   );
