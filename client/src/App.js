@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Nav from "./components/Nav";
-import Zoom from "./components/Zoom";
-import DiscussTopicBtn from "./components/DiscussTopicBtn";
-=======
 import React, { useState } from "react";
 import {
   BrowserRouter as Router,
@@ -18,7 +10,6 @@ import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import Home from "./components/Home/Home";
 import PrivateRoute from "./utils/PrivateRoute";
 import AlertComponent from "./components/AlertComponent/AlertComponent";
->>>>>>> 857225bf664a43ea71d5e3edd466095b793c807b
 
 function App() {
   const [title, updateTitle] = useState(null);
