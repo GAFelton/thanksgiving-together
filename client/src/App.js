@@ -1,27 +1,51 @@
+<<<<<<< HEAD
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Nav from "./components/Nav";
 import Zoom from "./components/Zoom";
 import DiscussTopicBtn from "./components/DiscussTopicBtn";
+=======
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import Header from "./components/Header/Header";
+import LoginForm from "./components/LoginForm/LoginForm";
+import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
+import Home from "./components/Home/Home";
+import PrivateRoute from "./utils/PrivateRoute";
+import AlertComponent from "./components/AlertComponent/AlertComponent";
+>>>>>>> 857225bf664a43ea71d5e3edd466095b793c807b
 
-// AUTHENTICATION NOTES
-// Wrap providers around MAIN app.
-// Logic for determining "is user logged in?" should all be in the auth context provider.
-// React Router ((user) ? Logged-in Routes : Logged-out Routes)
 function App() {
+  const [title, updateTitle] = useState(null);
+  const [errorMessage, updateErrorMessage] = useState(null);
   return (
-    <Container>
-      <Row>
-        <Nav />
-      </Row>
-      <Row>
-        <Zoom />
-      </Row>
-      <Row>
-        <DiscussTopicBtn />
-      </Row>
-    </Container>
+    <Router>
+      <div className="App">
+        <Header title={title} />
+        <div className="container d-flex align-items-center flex-column">
+          <Switch>
+            <Route path="/" exact>
+              <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
+            </Route>
+            <Route path="/register">
+              <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
+            </Route>
+            <Route path="/login">
+              <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
+            </Route>
+            <PrivateRoute path="/home">
+              <Home />
+            </PrivateRoute>
+          </Switch>
+          <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage} />
+        </div>
+      </div>
+    </Router>
   );
 }
 
