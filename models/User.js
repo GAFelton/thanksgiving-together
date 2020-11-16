@@ -12,6 +12,7 @@ const userSchema = new Schema({
     type: String, required: true, lowercase: true, index: { unique: true },
   },
   password: { type: String, required: true, select: false },
+  family: { type: Schema.types.ObjectID, ref: "Family", required: true },
   familyAdmin: { type: Boolean, required: true, default: false },
   archived: { type: Boolean, required: true, default: false },
 }, { toJSON: { virtuals: true } });
