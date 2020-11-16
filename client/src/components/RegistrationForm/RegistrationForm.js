@@ -7,6 +7,8 @@ import API from "../../utils/API";
 
 function RegistrationForm(props) {
   const [state, setState] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -24,10 +26,15 @@ function RegistrationForm(props) {
     props.history.push("/home");
   };
   const sendDetailsToServer = () => {
-    if (state.email.length && state.password.length) {
+    if (
+      state.firstName.length
+      && state.lastName.length
+      && state.email.length
+      && state.password.length) {
       props.showError(null);
       const payload = {
-        // TODO: Must add firstName and lastName to registration form.
+        firstName: state.firstName,
+        lastName: state.lastName,
         email: state.email,
         password: state.password,
       };
@@ -69,6 +76,32 @@ function RegistrationForm(props) {
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>
+        <div className="form-group text-left">
+          <label htmlFor="firstName">
+            First Name
+            <input
+              type="text"
+              className="form-control"
+              id="firstName"
+              placeholder="First Name"
+              value={state.firstName}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className="form-group text-left">
+          <label htmlFor="lastName">
+            Last Name
+            <input
+              type="text"
+              className="form-control"
+              id="lastName"
+              placeholder="Last Name"
+              value={state.lastName}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
         <div className="form-group text-left">
           <label htmlFor="email">
             Email address

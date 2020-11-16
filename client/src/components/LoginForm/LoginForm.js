@@ -45,9 +45,9 @@ function LoginForm(props) {
           redirectToHome();
           props.showError(null);
         } else if (response.code === 204) {
-          props.showError("Username and password do not match");
+          props.showError("Email and password do not match");
         } else {
-          props.showError("Username does not exists");
+          props.showError("User does not exists");
         }
       })
       .catch((error) => {
