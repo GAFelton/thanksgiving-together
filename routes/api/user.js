@@ -9,7 +9,7 @@ router.route("/")
 // Matches with "/api/${version}/user/:id"
 router.route("/:id")
   .get(auth, userController.findById)
-  .put(userController.update);
+  .put(auth, userController.update);
 
 // Matches with "/api/${version}/user/family/:(family)id"
 router.route("/family/:id")
@@ -17,6 +17,6 @@ router.route("/family/:id")
 
 // Matches with "/api/${version}/user/archive/:id"
 router.route("/archive/:id")
-  .put(userController.archiveUser);
+  .put(auth, userController.archiveUser);
 
 module.exports = router;
