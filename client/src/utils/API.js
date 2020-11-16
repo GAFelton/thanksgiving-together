@@ -11,6 +11,7 @@ const API = axios.create({
 // Family axios routes
 const family = {
   get: (params) => API.get("/family", { params }),
+  findIdByCode: (data) => API.get("/family", data),
   update: (data, params) => API.put("/family", data, { params }),
   create: (data) => API.post("/", data),
   archive: (params) => API.put("/family/archive", { params }),

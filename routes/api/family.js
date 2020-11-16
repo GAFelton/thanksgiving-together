@@ -1,17 +1,19 @@
 const router = require("express").Router();
+const auth = require("../../middleware/auth");
 const familyController = require("../../controllers/familyController");
 
 // Matches with "/api/${version}/family"
 router.route("/")
+  .get(familyController.findIdByCode)
   .post(familyController.create);
 
 // Matches with "/api/${version}/family/:id"
 router.route("/:id")
   .get(familyController.findById)
-  .put(familyController.update);
+  .put(auth, familyController.update);
 
 // Matches with "/api/${version}/family/archive/:id"
 router.route("/archive/:id")
-  .put(familyController.archiveFamily);
+  .put(auth, familyController.archiveFamily);
 
 module.exports = router;

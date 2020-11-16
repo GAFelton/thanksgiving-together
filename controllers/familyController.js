@@ -17,6 +17,15 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+
+  // findIdByCode "GET /api/family"
+  findIdByCode(req, res) {
+    const code = req.body.roomCode;
+    db.Family.findOne({ roomCode: code }, "_id").lean()
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+
   // TODO findAllRecipes
 
   // TODO findAllUsers
