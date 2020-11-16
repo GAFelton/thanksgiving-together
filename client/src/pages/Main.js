@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Nav from "../components/Nav";
-import Zoom from "./Zoom";
+import Zoom from "../components/Zoom";
 import DiscussTopicBtn from "../components/DiscussTopicBtn";
 
 // AUTHENTICATION NOTES
