@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "./LoginForm.css";
 import { withRouter } from "react-router-dom";
 import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
@@ -34,7 +33,7 @@ function LoginForm(props) {
       email: state.email,
       password: state.password,
     };
-    axios.post(API.users.comparePassword, payload)
+    API.users.comparePassword(payload)
       .then((response) => {
         if (response.status === 200) {
           setState((prevState) => ({
