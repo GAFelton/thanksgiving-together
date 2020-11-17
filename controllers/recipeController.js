@@ -3,7 +3,7 @@ const db = require("../models");
 // TODO: Set up routes. Remember that sorting by Family can help with querying.
 // Always sort by archived: false.
 module.exports = {
-  // TODO findById "GET /api/recipe/:id"
+  // TODO findById "GET /api/v1/recipe/:id"
   findById(req, res) {
     db.Recipe
       .findById(req.params.id)
@@ -14,7 +14,7 @@ module.exports = {
 
   // TODO findAllByAuthor
 
-  // create (adding recipe to correct family) "POST /api/recipe/family/:(family)id"
+  // create (adding recipe to correct family) "POST /api/v1/recipe/family/:(family)id"
   async create(req, res) {
     try {
       const newRecipe = new db.Recipe(req.body); // eslint-disable-next-line no-unused-vars
@@ -30,14 +30,14 @@ module.exports = {
     }
   },
 
-  // update "PUT /api/recipe/:id"
+  // update "PUT /api/v1/recipe/:id"
   update(req, res) {
     db.Recipe
       .findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  // archive "PUT /api/recipe/archive/:id"
+  // archive "PUT /api/v1/recipe/archive/:id"
   archiveRecipe(req, res) {
     db.Recipe
       .findByIdAndUpdate(req.params.id, { archived: true }, { new: true })

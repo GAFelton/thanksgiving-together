@@ -5,15 +5,16 @@ const db = require("../models");
 // TODO: Set up routes. Remember that sorting by Family can help with querying.
 // Always sort by archived: false.
 // Create FamilyAdmin Discriminator Key?
+// Add logout route. Add JWT validation route. Add lookup family route.
 module.exports = {
-  // TODO findById "GET /api/user/:id"
+  // TODO findById "GET /api/v1/user/:id"
   findById(req, res) {
     db.User
       .findById(req.params.id)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  // comparePassword "POST /api/user/"
+  // comparePassword "POST /api/v1/user/"
   comparePassword(req, res) {
     const { email, password } = req.body;
 
@@ -52,7 +53,7 @@ module.exports = {
       })
       .catch((err) => res.status(500).json(err));
   },
-  // create (adding user to correct family) "POST /api/user/family/:(family)id"
+  // create (adding user to correct family) "POST /api/v1/user/family"
   // Need to use constructor method to allow Mongoose middleware to run.
   // eslint-disable-next-line consistent-return
   async create(req, res) {
@@ -61,6 +62,7 @@ module.exports = {
       lastName,
       email,
       password,
+      family,
     } = req.body;
     try {
       const user = await db.User.findOne({
@@ -72,12 +74,11 @@ module.exports = {
         });
       }
       const newUser = new db.User({
-        firstName, lastName, email, password,
+        firstName, lastName, email, password, family,
       });
-      // eslint-disable-next-line no-unused-vars
-      const dbFamilyModel = await db.Family.findOneAndUpdate({ _id: req.params.id },
+      await db.Family.findOneAndUpdate({ _id: family },
         { $push: { members: newUser.id } }, { new: true });
-      newUser.save((err) => {
+      await newUser.save((err) => {
         if (err) throw err;
         // Should this return newUser, dbFamilyModel, or both? (dbFamilyModel = family document.)
       });
@@ -85,6 +86,7 @@ module.exports = {
         user: {
           id: newUser.id,
         },
+        iat: (Math.floor(Date.now() / 1000) - 3),
       };
 
       jwt.sign(
@@ -105,14 +107,31 @@ module.exports = {
       res.status(422).json(error);
     }
   },
-  // update "PUT /api/user/:id"
+
+  me(req, res) {
+    const myID = req.user.id;
+    db.User
+      .findById(myID)
+      .then((dbModel) => {
+        res.json(dbModel);
+      })
+      .catch((err) => res.status(422).json(err));
+    // try {
+    //   // request.user is getting fetched from Middleware after token authentication
+    //   const user = await db.User.findById(req.user.id);
+    //   res.json(user);
+    // } catch (e) {
+    //   res.send({ message: "Error in Fetching user" });
+    // }
+  },
+  // update "PUT /api/v1/user/:id"
   update(req, res) {
     db.User
       .findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  // archive "PUT /api/user/archive/:id"
+  // archive "PUT /api/v1/user/archive/:id"
   archiveUser(req, res) {
     db.User
       .findByIdAndUpdate(req.params.id, { archived: true }, { new: true })

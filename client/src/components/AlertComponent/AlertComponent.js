@@ -1,8 +1,14 @@
+// PROBLEM! THIS FILE WAS OVERWRITTEN WITH HEADER.JS
+
+// That means there is no AlertComponent.
+
+// TODO: Recover AlertComponent, or remake.
+
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 
-function Header({ location, title }, props) {
+function AlertComponent({ location, title }, props) {
   const capitalize = (s) => {
     if (typeof s !== "string") return "";
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -34,4 +40,4 @@ function Header({ location, title }, props) {
     </nav>
   );
 }
-export default withRouter(Header);
+export default withRouter(AlertComponent);
