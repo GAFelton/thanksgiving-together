@@ -50,11 +50,10 @@ function RegistrationForm(props) {
       password: state.password,
       family: familyID,
     };
-    console.log(familyID);
+    console.log(`New Family Created with id: ${familyID}`);
     API.users.create(payload)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response);
           setState((prevState) => ({
             ...prevState,
             successMessage: "Registration successful. Redirecting to home page..",
@@ -80,7 +79,6 @@ function RegistrationForm(props) {
       let familyID;
       await API.family.findIdByCode(data)
         .then((response) => {
-          console.log("response:", response);
           if (response.status === 200) {
             familyID = response.data._id; // eslint-disable-line no-underscore-dangle
           } else {
