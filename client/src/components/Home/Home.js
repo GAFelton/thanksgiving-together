@@ -9,6 +9,7 @@ function Home(props) {
   });
 
   function redirectToLogin() {
+    props.updateTitle("Login");
     props.history.push("/login");
   }
 
