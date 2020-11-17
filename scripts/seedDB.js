@@ -122,10 +122,11 @@ const userSeed = {
   lastName: "Testersmith",
   email: "tester@test.com",
   password: "test",
+  familyAdmin: true,
 };
 
 // Seed Data for recipe. 1 Record. Requires a userID, so must be seeded after user is seeded.
-const recipeSeed = (authorID) => ({ title: "Acorn Squash Soup", author: authorID });
+const recipeSeed = { title: "Acorn Squash Soup" };
 
 // Deletes existing records and Inserts family seed data into database.
 // Takes in seed data.
@@ -151,6 +152,7 @@ async function userInsert(seed, familyID) {
   try {
     const deleted = await User.deleteMany();
     console.log(`Number of User records deleted: ${deleted.deletedCount}`);
+    seed.family = familyID; // eslint-disable-line no-param-reassign
     const newUser = new User(seed); // eslint-disable-next-line no-unused-vars
     const dbFamilyModel = await Family.findOneAndUpdate({ _id: familyID },
       { $push: { members: newUser.id } }, { new: true });
@@ -173,7 +175,8 @@ async function recipeInsert(seed, familyID, memberID) {
     const authorID = memberID;
     const deleted = await Recipe.deleteMany();
     console.log(`Number of Recipe records deleted: ${deleted.deletedCount}`);
-    const newRecipe = new Recipe(seed(authorID)); // eslint-disable-next-line no-unused-vars
+    seed.author = authorID; // eslint-disable-line no-param-reassign
+    const newRecipe = new Recipe(seed); // eslint-disable-next-line no-unused-vars
     const dbFamilyModel = await Family.findOneAndUpdate({ _id: familyID },
       { $push: { recipes: newRecipe.id } }, { new: true });
     console.log(`Recipe Inserted: ObjectID: ${newRecipe.id}`);
@@ -190,7 +193,7 @@ async function recipeInsert(seed, familyID, memberID) {
 // Takes in seed data.
 async function discussionInsert(seed) {
   DiscussionTopic
-    .remove({})
+    .deleteMany()
     .then(() => DiscussionTopic.collection.insertMany(seed))
     .then((data) => {
       console.log(`${data.result.n} records inserted!`);
