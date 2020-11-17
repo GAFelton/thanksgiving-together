@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 import API from "../../utils/API";
 
@@ -15,7 +14,7 @@ function Home(props) {
 
   function validateToken() {
     // TODO: Need to send user ID in request body.
-    axios.get(API.users.get, { headers: { token: localStorage.getItem(ACCESS_TOKEN_NAME) } })
+    API.users.getMe({ headers: { token: localStorage.getItem(ACCESS_TOKEN_NAME) } })
       .then((response) => {
         if (response.status !== 200) {
           redirectToLogin();
