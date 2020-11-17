@@ -1,8 +1,9 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 
-function Header({ location, title }, props) {
+function Header({ location, title }) {
+  const history = useHistory();
   const capitalize = (s) => {
     if (typeof s !== "string") return "";
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -13,8 +14,9 @@ function Header({ location, title }, props) {
   }
   function handleLogout() {
     localStorage.removeItem(ACCESS_TOKEN_NAME);
-    props.history.push("/login");
+    history.push("/login");
   }
+  // TODO: location.pathname will likely be more things than /home for protected routes.
   function renderLogout() { // eslint-disable-line consistent-return
     if (location.pathname === "/home") {
       return (
