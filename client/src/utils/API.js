@@ -6,14 +6,15 @@ import axios from "axios";
 // Creating an axios instance - more config params can  be added, for now baseURL makes code DRY.
 const API = axios.create({
   baseURL: "/api/v1",
+  headers: { "Content-Type": "application/json" },
 });
 
 // Family axios routes
 const family = {
   get: (params) => API.get("/family", { params }),
-  findIdByCode: (data) => API.get("/family", data),
+  findIdByCode: (data) => API.post("/family/code", data),
   update: (data, params) => API.put("/family", data, { params }),
-  create: (data) => API.post("/", data),
+  create: (data) => API.post("/family", data),
   archive: (params) => API.put("/family/archive", { params }),
 };
 
@@ -21,10 +22,11 @@ const family = {
 // Note that for creating a new user, the param must be the FAMILY id.
 const users = {
   // data for comparePassword must contain email and password
-  comparePassword: (data) => API.post("/", data),
+  comparePassword: (data) => API.post("/user", data),
+  getMe: (headers) => API.get("user/me", headers),
   get: (params) => API.get("/user", { params }),
   update: (data, params) => API.put("/user", data, { params }),
-  create: (data, params) => API.post("/user/family", data, { params }),
+  create: (data) => API.post("/user/family", data),
   archive: (params) => API.put("/user/archive", { params }),
 };
 
