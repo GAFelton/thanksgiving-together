@@ -7,6 +7,10 @@ router.route("/")
   .get(familyController.findIdByCode)
   .post(familyController.create);
 
+// Matches with "/api/${version}/family/code"
+router.route("/code")
+  .post(familyController.findIdByCode);
+
 // Matches with "/api/${version}/family/:id"
 router.route("/:id")
   .get(familyController.findById)
