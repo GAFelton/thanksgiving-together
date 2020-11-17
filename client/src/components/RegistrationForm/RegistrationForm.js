@@ -4,7 +4,11 @@ import { withRouter } from "react-router-dom";
 import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 import API from "../../utils/API";
 
+// The registration form allows users to sign up for a new account.
+// It has functions for both creating a new family and for joining an existing one.
 function RegistrationForm(props) {
+  // These state parameters are mostly straightforward.
+  // familyDetail refers to either a room code or a family Name, depending on the newFamily boolean.
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -15,6 +19,7 @@ function RegistrationForm(props) {
     familyDetail: "",
     successMessage: null,
   });
+  // Handles state updates, accounts for either text input or the checkbox.
   const handleChange = (e) => {
     const { id } = e.target;
     const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
@@ -23,14 +28,17 @@ function RegistrationForm(props) {
       [id]: value,
     }));
   };
+  // redirectToHome is the successful registration function: for now, /home is the 1st privateRoute.
   const redirectToHome = () => {
     props.updateTitle("Home");
     props.history.push("/home");
   };
 
+  // createNewFamily handles first-time family and user creation.
   const createNewFamily = async () => {
     const familyName = state.familyDetail.trim();
     let familyID;
+    // First the family is created, which will give us back the family _id so we can add members.
     await API.family.create({ title: familyName })
       .then((response) => {
         if (response.status === 200) {
@@ -43,14 +51,17 @@ function RegistrationForm(props) {
       .catch((error) => {
         console.log(error);
       });
+    // The payload for user creation also sets this family creator as the familyAdmin.
     const payload = {
       firstName: state.firstName.trim(),
       lastName: state.lastName.trim(),
       email: state.email.trim(),
       password: state.password,
       family: familyID,
+      familyAdmin: true,
     };
     console.log(`New Family Created with id: ${familyID}`);
+    // Next, a new user is created.
     API.users.create(payload)
       .then((response) => {
         if (response.status === 200) {
@@ -58,6 +69,7 @@ function RegistrationForm(props) {
             ...prevState,
             successMessage: "Registration successful. Redirecting to home page..",
           }));
+          // After successful user creation, the new user is logged-in via a JWT, and redirected.
           // TODO: is localStorage the best place to store the JWT? Maybe for now.
           localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
           redirectToHome();
@@ -70,6 +82,8 @@ function RegistrationForm(props) {
         console.log(error);
       });
   };
+
+  // joinExistingFamily handles new user creation, where a family already exists.
   const joinExistingFamily = async () => {
     try {
       const code = state.familyDetail.trim();
@@ -77,6 +91,8 @@ function RegistrationForm(props) {
         roomCode: code,
       };
       let familyID;
+      // First, we find the family ID via a length 8 "room code."
+      // This UUID room code makes it easier for family members to be invited.
       await API.family.findIdByCode(data)
         .then((response) => {
           if (response.status === 200) {
@@ -88,6 +104,7 @@ function RegistrationForm(props) {
         .catch((error) => {
           console.log(error);
         });
+      // The payload does not include familyAdmin, which defaults to false.
       const payload = {
         firstName: state.firstName.trim(),
         lastName: state.lastName.trim(),
@@ -95,6 +112,7 @@ function RegistrationForm(props) {
         password: state.password,
         family: familyID,
       };
+      // After the id has been gathered and the payload sanitized, the new user is created.
       await API.users.create(payload)
         .then((response) => {
           if (response.status === 200) {
@@ -102,6 +120,7 @@ function RegistrationForm(props) {
               ...prevState,
               successMessage: "Registration successful. Redirecting to home page..",
             }));
+            // After successful user creation, the new user is logged-in via a JWT, and redirected.
             // TODO: is localStorage the best place to store the JWT? Maybe for now.
             localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
             redirectToHome();
@@ -117,6 +136,9 @@ function RegistrationForm(props) {
       console.error(err);
     }
   };
+
+  // This function makes sure that all form fields have been filled out before submission
+  // via the correct function (createNewFamily or joinExistingFamily).
   const sendDetailsToServer = () => {
     if (
       state.firstName.length
@@ -134,10 +156,12 @@ function RegistrationForm(props) {
       }
     }
   };
+  // redirectToLogin handles the Login button at the end of the form.
   const redirectToLogin = () => {
     props.updateTitle("Login");
     props.history.push("/login");
   };
+  // When the user submits the registration form, this function checks for password match.
   const handleSubmitClick = (e) => {
     e.preventDefault();
     if (state.password === state.confirmPassword) {
@@ -146,6 +170,8 @@ function RegistrationForm(props) {
       props.showError("Passwords do not match");
     }
   };
+  // Rendering the Registration form.
+  // TODO: This kind of heavy copy-paste could use some conditional logic to render it.
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>

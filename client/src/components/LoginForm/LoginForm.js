@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 import API from "../../utils/API";
 
+// The Login Form is for users who already have an account.
 function LoginForm(props) {
   const [state, setState] = useState({
     email: "",
@@ -18,21 +19,25 @@ function LoginForm(props) {
     }));
   };
 
+  // redirectToHome handles successful login - where the /home path will validate the JWT.
   const redirectToHome = () => {
     props.updateTitle("Home");
     props.history.push("/home");
   };
+  // If a user wants to register a new account, this function redirects them.
   const redirectToRegister = () => {
     props.history.push("/register");
     props.updateTitle("Register");
   };
 
+  // The click handler directly invokes our API call - to verify the user's password.
   const handleSubmitClick = (e) => {
     e.preventDefault();
     const payload = {
       email: state.email,
       password: state.password,
     };
+    // This route compares the password against its hash stored in the database.
     API.users.comparePassword(payload)
       .then((response) => {
         if (response.status === 200) {
@@ -40,6 +45,8 @@ function LoginForm(props) {
             ...prevState,
             successMessage: "Login successful. Redirecting to home page..",
           }));
+          // After successful login, the user is granted a JWT, and redirected.
+          // TODO: is localStorage the best place to store the JWT? Maybe for now.
           localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
           redirectToHome();
           props.showError(null);
@@ -54,6 +61,7 @@ function LoginForm(props) {
       });
   };
 
+  // Rendering the Login Form.
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>

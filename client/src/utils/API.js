@@ -19,7 +19,6 @@ const family = {
 };
 
 // User axios routes
-// Note that for creating a new user, the param must be the FAMILY id.
 const users = {
   // data for comparePassword must contain email and password
   comparePassword: (data) => API.post("/user", data),

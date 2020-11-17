@@ -7,14 +7,14 @@ const db = require("../models");
 // Create FamilyAdmin Discriminator Key?
 // Add logout route. Add JWT validation route. Add lookup family route.
 module.exports = {
-  // TODO findById "GET /api/user/:id"
+  // TODO findById "GET /api/v1/user/:id"
   findById(req, res) {
     db.User
       .findById(req.params.id)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  // comparePassword "POST /api/user/"
+  // comparePassword "POST /api/v1/user/"
   comparePassword(req, res) {
     const { email, password } = req.body;
 
@@ -53,7 +53,7 @@ module.exports = {
       })
       .catch((err) => res.status(500).json(err));
   },
-  // create (adding user to correct family) "POST /api/user/family/:(family)id"
+  // create (adding user to correct family) "POST /api/v1/user/family"
   // Need to use constructor method to allow Mongoose middleware to run.
   // eslint-disable-next-line consistent-return
   async create(req, res) {
@@ -124,14 +124,14 @@ module.exports = {
     //   res.send({ message: "Error in Fetching user" });
     // }
   },
-  // update "PUT /api/user/:id"
+  // update "PUT /api/v1/user/:id"
   update(req, res) {
     db.User
       .findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  // archive "PUT /api/user/archive/:id"
+  // archive "PUT /api/v1/user/archive/:id"
   archiveUser(req, res) {
     db.User
       .findByIdAndUpdate(req.params.id, { archived: true }, { new: true })
