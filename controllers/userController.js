@@ -5,6 +5,7 @@ const db = require("../models");
 // TODO: Set up routes. Remember that sorting by Family can help with querying.
 // Always sort by archived: false.
 // Create FamilyAdmin Discriminator Key?
+// Add logout route. Add JWT validation route. Add lookup family route.
 module.exports = {
   // TODO findById "GET /api/user/:id"
   findById(req, res) {
@@ -61,6 +62,7 @@ module.exports = {
       lastName,
       email,
       password,
+      family,
     } = req.body;
     try {
       const user = await db.User.findOne({
@@ -72,12 +74,11 @@ module.exports = {
         });
       }
       const newUser = new db.User({
-        firstName, lastName, email, password,
+        firstName, lastName, email, password, family,
       });
-      // eslint-disable-next-line no-unused-vars
-      const dbFamilyModel = await db.Family.findOneAndUpdate({ _id: req.params.id },
+      await db.Family.findOneAndUpdate({ _id: family },
         { $push: { members: newUser.id } }, { new: true });
-      newUser.save((err) => {
+      await newUser.save((err) => {
         if (err) throw err;
         // Should this return newUser, dbFamilyModel, or both? (dbFamilyModel = family document.)
       });
@@ -85,6 +86,7 @@ module.exports = {
         user: {
           id: newUser.id,
         },
+        iat: (Math.floor(Date.now() / 1000) - 3),
       };
 
       jwt.sign(
@@ -104,6 +106,23 @@ module.exports = {
       console.log(error);
       res.status(422).json(error);
     }
+  },
+
+  me(req, res) {
+    const myID = req.user.id;
+    db.User
+      .findById(myID)
+      .then((dbModel) => {
+        res.json(dbModel);
+      })
+      .catch((err) => res.status(422).json(err));
+    // try {
+    //   // request.user is getting fetched from Middleware after token authentication
+    //   const user = await db.User.findById(req.user.id);
+    //   res.json(user);
+    // } catch (e) {
+    //   res.send({ message: "Error in Fetching user" });
+    // }
   },
   // update "PUT /api/user/:id"
   update(req, res) {
