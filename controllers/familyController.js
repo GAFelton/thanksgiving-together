@@ -19,7 +19,7 @@ module.exports = {
   },
 
   // findIdByCode "GET /api/family"
-  findIdByCode(req, res) {
+  async findIdByCode(req, res) {
     const code = req.body.roomCode;
     db.Family.findOne({ roomCode: code }, "_id").lean()
       .then((dbModel) => res.json(dbModel))
