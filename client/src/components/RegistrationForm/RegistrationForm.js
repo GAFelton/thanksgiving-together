@@ -28,30 +28,33 @@ function RegistrationForm(props) {
     props.history.push("/home");
   };
 
-  const createNewFamily = () => {
-    const familyName = state.familyDetail;
+  const createNewFamily = async () => {
+    const familyName = state.familyDetail.trim();
     let familyID;
-    API.family.create(familyName)
+    await API.family.create({ title: familyName })
       .then((response) => {
         if (response.status === 200) {
-          familyID = response._id; // eslint-disable-line no-underscore-dangle
+          familyID = response.data._id; // eslint-disable-line no-underscore-dangle
         } else {
           props.showError("Error occurred during family creation.");
         }
+        return familyID;
       })
       .catch((error) => {
         console.log(error);
       });
     const payload = {
-      firstName: state.firstName,
-      lastName: state.lastName,
-      email: state.email,
+      firstName: state.firstName.trim(),
+      lastName: state.lastName.trim(),
+      email: state.email.trim(),
       password: state.password,
+      family: familyID,
     };
-    // TODO: Must get family id first - then create user at POST "/api/v1/user/family/:(family)id"
-    API.users.create(payload, { params: familyID })
+    console.log(familyID);
+    API.users.create(payload)
       .then((response) => {
         if (response.status === 200) {
+          console.log(response);
           setState((prevState) => ({
             ...prevState,
             successMessage: "Registration successful. Redirecting to home page..",
@@ -68,45 +71,53 @@ function RegistrationForm(props) {
         console.log(error);
       });
   };
-  const joinExistingFamily = () => {
-    const roomCode = state.familyDetail;
-    let familyID;
-    API.family.findIdByCode(roomCode)
-      .then((response) => {
-        if (response.status === 200) {
-          familyID = response._id; // eslint-disable-line no-underscore-dangle
-        } else {
-          props.showError("No Family Found with that Code.");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    const payload = {
-      firstName: state.firstName,
-      lastName: state.lastName,
-      email: state.email,
-      password: state.password,
-      family: familyID,
-    };
-    API.users.create(payload, { params: familyID })
-      .then((response) => {
-        if (response.status === 200) {
-          setState((prevState) => ({
-            ...prevState,
-            successMessage: "Registration successful. Redirecting to home page..",
-          }));
-          // TODO: is localStorage the best place to store the JWT? Maybe for now.
-          localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
-          redirectToHome();
-          props.showError(null);
-        } else {
-          props.showError("Some error ocurred");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const joinExistingFamily = async () => {
+    try {
+      const code = state.familyDetail.trim();
+      const data = {
+        roomCode: code,
+      };
+      let familyID;
+      await API.family.findIdByCode(data)
+        .then((response) => {
+          console.log("response:", response);
+          if (response.status === 200) {
+            familyID = response.data._id; // eslint-disable-line no-underscore-dangle
+          } else {
+            props.showError("No Family Found with that Code.");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      const payload = {
+        firstName: state.firstName.trim(),
+        lastName: state.lastName.trim(),
+        email: state.email.trim(),
+        password: state.password,
+        family: familyID,
+      };
+      await API.users.create(payload)
+        .then((response) => {
+          if (response.status === 200) {
+            setState((prevState) => ({
+              ...prevState,
+              successMessage: "Registration successful. Redirecting to home page..",
+            }));
+            // TODO: is localStorage the best place to store the JWT? Maybe for now.
+            localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
+            redirectToHome();
+            props.showError(null);
+          } else {
+            props.showError("Some error ocurred");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (err) {
+      console.error(err);
+    }
   };
   const sendDetailsToServer = () => {
     if (
@@ -142,7 +153,7 @@ function RegistrationForm(props) {
       <form>
         <div className="form-group text-left">
           <label htmlFor="newFamily">
-            First Name
+            Create New Family?
             <input
               type="checkbox"
               className="form-control"
