@@ -9,7 +9,7 @@ import LoginForm from "./components/LoginForm/LoginForm";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import Home from "./components/Home/Home";
 import PrivateRoute from "./utils/PrivateRoute";
-import AlertComponent from "./components/AlertComponent/AlertComponent";
+// import AlertComponent from "./components/AlertComponent/AlertComponent";
 
 function App() {
   const [title, updateTitle] = useState(null);
@@ -33,7 +33,12 @@ function App() {
               <Home />
             </PrivateRoute>
           </Switch>
-          <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage} />
+          {/* PLACEHOLDER: the Alert Component is broken. This will display Error Messages. */}
+          {errorMessage
+            ? <p>{errorMessage}</p>
+            : <p />}
+          {/* Commented Out AlertComponent below: */}
+          {/* <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage} /> */}
         </div>
       </div>
     </Router>
