@@ -1,12 +1,13 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { ACCESS_TOKEN_NAME } from "../constants/apiConstants";
+import { useAuth } from "../components/AuthContext";
 
 function PrivateRoute({ children, ...rest }) {
+  const { user } = useAuth();
   return (
     <Route
       {...rest}
-      render={({ location }) => (localStorage.getItem(ACCESS_TOKEN_NAME) ? (
+      render={({ location }) => (user ? (
         children
       ) : (
         <Redirect
