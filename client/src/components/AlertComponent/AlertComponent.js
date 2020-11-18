@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./AlertComponent.css";
 
-function AlertComponent({ errorMessage }, props) {
+function AlertComponent(props) {
+  // Define error message and update state function passed in for easy access
+  const { errorMessage, hideError } = props;
   const [modalDisplay, toggleDisplay] = useState("none");
   const openModal = () => {
     toggleDisplay("block");
   };
   const closeModal = () => {
     toggleDisplay("none");
-    props.hideError(null);
+    hideError(null);
   };
   useEffect(() => {
-    if (props.errorMessage !== null) {
+    if (errorMessage !== null) {
       openModal();
     } else {
       closeModal();
@@ -25,7 +27,7 @@ function AlertComponent({ errorMessage }, props) {
       style={{ display: modalDisplay }}
     >
       <div className="d-flex alertMessage">
-        <span>{errorMessage}</span>
+        <span>{ errorMessage }</span>
         <button type="button" className="close" aria-label="Close" onClick={() => closeModal()}>
           <span aria-hidden="true">&times;</span>
         </button>
