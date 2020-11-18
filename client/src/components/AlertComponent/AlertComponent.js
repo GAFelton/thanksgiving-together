@@ -27,7 +27,7 @@ function AlertComponent(props) {
       style={{ display: modalDisplay }}
     >
       <div className="d-flex alertMessage">
-        <span>{ errorMessage }</span>
+        <span>{errorMessage}</span>
         <button type="button" className="close" aria-label="Close" onClick={() => closeModal()}>
           <span aria-hidden="true">&times;</span>
         </button>
