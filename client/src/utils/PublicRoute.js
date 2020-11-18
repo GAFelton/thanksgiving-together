@@ -5,7 +5,7 @@ import { Redirect, Route } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
 
 // TODO: Work with useAuth().
-function PrivateRoute({ children, ...rest }) {
+function PublicRoute({ children, ...rest }) {
   const { user } = useAuth();
   return (
     <Route
@@ -24,4 +24,4 @@ function PrivateRoute({ children, ...rest }) {
   );
 }
 
-export default PrivateRoute;
+export default PublicRoute;

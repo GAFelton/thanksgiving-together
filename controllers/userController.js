@@ -57,14 +57,14 @@ module.exports = {
   // Need to use constructor method to allow Mongoose middleware to run.
   // eslint-disable-next-line consistent-return
   async create(req, res) {
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      family,
-    } = req.body;
     try {
+      const {
+        firstName,
+        lastName,
+        email,
+        password,
+        family,
+      } = req.body;
       const user = await db.User.findOne({
         email,
       });
