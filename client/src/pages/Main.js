@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Nav from "../components/Nav";
@@ -29,4 +30,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default withRouter(Main);
