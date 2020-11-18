@@ -1,37 +1,36 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
+import React, { useState, useEffect } from "react";
+import "./AlertComponent.css";
 
-function Header({ location, title }, props) {
-  const capitalize = (s) => {
-    if (typeof s !== "string") return "";
-    return s.charAt(0).toUpperCase() + s.slice(1);
+function AlertComponent({ errorMessage }, props) {
+  const [modalDisplay, toggleDisplay] = useState("none");
+  const openModal = () => {
+    toggleDisplay("block");
   };
-  let appTitle = capitalize(location.pathname.substring(1, location.pathname.length));
-  if (location.pathname === "/") {
-    appTitle = "Welcome";
-  }
-  function handleLogout() {
-    localStorage.removeItem(ACCESS_TOKEN_NAME);
-    props.history.push("/login");
-  }
-  function renderLogout() { // eslint-disable-line consistent-return
-    if (location.pathname === "/home") {
-      return (
-        <div className="ml-auto">
-          <button className="btn btn-danger" type="button" onClick={() => handleLogout()}>Logout</button>
-        </div>
-      );
+  const closeModal = () => {
+    toggleDisplay("none");
+    props.hideError(null);
+  };
+  useEffect(() => {
+    if (props.errorMessage !== null) {
+      openModal();
+    } else {
+      closeModal();
     }
-  }
-
+  });
   return (
-    <nav className="navbar navbar-dark bg-primary">
-      <div className="row col-12 d-flex justify-content-center text-white">
-        <span className="h3">{title || appTitle}</span>
-        {renderLogout()}
+    <div
+      className="alert alert-danger alert-dismissable mt-4"
+      role="alert"
+      id="alertPopUp"
+      style={{ display: modalDisplay }}
+    >
+      <div className="d-flex alertMessage">
+        <span>{errorMessage}</span>
+        <button type="button" className="close" aria-label="Close" onClick={() => closeModal()}>
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </nav>
+    </div>
   );
 }
-export default withRouter(Header);
+export default AlertComponent;
