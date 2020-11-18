@@ -6,7 +6,7 @@ import {
 import Header from "./components/Header/Header";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
-import Home from "./components/Home/Home";
+import Main from "./pages/Main";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
 import { AuthProvider } from "./components/AuthContext";
@@ -32,7 +32,7 @@ function App() {
                 <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
               </PublicRoute>
               <PrivateRoute path="/home">
-                <Home />
+                <Main />
               </PrivateRoute>
             </Switch>
             <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage} />
