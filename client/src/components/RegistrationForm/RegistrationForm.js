@@ -66,7 +66,7 @@ function RegistrationForm(props) {
             if (response.status === 200) {
               setState((prevState) => ({
                 ...prevState,
-                successMessage: "Registration successful. Redirecting to home page..",
+                successMessage: "Registration successful. Redirecting to main page..",
               }));
               // After successful user creation, new user is logged-in via a JWT, and redirected.
               handleLogin(response.data.token);
@@ -121,7 +121,7 @@ function RegistrationForm(props) {
             if (response.status === 200) {
               setState((prevState) => ({
                 ...prevState,
-                successMessage: "Registration successful. Redirecting to home page..",
+                successMessage: "Registration successful. Redirecting to main page..",
               }));
               // After successful user creation, new user is logged-in via a JWT, and redirected.
               handleLogin(response.data.token);

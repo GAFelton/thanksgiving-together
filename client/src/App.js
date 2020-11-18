@@ -31,7 +31,7 @@ function App() {
               <PublicRoute path="/login">
                 <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
               </PublicRoute>
-              <PrivateRoute path="/home">
+              <PrivateRoute path="/main">
                 <Main />
               </PrivateRoute>
             </Switch>
