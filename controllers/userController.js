@@ -107,7 +107,7 @@ module.exports = {
       res.status(422).json(error);
     }
   },
-
+  // getMe route "GET /api/v1/user/me"
   me(req, res) {
     const myID = req.user.id;
     db.User
@@ -116,13 +116,6 @@ module.exports = {
         res.json(dbModel);
       })
       .catch((err) => res.status(422).json(err));
-    // try {
-    //   // request.user is getting fetched from Middleware after token authentication
-    //   const user = await db.User.findById(req.user.id);
-    //   res.json(user);
-    // } catch (e) {
-    //   res.send({ message: "Error in Fetching user" });
-    // }
   },
   // update "PUT /api/v1/user/:id"
   update(req, res) {

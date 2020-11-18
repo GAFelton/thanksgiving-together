@@ -21,11 +21,6 @@ function LoginForm(props) {
     }));
   };
 
-  // redirectToHome handles successful login - where the /home path will validate the JWT.
-  // const redirectToHome = () => {
-  //   props.updateTitle("Home");
-  //   props.history.push("/home");
-  // };
   // If a user wants to register a new account, this function redirects them.
   const redirectToRegister = () => {
     props.history.push("/register");
