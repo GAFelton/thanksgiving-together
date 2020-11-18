@@ -40,7 +40,7 @@ function LoginForm(props) {
         if (response.status === 200) {
           setState((prevState) => ({
             ...prevState,
-            successMessage: "Login successful. Redirecting to home page..",
+            successMessage: "Login successful. Redirecting to main page..",
           }));
           handleLogin(response.data.token);
           props.showError(null);

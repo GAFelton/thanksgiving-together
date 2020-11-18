@@ -1,6 +1,6 @@
 import React from "react";
 import ZoomClient from "./zoomClient";
-// import ZoomControl from "./zoomControl";
+import ZoomControl from "./zoomControl";
 
 // next step: rewrite zoomControl as button sending request to client
 // from our db, to follow zoom frame- maybe better done as entirely
@@ -12,6 +12,7 @@ function Zoom() {
   return (
     <>
       <ZoomClient />
+      <ZoomControl />
     </>
   );
 }
