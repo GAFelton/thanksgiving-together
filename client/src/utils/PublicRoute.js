@@ -1,18 +1,21 @@
+// If userContext is not null, redirect to /home
+
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
 
-function PrivateRoute({ children, ...rest }) {
+// TODO: Work with useAuth().
+function PublicRoute({ children, ...rest }) {
   const { user } = useAuth();
   return (
     <Route
       {...rest}
-      render={({ location }) => (user ? (
+      render={({ location }) => ((user === null) ? (
         children
       ) : (
         <Redirect
           to={{
-            pathname: "/login",
+            pathname: "/home",
             state: { from: location },
           }}
         />
@@ -21,4 +24,4 @@ function PrivateRoute({ children, ...rest }) {
   );
 }
 
-export default PrivateRoute;
+export default PublicRoute;
