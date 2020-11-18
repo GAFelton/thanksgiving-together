@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
 import { withRouter } from "react-router-dom";
-import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
+import { useAuth } from "../AuthContext";
 import API from "../../utils/API";
 
 // The Login Form is for users who already have an account.
 function LoginForm(props) {
+  const { handleLogin } = useAuth();
+
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -20,10 +22,10 @@ function LoginForm(props) {
   };
 
   // redirectToHome handles successful login - where the /home path will validate the JWT.
-  const redirectToHome = () => {
-    props.updateTitle("Home");
-    props.history.push("/home");
-  };
+  // const redirectToHome = () => {
+  //   props.updateTitle("Home");
+  //   props.history.push("/home");
+  // };
   // If a user wants to register a new account, this function redirects them.
   const redirectToRegister = () => {
     props.history.push("/register");
@@ -45,10 +47,7 @@ function LoginForm(props) {
             ...prevState,
             successMessage: "Login successful. Redirecting to home page..",
           }));
-          // After successful login, the user is granted a JWT, and redirected.
-          // TODO: is localStorage the best place to store the JWT? Maybe for now.
-          localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
-          redirectToHome();
+          handleLogin(response.data.token);
           props.showError(null);
         } else if (response.code === 204) {
           props.showError("Email and password do not match");
