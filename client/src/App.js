@@ -4,7 +4,7 @@ import {
   Switch,
 } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import Nav from "./components/Nav";
+import Header from "./components/Header/Header";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import Main from "./pages/Main";
@@ -20,7 +20,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
-          <Nav title={title} fixed="top" />
+          <Header title={title} />
           <div className="container d-flex align-items-center flex-column">
             <Container>
               <Switch>

@@ -26,17 +26,34 @@ function Header() {
 
   // To Do: update links and make sure they route to pages
   return (
-    <Navbar collapseOnSelect fixed="top" expand="lg" bg="warning" variant="light">
-      <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
-          <Nav.Link href="#games">Games</Nav.Link>
-          <Nav.Link href="/recipes">Recipes</Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-      {renderLogout()}
-    </Navbar>
+    <div>
+      {user
+        ? (
+          <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
+            <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link href="#games">Games</Nav.Link>
+                <Nav.Link href="/recipes">Recipes</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+            {renderLogout()}
+          </Navbar>
+        ) : (
+          <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
+            <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link href="/about">About</Nav.Link>
+                <Nav.Link href="/how-to">How-to</Nav.Link>
+                <Nav.Link href="/login">Login/Register</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+        )}
+    </div>
   );
 }
 
