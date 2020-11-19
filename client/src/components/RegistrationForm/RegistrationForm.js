@@ -7,6 +7,8 @@ import { useAuth } from "../AuthContext";
 // The registration form allows users to sign up for a new account.
 // It has functions for both creating a new family and for joining an existing one.
 function RegistrationForm(props) {
+  // Define error handler fn for reference
+  const { showError } = props;
   // These state parameters are mostly straightforward.
   // familyDetail refers to either a room code or a family Name, depending on the newFamily boolean.
   const [state, setState] = useState({
@@ -41,12 +43,11 @@ function RegistrationForm(props) {
         .then((response) => {
           if (response.status === 200) {
             familyID = response.data._id; // eslint-disable-line no-underscore-dangle
-          } else {
-            props.showError("Error occurred during family creation.");
           }
           return familyID;
         })
         .catch((error) => {
+          showError("Error occurred during family creation.");
           console.log(error);
         });
       if (familyID) {
@@ -70,12 +71,13 @@ function RegistrationForm(props) {
               }));
               // After successful user creation, new user is logged-in via a JWT, and redirected.
               handleLogin(response.data.token);
-              props.showError(null);
-            } else {
-              props.showError("Some error ocurred");
+              showError(null);
+            } else if (response.status === 400) {
+              showError(`User already exists, Family Created, join with ID ${familyID}.`);
             }
           })
           .catch((error) => {
+            showError("Some error ocurred");
             console.log(error);
           });
       }
@@ -103,7 +105,7 @@ function RegistrationForm(props) {
         })
         .catch((error) => {
           console.log(error);
-          props.showError("No Family Found with that Code.");
+          showError("No Family Found with that Code.");
         });
       if (familyID) {
         // The payload does not include familyAdmin, which defaults to false.
@@ -125,18 +127,20 @@ function RegistrationForm(props) {
               }));
               // After successful user creation, new user is logged-in via a JWT, and redirected.
               handleLogin(response.data.token);
-              props.showError(null);
-            } else {
-              props.showError("Some error occurred");
+              showError(null);
+            } else if (response.status === 400) {
+              showError("User already exists.");
             }
           })
           .catch((error) => {
+            showError("Some error occurred");
             console.log(error);
           });
       } else {
-        props.showError("No Family Found with that Code.");
+        showError("No Family Found with that Code.");
       }
     } catch (err) {
+      showError("Some error occurred");
       console.error(err);
     }
   };
@@ -150,14 +154,14 @@ function RegistrationForm(props) {
       && state.email.length
       && state.password.length
       && state.familyDetail.length) {
-      props.showError(null);
+      showError(null);
       if (state.newFamily === true) {
         createNewFamily();
       } else if (state.newFamily === false) {
         joinExistingFamily();
-      } else {
-        props.showError("Please fill out all form fields");
       }
+    } else {
+      showError("Please fill out all form fields");
     }
   };
   // redirectToLogin handles the Login button at the end of the form.
@@ -171,7 +175,7 @@ function RegistrationForm(props) {
     if (state.password === state.confirmPassword) {
       sendDetailsToServer();
     } else {
-      props.showError("Passwords do not match");
+      showError("Passwords do not match");
     }
   };
   // Rendering the Registration form.
