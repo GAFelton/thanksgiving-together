@@ -24,8 +24,8 @@ const familySchema = new Schema({
     },
   ],
   zoomInfo: {
-    id: { type: Number },
-    pwd: { type: String },
+    id: { type: Number, default: 0 },
+    pwd: { type: String, default: "" },
   },
   archived: { type: Boolean, required: true, default: false },
 });
