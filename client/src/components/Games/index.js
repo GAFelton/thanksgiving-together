@@ -2,8 +2,7 @@ import React from "react";
 
 function Games() {
   return (
-    <h2>Games</h2>
-    <p>Coming Soon</p>
+    <h2>Coming Soon</h2>
   );
 }
 

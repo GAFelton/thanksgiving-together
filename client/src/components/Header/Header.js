@@ -34,7 +34,7 @@ function Header() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="#games">Games</Nav.Link>
+                <Nav.Link href="/games">Games</Nav.Link>
                 <Nav.Link href="/recipes">Recipes</Nav.Link>
               </Nav>
             </Navbar.Collapse>
@@ -47,8 +47,7 @@ function Header() {
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="/about">About</Nav.Link>
-                <Nav.Link href="/how-to">How-to</Nav.Link>
-                <Nav.Link href="/login">Login/Register</Nav.Link>
+                <Nav.Link href="/register">Login/Register</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
