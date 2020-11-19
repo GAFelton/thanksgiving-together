@@ -13,7 +13,7 @@ const API = axios.create({
 const family = {
   get: (params) => API.get(`/family/${params}`),
   findIdByCode: (data) => API.post("/family/code", data),
-  update: (data, params) => API.put(`/family${params}`, data),
+  update: (headers, data, params) => API.put(`/family/${params}`, data, headers),
   create: (data) => API.post("/family", data),
   archive: (params) => API.put(`/family/archive/${params}`),
 };
