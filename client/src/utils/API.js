@@ -11,11 +11,11 @@ const API = axios.create({
 
 // Family axios routes
 const family = {
-  get: (params) => API.get("/family", { params }),
+  get: (params) => API.get(`/family/${params}`),
   findIdByCode: (data) => API.post("/family/code", data),
-  update: (data, params) => API.put("/family", data, { params }),
+  update: (headers, data, params) => API.put(`/family/${params}`, data, headers),
   create: (data) => API.post("/family", data),
-  archive: (params) => API.put("/family/archive", { params }),
+  archive: (params) => API.put(`/family/archive/${params}`),
 };
 
 // User axios routes
@@ -23,20 +23,20 @@ const users = {
   // data for comparePassword must contain email and password
   comparePassword: (data) => API.post("/user", data),
   getMe: (headers) => API.get("user/me", headers),
-  get: (params) => API.get("/user", { params }),
-  update: (data, params) => API.put("/user", data, { params }),
+  get: (params) => API.get(`/user/${params}`),
+  update: (data, params) => API.put(`/user/${params}`, data),
   create: (data) => API.post("/user/family", data),
-  archive: (params) => API.put("/user/archive", { params }),
+  archive: (params) => API.put(`/user/archive${params}`),
 };
 
 // Recipe axios routes
 // Note that for creating a new recipe, the param must be the FAMILY id.
 // Also for create, data must contain the author's _id (from the user object).
 const recipes = {
-  get: (params) => API.get("/recipe", { params }),
-  update: (data, params) => API.put("/recipe", data, { params }),
-  create: (data, params) => API.post("/recipe/family", data, { params }),
-  archive: (params) => API.put("/recipe/archive", { params }),
+  get: (params) => API.get(`/recipe/${params}`),
+  update: (data, params) => API.put(`/recipe/${params}`, data),
+  create: (data, params) => API.post(`/recipe/family/${params}`, data),
+  archive: (params) => API.put(`/recipe/archive/${params}`),
 };
 
 // Discussion Topics axios routes

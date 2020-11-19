@@ -1,18 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import API from "../../utils/API";
 import ZoomClient from "./zoomClient";
 import ZoomControl from "./zoomControl";
+import { useAuth } from "../AuthContext";
 
-// next step: rewrite zoomControl as button sending request to client
-// from our db, to follow zoom frame- maybe better done as entirely
-// separate component
-
-// Exports a div containing our zoom client-these could be merged into a single component,
-// but this structure might make styling easier-
+// Exports a div containing our zoom client and join meeting button
 function Zoom() {
+  // Create state to receive results of api call
+  const [zoomRoomSettings, setZoomRoomSettings] = useState();
+
+  // Get user info used in creating meeting to pass to zoom client router/app's zoomControl button
+  const {
+    id,
+    fullName,
+    family,
+  } = useAuth().user;
+
+  // Once component renders, get family Zoom information from db and update zoomRoomSettings state
+  useEffect(() => {
+    API.family.get(family)
+      .then((response) => {
+        setZoomRoomSettings(response.data.zoomInfo);
+      });
+  }, []);
+
+  // Pass all the required info from above into Zoom components as props
   return (
     <>
-      <ZoomClient />
-      <ZoomControl />
+      <ZoomClient
+        userId={id}
+      />
+      <ZoomControl
+        userId={id}
+        name={fullName}
+        roomSettings={zoomRoomSettings}
+      />
     </>
   );
 }
