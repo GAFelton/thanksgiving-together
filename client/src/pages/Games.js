@@ -3,31 +3,19 @@ import { withRouter } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Header from "../components/Header/Header";
-import Zoom from "../components/Zoom";
-import DiscussTopicBtn from "../components/DiscussTopicBtn";
-import Spotify from "../components/Spotify";
 
 // AUTHENTICATION NOTES
 // Wrap providers around MAIN app.
 // Logic for determining "is user logged in?" should all be in the auth context provider.
 // React Router ((user) ? Logged-in Routes : Logged-out Routes)
-function Main() {
+function Games() {
   return (
     <Container>
       <Row>
         <Header />
       </Row>
-      <Row>
-        <Zoom />
-      </Row>
-      <Row>
-        <DiscussTopicBtn />
-      </Row>
-      <Row>
-        <Spotify />
-      </Row>
     </Container>
   );
 }
 
-export default withRouter(Main);
+export default withRouter(Games);

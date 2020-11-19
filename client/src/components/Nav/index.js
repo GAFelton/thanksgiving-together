@@ -1,29 +1,22 @@
 import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 
-function Nav() {
+function NavPub() {
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-warning">
-      <a className="navbar-brand" href="/">
-        Thanksgiving Together
-      </a>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon" />
-      </button>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <a className="nav-link" href="/">Games</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/">Recipes</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/">Sign In</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <Navbar collapseOnSelect fixed="top" expand="lg" bg="warning" variant="light">
+      <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link href="/about">About</Nav.Link>
+          <Nav.Link href="/how-to">How-to</Nav.Link>
+          <Nav.Link href="/login">Login/Register</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+
   );
 }
 
-export default Nav;
+export default NavPub;
