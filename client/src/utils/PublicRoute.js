@@ -1,10 +1,9 @@
-// If userContext is not null, redirect to /home
+// If userContext is not null, redirect to /main
 
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
 
-// TODO: Work with useAuth().
 function PublicRoute({ children, ...rest }) {
   const { user } = useAuth();
   return (
@@ -15,7 +14,7 @@ function PublicRoute({ children, ...rest }) {
       ) : (
         <Redirect
           to={{
-            pathname: "/home",
+            pathname: "/main",
             state: { from: location },
           }}
         />
