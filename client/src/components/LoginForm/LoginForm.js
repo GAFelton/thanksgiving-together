@@ -6,6 +6,8 @@ import API from "../../utils/API";
 
 // The Login Form is for users who already have an account.
 function LoginForm(props) {
+  // Define error handler fn for reference
+  const { showError } = props;
   const { handleLogin } = useAuth();
 
   const [state, setState] = useState({
@@ -27,9 +29,7 @@ function LoginForm(props) {
     props.updateTitle("Register");
   };
 
-  // The click handler directly invokes our API call - to verify the user's password.
-  const handleSubmitClick = (e) => {
-    e.preventDefault();
+  const loginUser = () => {
     const payload = {
       email: state.email,
       password: state.password,
@@ -43,16 +43,23 @@ function LoginForm(props) {
             successMessage: "Login successful. Redirecting to main page..",
           }));
           handleLogin(response.data.token);
-          props.showError(null);
-        } else if (response.code === 204) {
-          props.showError("Email and password do not match");
-        } else {
-          props.showError("User does not exists");
+          showError(null);
         }
       })
       .catch((error) => {
+        showError("Login Unsuccessful.");
         console.log(error);
       });
+  };
+
+  // The click handler directly invokes our API call - to verify the user's password.
+  const handleSubmitClick = (e) => {
+    e.preventDefault();
+    if (state.email.length && state.password.length) {
+      loginUser();
+    } else {
+      showError("Please enter both email and password.");
+    }
   };
 
   // Rendering the Login Form.
