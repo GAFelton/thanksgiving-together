@@ -192,17 +192,15 @@ async function recipeInsert(seed, familyID, memberID) {
 // Deletes existing records and Inserts discussion topic seed data into database.
 // Takes in seed data.
 async function discussionInsert(seed) {
-  DiscussionTopic
-    .deleteMany()
-    .then(() => DiscussionTopic.collection.insertMany(seed))
-    .then((data) => {
-      console.log(`${data.result.n} records inserted!`);
-      return data;
-    })
-    .catch((err) => {
-      console.error(err);
-      connectionErrors.push(err);
-    });
+  try {
+    const deleted = await DiscussionTopic.deleteMany();
+    console.log(`Number of Discussion Topic records deleted: ${deleted.deletedCount}`);
+    const data = await DiscussionTopic.insertMany(seed);
+    console.log(`${data.length} Discussion Topic records inserted!`);
+  } catch (err) {
+    console.error(err);
+    connectionErrors.push(err);
+  }
 }
 
 // This function ends the database connection at the end of the seeding script.
