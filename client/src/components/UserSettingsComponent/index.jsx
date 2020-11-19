@@ -12,7 +12,7 @@ function UserSettingsComponent() {
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
-    id: "",
+    zoomId: "",
     pwd: "",
   });
 
@@ -24,8 +24,20 @@ function UserSettingsComponent() {
     }));
   };
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setState({
+      firstName: "",
+      lastName: "",
+      zoomId: "",
+      pwd: "",
+    });
+  };
   const handleShow = () => setShow(true);
+
+  const isEmpty = (obj) => { // eslint-disable-line consistent-return
+    if (Object.getOwnPropertyNames(obj).length === 0) return true;
+  };
 
   const handleSave = () => {
     const {
@@ -33,24 +45,36 @@ function UserSettingsComponent() {
       family,
     } = user;
     const storedJWT = localStorage.getItem(ACCESS_TOKEN_NAME);
+    const userInfo = {};
+    const familyInfo = { zoomInfo: {} };
+    if (state.firstName.length) {
+      userInfo.firstName = state.firstName.trim();
+    }
+    if (state.lastName.length) {
+      userInfo.lastName = state.lastName.trim();
+    }
+    if (state.zoomId.length) {
+      familyInfo.zoomInfo.id = parseInt(state.zoomId.trim(), 10);
+    }
+    if (state.pwd.length) {
+      familyInfo.zoomInfo.pwd = state.pwd.trim();
+    }
     // TODO: update user & family in DB.
-    if (state.firstName.length && state.lastName.length) {
+    if (!isEmpty(userInfo)) {
       API.users.update(
         { headers: { token: storedJWT } },
-        { firtName: state.firstName.trim(), lastName: state.lastName.trim() },
+        userInfo,
         id,
-      ).then(
-        (response) => { console.log(response); },
-      );
+      )
+        .catch((err) => console.log(err));
     }
-    if (state.id.length && state.pwd.length) {
+    if (!isEmpty(familyInfo.zoomInfo)) {
       API.family.update(
         { headers: { token: storedJWT } },
-        { zoomInfo: { id: state.id.trim(), pwd: state.pwd.trim() } },
+        familyInfo,
         family,
-      ).then(
-        (response) => { console.log(response); },
-      );
+      )
+        .catch((err) => console.log(err));
     }
     handleLogin(storedJWT);
     handleClose();
@@ -72,27 +96,30 @@ function UserSettingsComponent() {
             <Form>
               <Row>
                 <Col>
-                  <Form.Group controlId="formGroupfirstName">
+                  <Form.Group controlId="firstName">
                     <Form.Label>First name</Form.Label>
                     <Form.Control type="input" onChange={handleChange} value={state.firstName} placeholder="Enter First name" />
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Group controlId="formGrouplastName">
+                  <Form.Group controlId="lastName">
                     <Form.Label>Last name</Form.Label>
                     <Form.Control type="input" onChange={handleChange} value={state.lastName} placeholder="Enter Last Name" />
                   </Form.Group>
                 </Col>
               </Row>
+              <Modal.Header>
+                <Modal.Title>Adjust Family Details</Modal.Title>
+              </Modal.Header>
               <Row>
                 <Col>
-                  <Form.Group controlId="formZoomID">
+                  <Form.Group controlId="zoomId">
                     <Form.Label>Zoom Meeting ID</Form.Label>
-                    <Form.Control type="input" onChange={handleChange} value={state.id} placeholder="Enter Zoom Meeting Id" />
+                    <Form.Control type="input" onChange={handleChange} value={state.zoomId} placeholder="Enter Zoom Meeting Id" />
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Group controlId="formZoomPWD">
+                  <Form.Group controlId="pwd">
                     <Form.Label>Zoom Meeting Passcode</Form.Label>
                     <Form.Control type="input" onChange={handleChange} value={state.pwd} placeholder="Enter Zoom Meeting Passcode" />
                   </Form.Group>
