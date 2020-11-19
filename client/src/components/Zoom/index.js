@@ -24,13 +24,14 @@ function Zoom() {
       });
   }, []);
 
-  // Pass all the required info above into Zoom components as props
+  // Pass all the required info from above into Zoom components as props
   return (
     <>
       <ZoomClient
         userId={id}
       />
       <ZoomControl
+        userId={id}
         name={fullName}
         roomSettings={zoomRoomSettings}
       />
