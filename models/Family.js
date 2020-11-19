@@ -23,6 +23,10 @@ const familySchema = new Schema({
       ref: "Recipe",
     },
   ],
+  zoomInfo: {
+    id: { type: Number },
+    pwd: { type: String },
+  },
   archived: { type: Boolean, required: true, default: false },
 });
 
