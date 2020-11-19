@@ -1,45 +1,48 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-// Get code could/ maybe should be moved to utils/api, but doing here for now
-// to avoid confusion/conflicts
 import axios from "axios";
 
 // Use state to track-joining, joined, default(as in, unclicked)
-//  Gets required information from app db and sends to Zoom client
-const sendJoinRequest = () => {
-  // Button fn test
-  console.log("test");
 
-  // Prep data to send - values should come from db, const should likely be let
-  const data = JSON.stringify({ id: 7791079090, pwd: "Fyr5Xk", name: "Big Test" });
+const ZoomControl = ({ userId, name, roomSettings }) => {
+  // Onclick function for zoomControl button
+  const sendJoinRequest = () => {
+    // Destructure two key meeting Room settings from prop
+    const { pwd, id } = roomSettings;
 
-  const config = {
-    method: "post",
-    url: "https://ttzoomclient.herokuapp.com/create",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data,
+    // Create data object to send based on above vals/props
+    const data = JSON.stringify({ id, pwd, name });
+
+    // Configuration object for axios request to Zoom client
+    // userId is used to sync unique route w/ zoommClient page/component
+    const config = {
+      method: "post",
+      url: `https://ttzoomclient.herokuapp.com/create/${userId}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data,
+    };
+
+    // Send required data to start meeting
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
-  axios(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  return (
+    <>
+      <Button
+        variant="success"
+        onClick={sendJoinRequest}
+      >
+        Join Meeting
+      </Button>
+    </>
+  );
 };
-
-const ZoomControl = () => (
-  <>
-    <Button
-      variant="success"
-      onClick={sendJoinRequest}
-    >
-      Join Meeting
-    </Button>
-  </>
-);
 
 export default ZoomControl;
