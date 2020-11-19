@@ -21,12 +21,12 @@ module.exports = {
     db.User
       .findOne({ email }).select("password")
       .then((user) => { // eslint-disable-line consistent-return
-        if (!user) { return res.status(400).json({ msg: "User does not exist" }); }
+        if (!user) { return res.status(401).json({ msg: "User does not exist" }); }
         // eslint-disable-next-line consistent-return
         user.comparePassword(password, (error, isMatch) => {
           if (error) throw error;
           if (!isMatch) {
-            return res.status(401).json({ loggedIn: false, msg: "Login Unsuccessful" });
+            return res.status(401).json({ msg: "Login Unsuccessful" });
           }
           const payload = {
             user: {

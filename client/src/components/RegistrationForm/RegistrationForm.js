@@ -72,6 +72,8 @@ function RegistrationForm(props) {
               // After successful user creation, new user is logged-in via a JWT, and redirected.
               handleLogin(response.data.token);
               showError(null);
+            } else if (response.status === 400) {
+              showError(`User already exists, Family Created, join with ID ${familyID}.`);
             }
           })
           .catch((error) => {
@@ -126,6 +128,8 @@ function RegistrationForm(props) {
               // After successful user creation, new user is logged-in via a JWT, and redirected.
               handleLogin(response.data.token);
               showError(null);
+            } else if (response.status === 400) {
+              showError("User already exists.");
             }
           })
           .catch((error) => {
@@ -150,14 +154,14 @@ function RegistrationForm(props) {
       && state.email.length
       && state.password.length
       && state.familyDetail.length) {
-      props.showError(null);
+      showError(null);
       if (state.newFamily === true) {
         createNewFamily();
       } else if (state.newFamily === false) {
         joinExistingFamily();
-      } else {
-        showError("Please fill out all form fields");
       }
+    } else {
+      showError("Please fill out all form fields");
     }
   };
   // redirectToLogin handles the Login button at the end of the form.
