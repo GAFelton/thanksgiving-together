@@ -5,6 +5,7 @@ import {
 import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 import API from "../../utils/API";
 import { useAuth } from "../AuthContext";
+import InviteButton from "../InviteButton";
 
 // This component shows a button where it is placed. When clicked, it opens a modal.
 // The modal should contain user settings fields, meant to update db records.
@@ -145,6 +146,14 @@ function UserSettingsComponent() {
               </Row>
             </Form>
           </div>
+          <Modal.Header>
+            <Modal.Title>Invite Family Members</Modal.Title>
+          </Modal.Header>
+          <Row>
+            <Col className="text-center">
+              <InviteButton />
+            </Col>
+          </Row>
         </Modal.Body>
         {/* The handleSave function only runs when "Save Changes" is clicked. */}
         <Modal.Footer>
