@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Zoom from "../components/Zoom";
 import DiscussTopicBtn from "../components/DiscussTopicBtn";
@@ -12,17 +11,11 @@ import Spotify from "../components/Spotify";
 // React Router ((user) ? Logged-in Routes : Logged-out Routes)
 function Main() {
   return (
-    <Container>
-      <Row>
-        <Zoom />
-      </Row>
-      <Row>
-        <DiscussTopicBtn />
-      </Row>
-      <Row>
-        <Spotify />
-      </Row>
-    </Container>
+    <Row>
+      <DiscussTopicBtn />
+      <Zoom />
+      <Spotify />
+    </Row>
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Col from "react-bootstrap/Col";
 import API from "../../utils/API";
 
 // Discussion Topic Button Functional Component
@@ -36,7 +37,7 @@ function DiscussTopicBtn() {
   // For now, DiscussTopicArea is the div in which topics are displayed.
   // Topics should be displayed in a child component, which can be placed elsewhere on the page.
   return (
-    <div>
+    <Col>
       <button className="DiscussTopicBtn" onClick={showDiscussionTopic} type="button" name="DiscussTopicBtn">
         Help! I need a discussion topic.
       </button>
@@ -47,7 +48,7 @@ function DiscussTopicBtn() {
           {topics[topicIndex]}
         </p>
       </div>
-    </div>
+    </Col>
   );
 }
 
