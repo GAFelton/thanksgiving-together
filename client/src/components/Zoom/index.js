@@ -33,7 +33,7 @@ function Zoom() {
           userId={id}
         />
       </Row>
-      <Row>
+      <Row className="justify-content-center">
         <ZoomControl
           userId={id}
           name={fullName}

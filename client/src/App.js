@@ -20,7 +20,7 @@ import PublicRoute from "./utils/PublicRoute";
 import { AuthProvider } from "./components/AuthContext";
 import AlertComponent from "./components/AlertComponent/AlertComponent";
 
-// App() mainly countains the React router. The router is wrapped in an AuthProvider,
+// App() mainly contains the React router. The router is wrapped in an AuthProvider,
 // letting us discern whether a user is logged-in or not.
 // Based on login status, PublicRoute and PrivateRoute will redirect users to /login or /main.
 // If a route should be accessible by both logged-in and logged-out users, it is called via Route.
@@ -31,7 +31,7 @@ function App() {
       <Router>
         <div className="App">
           <Header />
-          <Container className="justify-content-center align-items-center">
+          <Container fluid>
             <Switch>
               <PublicRoute path="/" exact>
                 <RegistrationForm showError={updateErrorMessage} />
