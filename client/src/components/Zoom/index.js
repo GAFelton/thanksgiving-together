@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Row, Col } from "react-bootstrap";
 import API from "../../utils/API";
 import ZoomClient from "./zoomClient";
 import ZoomControl from "./zoomControl";
@@ -26,16 +27,20 @@ function Zoom() {
 
   // Pass all the required info from above into Zoom components as props
   return (
-    <>
-      <ZoomClient
-        userId={id}
-      />
-      <ZoomControl
-        userId={id}
-        name={fullName}
-        roomSettings={zoomRoomSettings}
-      />
-    </>
+    <Col>
+      <Row>
+        <ZoomClient
+          userId={id}
+        />
+      </Row>
+      <Row>
+        <ZoomControl
+          userId={id}
+          name={fullName}
+          roomSettings={zoomRoomSettings}
+        />
+      </Row>
+    </Col>
   );
 }
 
