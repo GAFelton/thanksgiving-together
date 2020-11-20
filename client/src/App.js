@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
+  Redirect,
 } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Header from "./components/Header/Header";
@@ -31,10 +32,11 @@ function App() {
                 <PublicRoute path="/" exact>
                   <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
                 </PublicRoute>
-                <PublicRoute path="/register">
+                <PublicRoute exact path="/register">
                   <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
                 </PublicRoute>
-                <PublicRoute exact path="/invite">
+                <Redirect from="/joinfamily/:invitecode" to="/register/:invitecode" />
+                <PublicRoute exact path="/register/:invitecode">
                   <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
                 </PublicRoute>
                 <PublicRoute path="/login">
