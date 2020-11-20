@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import { Nav, Navbar } from "react-bootstrap";
 import { useHistory, withRouter } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import UserSettingsComponent from "../UserSettingsComponent";
 
 function Header() {
   // The history hook gives this component access to the full history object w/out relying on props.
@@ -35,19 +35,22 @@ function Header() {
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="/games">Games</Nav.Link>
-                <Nav.Link href="/Recipes">Recipes</Nav.Link>
+                <Nav.Link href="/recipes">Recipes</Nav.Link>
+                <UserSettingsComponent />
               </Nav>
             </Navbar.Collapse>
             {renderLogout()}
           </Navbar>
         ) : (
           <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
-            <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
+            <Navbar.Brand href="/about">Thanksgiving Together</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="/about">About</Nav.Link>
-                <Nav.Link href="/register">Login/Register</Nav.Link>
+                <Nav.Link href="/how-to">How-to</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
