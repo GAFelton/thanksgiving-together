@@ -8,6 +8,7 @@ import Header from "./components/Header/Header";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import About from "./components/About";
+import How from "./components/How";
 import Main from "./pages/Main";
 import Games from "./components/Games";
 import PrivateRoute from "./utils/PrivateRoute";
@@ -37,6 +38,9 @@ function App() {
                 </PublicRoute>
                 <PublicRoute path="/about">
                   <About />
+                </PublicRoute>
+                <PublicRoute path="/how-to">
+                  <How />
                 </PublicRoute>
                 <PrivateRoute path="/main">
                   <Main />

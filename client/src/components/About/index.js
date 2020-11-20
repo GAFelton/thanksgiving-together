@@ -7,8 +7,32 @@ function About() {
       <Card className="bg-dark">
         <Card.Img src="https://images.pexels.com/photos/5662351/pexels-photo-5662351.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Thanksgiving Table" />
         <Card.ImgOverlay>
-          <Card.Header style={{ color: "gold", fontSize: "6vw", fontFamily: "Kaushan Script, cursive" }}>Thanksgiving Together</Card.Header>
-          <Card.Text style={{ color: "gold", fontSize: "3.5vw", fontFamily: "Kaushan Script, cursive" }}>
+          <Card.Header style={{
+            position: "relative",
+            left: "50%",
+            top: "45%",
+            transform: "translate(-50%, -50%)",
+            textShadow: "2px 2px 4px #000000",
+            textAlign: "center",
+            color: "gold",
+            fontSize: "5vw",
+            fontFamily: "Kaushan Script, cursive",
+          }}
+          >
+            Thanksgiving Together
+          </Card.Header>
+          <Card.Text style={{
+            position: "relative",
+            left: "50%",
+            top: "35%",
+            transform: "translate(-50%, -50%)",
+            textShadow: "2px 2px 4px #000000",
+            textAlign: "center",
+            color: "gold",
+            fontSize: "2.5vw",
+            fontFamily: "Kaushan Script, cursive",
+          }}
+          >
             Celebrate Thanksgiving with your loved ones virtually this year
           </Card.Text>
         </Card.ImgOverlay>
@@ -29,9 +53,13 @@ function About() {
         Register and login to experience a whole new Thanksgiving together online this year!
       </p>
       <p>
-        If you need a guide on how to register, head on over to our
-        <a href="/how-to"> How-to</a>
+        If you need a guide on how to register, head on over to
+        <a href="/how-to"> How-to </a>
+        for a quick rundown.
       </p>
+      <br />
+      <br />
+      <br />
     </div>
   );
 }
