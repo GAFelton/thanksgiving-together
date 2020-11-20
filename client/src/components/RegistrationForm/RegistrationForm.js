@@ -181,116 +181,118 @@ function RegistrationForm(props) {
   // Rendering the Registration form.
   // TODO: This kind of heavy copy-paste could use some conditional logic to render it.
   return (
-    <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-      <form>
-        <div className="form-group text-left">
-          <label htmlFor="newFamily">
-            Create New Family?
-            <input
-              type="checkbox"
-              className="form-control"
-              id="newFamily"
-              checked={state.newFamily}
-              onChange={handleChange}
-            />
-          </label>
+    <div className="container">
+      <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
+        <form>
+          <div className="form-group text-left">
+            <label htmlFor="newFamily">
+              Create New Family?
+              <input
+                type="checkbox"
+                className="form-control"
+                id="newFamily"
+                checked={state.newFamily}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+          <div className="form-group text-left">
+            <label htmlFor="firstName">
+              First Name
+              <input
+                type="text"
+                className="form-control"
+                id="firstName"
+                placeholder="First Name"
+                value={state.firstName}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+          <div className="form-group text-left">
+            <label htmlFor="lastName">
+              Last Name
+              <input
+                type="text"
+                className="form-control"
+                id="lastName"
+                placeholder="Last Name"
+                value={state.lastName}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+          <div className="form-group text-left">
+            <label htmlFor="email">
+              Email address
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                value={state.email}
+                onChange={handleChange}
+              />
+            </label>
+            <small id="emailHelp" className="form-text text-muted">We&apos;ll never share your email with anyone else.</small>
+          </div>
+          <div className="form-group text-left">
+            <label htmlFor="password">
+              Password
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                placeholder="Password"
+                value={state.password}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+          <div className="form-group text-left">
+            <label htmlFor="confirmPassword">
+              Confirm Password
+              <input
+                type="password"
+                className="form-control"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                value={state.confirmPassword}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+          <div className="form-group text-left">
+            <label htmlFor="familyDetail">
+              {state.newFamily ? "Family Name" : "Family Code"}
+              <input
+                type="text"
+                className="form-control"
+                id="familyDetail"
+                placeholder={state.newFamily ? "Family Name" : "Family Code"}
+                value={state.familyDetail}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+          <button
+            type="submit"
+            className="btn btn-dark"
+            onClick={handleSubmitClick}
+          >
+            Register
+          </button>
+        </form>
+        <div className="alert alert-success mt-2" style={{ display: state.successMessage ? "block" : "none" }} role="alert">
+          {state.successMessage}
         </div>
-        <div className="form-group text-left">
-          <label htmlFor="firstName">
-            First Name
-            <input
-              type="text"
-              className="form-control"
-              id="firstName"
-              placeholder="First Name"
-              value={state.firstName}
-              onChange={handleChange}
-            />
-          </label>
+        <div className="mt-2">
+          <span>Already have an account? </span>
+          <span className="loginText" onClick={() => redirectToLogin()}>Login here</span> {/* eslint-disable-line */}
         </div>
-        <div className="form-group text-left">
-          <label htmlFor="lastName">
-            Last Name
-            <input
-              type="text"
-              className="form-control"
-              id="lastName"
-              placeholder="Last Name"
-              value={state.lastName}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div className="form-group text-left">
-          <label htmlFor="email">
-            Email address
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-              value={state.email}
-              onChange={handleChange}
-            />
-          </label>
-          <small id="emailHelp" className="form-text text-muted">We&apos;ll never share your email with anyone else.</small>
-        </div>
-        <div className="form-group text-left">
-          <label htmlFor="password">
-            Password
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="Password"
-              value={state.password}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div className="form-group text-left">
-          <label htmlFor="confirmPassword">
-            Confirm Password
-            <input
-              type="password"
-              className="form-control"
-              id="confirmPassword"
-              placeholder="Confirm Password"
-              value={state.confirmPassword}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div className="form-group text-left">
-          <label htmlFor="familyDetail">
-            {state.newFamily ? "Family Name" : "Family Code"}
-            <input
-              type="text"
-              className="form-control"
-              id="familyDetail"
-              placeholder={state.newFamily ? "Family Name" : "Family Code"}
-              value={state.familyDetail}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <button
-          type="submit"
-          className="btn btn-dark"
-          onClick={handleSubmitClick}
-        >
-          Register
-        </button>
-      </form>
-      <div className="alert alert-success mt-2" style={{ display: state.successMessage ? "block" : "none" }} role="alert">
-        {state.successMessage}
-      </div>
-      <div className="mt-2">
-        <span>Already have an account? </span>
-        <span className="loginText" onClick={() => redirectToLogin()}>Login here</span> {/* eslint-disable-line */}
-      </div>
 
+      </div>
     </div>
   );
 }

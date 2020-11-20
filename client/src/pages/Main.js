@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Nav from "../components/Nav";
 import Zoom from "../components/Zoom";
 import DiscussTopicBtn from "../components/DiscussTopicBtn";
 import Spotify from "../components/Spotify";
@@ -14,9 +13,6 @@ import Spotify from "../components/Spotify";
 function Main() {
   return (
     <Container>
-      <Row>
-        <Nav />
-      </Row>
       <Row>
         <Zoom />
       </Row>

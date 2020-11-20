@@ -4,7 +4,6 @@ const familyController = require("../../controllers/familyController");
 
 // Matches with "/api/${version}/family"
 router.route("/")
-  .get(familyController.findIdByCode)
   .post(familyController.create);
 
 // Matches with "/api/${version}/family/code"

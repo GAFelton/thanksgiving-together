@@ -1,20 +1,13 @@
 import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 import { useHistory, withRouter } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 
-function Header({ location, title }) {
+function Header() {
   // The history hook gives this component access to the full history object w/out relying on props.
   const history = useHistory();
   const { user, handleLogout } = useAuth();
-
-  const capitalize = (s) => {
-    if (typeof s !== "string") return "";
-    return s.charAt(0).toUpperCase() + s.slice(1);
-  };
-  let appTitle = capitalize(location.pathname.substring(1, location.pathname.length));
-  if (user) {
-    appTitle = "Thanksgiving Together";
-  }
 
   function onLogout() {
     handleLogout();
@@ -31,13 +24,36 @@ function Header({ location, title }) {
     }
   }
 
+  // To Do: update links and make sure they route to pages
   return (
-    <nav className="navbar navbar- bg-dark">
-      <div className="row col-12 d-flex justify-content-center text-white">
-        <span className="h3">{title || appTitle}</span>
-        {renderLogout()}
-      </div>
-    </nav>
+    <div>
+      {user
+        ? (
+          <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
+            <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link href="/games">Games</Nav.Link>
+                <Nav.Link href="/recipes">Recipes</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+            {renderLogout()}
+          </Navbar>
+        ) : (
+          <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
+            <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link href="/about">About</Nav.Link>
+                <Nav.Link href="/register">Login/Register</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+        )}
+    </div>
   );
 }
+
 export default withRouter(Header);

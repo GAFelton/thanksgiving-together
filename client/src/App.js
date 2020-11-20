@@ -3,10 +3,13 @@ import {
   BrowserRouter as Router,
   Switch,
 } from "react-router-dom";
+import Container from "react-bootstrap/Container";
 import Header from "./components/Header/Header";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
+import About from "./components/About";
 import Main from "./pages/Main";
+import Games from "./components/Games";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
 import { AuthProvider } from "./components/AuthContext";
@@ -21,20 +24,28 @@ function App() {
         <div className="App">
           <Header title={title} />
           <div className="container d-flex align-items-center flex-column">
-            <Switch>
-              <PublicRoute path="/" exact>
-                <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
-              </PublicRoute>
-              <PublicRoute path="/register">
-                <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
-              </PublicRoute>
-              <PublicRoute path="/login">
-                <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
-              </PublicRoute>
-              <PrivateRoute path="/main">
-                <Main />
-              </PrivateRoute>
-            </Switch>
+            <Container>
+              <Switch>
+                <PublicRoute path="/" exact>
+                  <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
+                </PublicRoute>
+                <PublicRoute path="/register">
+                  <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
+                </PublicRoute>
+                <PublicRoute path="/login">
+                  <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
+                </PublicRoute>
+                <PublicRoute path="/about">
+                  <About />
+                </PublicRoute>
+                <PrivateRoute path="/main">
+                  <Main />
+                </PrivateRoute>
+                <PrivateRoute path="/games">
+                  <Games />
+                </PrivateRoute>
+              </Switch>
+            </Container>
             <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage} />
           </div>
         </div>
