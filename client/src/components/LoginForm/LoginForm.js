@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import {
+  Alert, Button, Card, Col, Form, Row,
+} from "react-bootstrap";
 import { useAuth } from "../AuthContext";
 import API from "../../utils/API";
 
 // The Login Form is for users who already have an account.
-function LoginForm(props) {
-  // Define error handler fn for reference
-  const { showError } = props;
+function LoginForm({ showError }) {
   const { handleLogin } = useAuth();
 
   const [state, setState] = useState({
@@ -21,11 +22,6 @@ function LoginForm(props) {
       ...prevState,
       [id]: value,
     }));
-  };
-
-  // If a user wants to register a new account, this function redirects them.
-  const redirectToRegister = () => {
-    props.history.push("/register");
   };
 
   const loginUser = () => {
@@ -63,53 +59,50 @@ function LoginForm(props) {
 
   // Rendering the Login Form.
   return (
-    <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-      <form>
-        <div className="form-group text-left">
-          <label htmlFor="email">
-            Email address
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-              value={state.email}
-              onChange={handleChange}
-            />
-          </label>
-          <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
-        </div>
-        <div className="form-group text-left">
-          <label htmlFor="password">
-            Password
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="Password"
-              value={state.password}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div className="form-check" />
-        <button
-          type="submit"
-          className="btn btn-dark"
-          onClick={handleSubmitClick}
-        >
-          Submit
-        </button>
-      </form>
-      <div className="alert alert-success mt-2" style={{ display: state.successMessage ? "block" : "none" }} role="alert">
-        {state.successMessage}
-      </div>
-      <div className="registerMessage">
-        {/* eslint-disable-next-line  */}
-        <span className="loginText" role="button" onClick={() => redirectToRegister()}>Register</span>
-      </div>
-    </div>
+    <Row>
+      <Col> </Col>
+      <Col xs={12} sm={6} lg={4}>
+        <Card className="login-card mt-2 p-2 hv-center">
+          <Form>
+            <Form.Group controlId="email" className="text-left">
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
+                type="email"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                value={state.email}
+                onChange={handleChange}
+              />
+              <Form.Text id="emailHelp" className="text-muted">We&apos;ll never share your email with anyone else.</Form.Text>
+            </Form.Group>
+            <Form.Group controlId="password" className="text-left">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={state.password}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Button
+              type="submit"
+              className="btn btn-dark"
+              onClick={handleSubmitClick}
+            >
+              Submit
+            </Button>
+          </Form>
+          <Alert variant="success" className="mt-2" style={{ display: state.successMessage ? "block" : "none" }} role="alert">
+            {state.successMessage}
+          </Alert>
+          <div className="mt-2">
+            <span>Need an account? </span>
+            <Link className="registerText" to="/register">Register</Link>
+          </div>
+        </Card>
+      </Col>
+      <Col> </Col>
+    </Row>
   );
 }
 
