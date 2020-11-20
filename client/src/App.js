@@ -34,6 +34,9 @@ function App() {
                 <PublicRoute path="/register">
                   <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
                 </PublicRoute>
+                <PublicRoute exact path="/invite">
+                  <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
+                </PublicRoute>
                 <PublicRoute path="/login">
                   <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
                 </PublicRoute>
