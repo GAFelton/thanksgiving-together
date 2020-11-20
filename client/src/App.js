@@ -19,28 +19,27 @@ import { AuthProvider } from "./components/AuthContext";
 import AlertComponent from "./components/AlertComponent/AlertComponent";
 
 function App() {
-  const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
   return (
     <AuthProvider>
       <Router>
         <div className="App">
-          <Header title={title} />
+          <Header />
           <div className="container d-flex align-items-center flex-column">
             <Container>
               <Switch>
                 <PublicRoute path="/" exact>
-                  <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
+                  <RegistrationForm showError={updateErrorMessage} />
                 </PublicRoute>
                 <PublicRoute exact path="/register">
-                  <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
+                  <RegistrationForm showError={updateErrorMessage} />
                 </PublicRoute>
                 <Redirect from="/joinfamily/:invitecode" to="/register/:invitecode" />
                 <PublicRoute exact path="/register/:invitecode">
-                  <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
+                  <RegistrationForm showError={updateErrorMessage} />
                 </PublicRoute>
                 <PublicRoute path="/login">
-                  <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
+                  <LoginForm showError={updateErrorMessage} />
                 </PublicRoute>
                 <PublicRoute path="/about">
                   <About />

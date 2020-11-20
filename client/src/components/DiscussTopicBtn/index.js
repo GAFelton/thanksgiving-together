@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
+import InviteButton from "../InviteButton";
 
 // Discussion Topic Button Functional Component
 function DiscussTopicBtn() {
@@ -47,6 +48,7 @@ function DiscussTopicBtn() {
           {topics[topicIndex]}
         </p>
       </div>
+      <InviteButton />
     </div>
   );
 }

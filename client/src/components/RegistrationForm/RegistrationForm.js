@@ -24,7 +24,6 @@ function RegistrationForm({ match }, props) {
 
   // useEffect extracts invite code as soon as the page is loaded.
   React.useEffect(() => {
-    console.log(match.params);
     if (match.params) {
       setState((prevState) => ({
         ...prevState,
@@ -178,7 +177,6 @@ function RegistrationForm({ match }, props) {
   };
   // redirectToLogin handles the Login button at the end of the form.
   const redirectToLogin = () => {
-    props.updateTitle("Login");
     props.history.push("/login");
   };
   // When the user submits the registration form, this function checks for password match.
