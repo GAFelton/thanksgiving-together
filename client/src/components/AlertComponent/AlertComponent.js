@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Alert, Button } from "react-bootstrap";
 import "./AlertComponent.css";
 
 function AlertComponent(props) {
@@ -20,19 +21,20 @@ function AlertComponent(props) {
     }
   });
   return (
-    <div
-      className="alert alert-danger alert-dismissable mt-4"
+    <Alert
+      variant="danger"
+      className="alert-dismissable mt-4"
       role="alert"
       id="alertPopUp"
       style={{ display: modalDisplay }}
     >
       <div className="d-flex alertMessage">
         <span>{errorMessage}</span>
-        <button type="button" className="close" aria-label="Close" onClick={() => closeModal()}>
+        <Button type="button" className="close" aria-label="Close" onClick={() => closeModal()}>
           <span aria-hidden="true">&times;</span>
-        </button>
+        </Button>
       </div>
-    </div>
+    </Alert>
   );
 }
 export default AlertComponent;
