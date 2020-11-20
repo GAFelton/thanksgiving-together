@@ -35,7 +35,7 @@ function Header() {
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="/games">Games</Nav.Link>
-                <Nav.Link href="/recipes">Recipes</Nav.Link>
+                <Nav.Link href="/Recipes">Recipes</Nav.Link>
               </Nav>
             </Navbar.Collapse>
             {renderLogout()}
