@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 
-// Use state to track-joining, joined, default(as in, unclicked)
-
 const ZoomControl = ({ userId, name, roomSettings }) => {
   // Create state to track button submission status, for UX
   const [isLoading, setLoading] = useState(false);
@@ -30,10 +28,10 @@ const ZoomControl = ({ userId, name, roomSettings }) => {
       data,
     };
 
-    // Send required data to start meeting
+    // Send required data to external Zoom client, which will attempt to start meeting
     axios(config)
       .then((response) => {
-        console.log(response.data);
+        console.log("Server Response: ", response.status);
         setLoading(false);
       })
       .catch((error) => {
