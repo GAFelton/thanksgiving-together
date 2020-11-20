@@ -26,7 +26,6 @@ function LoginForm(props) {
   // If a user wants to register a new account, this function redirects them.
   const redirectToRegister = () => {
     props.history.push("/register");
-    props.updateTitle("Register");
   };
 
   const loginUser = () => {
