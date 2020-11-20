@@ -3,10 +3,8 @@ import React from "react";
 // Defining functional style code here for now-
 // Messages from zoom client display correctly at at least this size
 const frameStyle = {
-  minWidth: "1000px",
-  minHeight: "500px",
-  transform: "scale(.5,.5)",
-  transformOrigin: "left",
+  minWidth: "60vw",
+  minHeight: "30vw",
 };
 
 // Export div containing embedded link to our zoom client code
