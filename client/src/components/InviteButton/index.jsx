@@ -4,7 +4,6 @@ import {
 } from "react-bootstrap";
 import API from "../../utils/API";
 import { useAuth } from "../AuthContext";
-import "./inviteButton.css";
 
 function InviteButton() {
   const [inviteURL, setInviteURL] = useState();
@@ -36,7 +35,7 @@ function InviteButton() {
       <Button onClick={handleClick}>
         Generate Invite Link
       </Button>
-      { show ? (
+      {show ? (
         <Alert className="mt2" style={{ width: "fit-content" }} variant="success">
           {inviteURL}
         </Alert>
