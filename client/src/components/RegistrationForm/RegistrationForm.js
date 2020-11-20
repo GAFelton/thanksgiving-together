@@ -6,7 +6,7 @@ import { useAuth } from "../AuthContext";
 
 // The registration form allows users to sign up for a new account.
 // It has functions for both creating a new family and for joining an existing one.
-function RegistrationForm(props) {
+function RegistrationForm({ match }, props) {
   // Define error handler fn for reference
   const { showError } = props;
   // These state parameters are mostly straightforward.
@@ -21,6 +21,17 @@ function RegistrationForm(props) {
     familyDetail: "",
     successMessage: null,
   });
+
+  // useEffect extracts invite code as soon as the page is loaded.
+  React.useEffect(() => {
+    if (match.params) {
+      setState((prevState) => ({
+        ...prevState,
+        newFamily: false,
+        familyDetail: match.params.invitecode,
+      }));
+    }
+  }, []);
 
   const { handleLogin } = useAuth();
   // Handles state updates, accounts for either text input or the checkbox.
@@ -166,7 +177,6 @@ function RegistrationForm(props) {
   };
   // redirectToLogin handles the Login button at the end of the form.
   const redirectToLogin = () => {
-    props.updateTitle("Login");
     props.history.push("/login");
   };
   // When the user submits the registration form, this function checks for password match.
