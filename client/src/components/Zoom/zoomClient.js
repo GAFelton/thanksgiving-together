@@ -4,7 +4,7 @@ import React from "react";
 // Messages from zoom client display correctly at at least this size
 const frameStyle = {
   minWidth: "60vw",
-  minHeight: "30vw",
+  minHeight: "60vh",
 };
 
 // Export div containing embedded link to our zoom client code
