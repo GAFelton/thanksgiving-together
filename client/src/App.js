@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import React, { useState } from "react";
 import {
   BrowserRouter as Router,
@@ -11,6 +12,7 @@ import About from "./components/About";
 import How from "./components/How";
 import Main from "./pages/Main";
 import Games from "./components/Games";
+import RecipesPage from "./pages/Recipes";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
 import { AuthProvider } from "./components/AuthContext";
@@ -47,6 +49,9 @@ function App() {
                 </PrivateRoute>
                 <PrivateRoute path="/games">
                   <Games />
+                </PrivateRoute>
+                <PrivateRoute path="/recipes">
+                  <RecipesPage />
                 </PrivateRoute>
               </Switch>
             </Container>
