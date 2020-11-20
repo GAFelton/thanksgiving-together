@@ -7,6 +7,7 @@ import {
 } from "react-bootstrap";
 import { Recipes, RecipeListItem } from "../components/Recipes/index";
 import API from "../utils/API";
+import Input from "../components/Recipes/Input";
 
 function RecipesPage() {
   const [recipes, setRecipes] = useState([]);
@@ -23,7 +24,7 @@ function RecipesPage() {
     // When the form is submitted,
     // prevent its default behavior, get recipes update the recipes state
     event.preventDefault();
-    API.recipes(recipeSearch)
+    API.recipes.get(recipeSearch)
       .then((res) => setRecipes(res.data))
       .catch((err) => console.log(err));
   };
@@ -37,7 +38,7 @@ function RecipesPage() {
               <Container>
                 <Row>
                   <Col size="xs-9 sm-10">
-                    <form
+                    <Input
                       name="RecipeSearch"
                       value={recipeSearch}
                       onChange={handleInputChange}
@@ -61,7 +62,7 @@ function RecipesPage() {
         <Row>
           <Col size="xs-12">
             {!recipes.length ? (
-              <h1 className="text-center">No Recipes to Display</h1>
+              <h1 className="text-center">Our Recipes</h1>
             ) : (
               <Recipes>
                 {recipes.map((recipe) => (
