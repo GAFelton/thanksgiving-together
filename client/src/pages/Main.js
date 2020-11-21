@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Zoom from "../components/Zoom";
 import DiscussTopicBtn from "../components/DiscussTopicBtn";
 import Spotify from "../components/Spotify";
+import "./main.css";
 
 // AUTHENTICATION NOTES
 // Wrap providers around MAIN app.

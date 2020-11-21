@@ -1,7 +1,14 @@
 
+
+body{
+    
+    background-image: linear-gradient(to top, #d46e0e 0%, #f9d423 100%) ;
+}
 .login-card {
-    min-height: 40vh;
-    background-color: #ff9900;
+   
+    min-height: 100vh;
+    background-color: #f5e625;
+   
 }
 
 .registerText {
