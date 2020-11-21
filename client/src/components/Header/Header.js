@@ -24,9 +24,8 @@ function Header() {
     }
   }
 
-  // To Do: update links and make sure they route to pages
   return (
-    <div>
+    <div className="mb-4">
       {user
         ? (
           <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
