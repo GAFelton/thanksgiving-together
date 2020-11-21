@@ -1,7 +1,10 @@
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { useHistory, withRouter } from "react-router-dom";
+import RecipesPage from "../../pages/Recipes";
 import { useAuth } from "../AuthContext";
+import Games from "../Games";
+import ModalComponent from "../ModalComponent";
 import UserSettingsComponent from "../UserSettingsComponent";
 
 function Header() {
@@ -35,8 +38,12 @@ function Header() {
               <Nav className="mr-auto">
                 <Nav.Link href="/about">About</Nav.Link>
                 <Nav.Link href="/how-to">How-to</Nav.Link>
-                <Nav.Link href="/games">Games</Nav.Link>
-                <Nav.Link href="/recipes">Recipes</Nav.Link>
+                <ModalComponent title="Games">
+                  <Games />
+                </ModalComponent>
+                <ModalComponent title="Recipes">
+                  <RecipesPage />
+                </ModalComponent>
                 <UserSettingsComponent />
               </Nav>
             </Navbar.Collapse>
