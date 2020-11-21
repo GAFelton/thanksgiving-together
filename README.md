@@ -13,7 +13,7 @@ This project was initially built in Nov. 2020 over 20 days by 5 people. Our goal
 
 [Link to the Deployed Site](https://thanksgiving-together.herokuapp.com/)     ||    [Link to the GitHub Repo](https://github.com/GAFelton/thanksgiving-together)
 
-![Recipes-Screenshot](.\Images\recipes-screenshot.png)
+![Recipes-Screenshot](./Images/recipes-screenshot.png)
 
   ## Table of Contents
 
@@ -52,7 +52,7 @@ This project was initially built in Nov. 2020 over 20 days by 5 people. Our goal
 
 Create a user account and a new family or join an existing one. Once you are logged in, the family admin should add Zoom room details via the user settings button and start a Zoom call from the Zoom desktop client (or Zoom's website). The rest of the family can join the call from the Thanksgiving Together app!
 
-![Discussion Topic Button](.\Images\discussion-topic-button.png)
+![Discussion Topic Button](./Images/discussion-topic-button.png)
 
   ## License
 
