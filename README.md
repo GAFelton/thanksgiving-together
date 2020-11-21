@@ -1,5 +1,5 @@
 # Thanksgiving Together
-  ![GitHub](https://img.shields.io/github/license/GAFelton/thanksgiving-together)![Travis CI](https://img.shields.io/travis/GAFelton/thanksgiving-together)![Lines of Code](https://img.shields.io/tokei/lines/github/GAFelton/thanksgiving-together)
+  ![GitHub](https://img.shields.io/github/license/GAFelton/thanksgiving-together)![Travis CI](https://img.shields.io/travis/GAFelton/thanksgiving-together)
 
   ## Description:
 
@@ -7,13 +7,13 @@ There are so many ways in which we've had to adjust our lives in response to the
 
 Thanksgiving Together allows families to sign up together for a group experience that augments their Zoom call. It includes features like a recipe tracker, games, a "Discussion Topic" button & more.
 
-The app is built on the MERN stack, uses react-bootstrap as a CSS framework, and integrates with the [Zoom SDK](https://marketplace.zoom.us/docs/api-reference/introduction) and the [Edamam API](https://developer.edamam.com/edamam-recipe-api).
+The app is built on the MERN stack, uses react-bootstrap as a CSS framework, and integrates with the [Zoom SDK](https://marketplace.zoom.us/docs/api-reference/introduction) and the [Edamam API](https://developer.edamam.com/edamam-recipe-api). The Zoom call handling is implemented on a second server ([Link to GitHub Repo](https://github.com/mavn2/zoom_exp)).
 
 This project was initially built in Nov. 2020 over 20 days by 5 people. Our goal is to help families share this holiday *no matter the distance*.
 
 [Link to the Deployed Site](https://thanksgiving-together.herokuapp.com/)     ||    [Link to the GitHub Repo](https://github.com/GAFelton/thanksgiving-together)
 
-
+![Recipes-Screenshot](.\Images\recipes-screenshot.png)
 
   ## Table of Contents
 
@@ -52,7 +52,7 @@ This project was initially built in Nov. 2020 over 20 days by 5 people. Our goal
 
 Create a user account and a new family or join an existing one. Once you are logged in, the family admin should add Zoom room details via the user settings button and start a Zoom call from the Zoom desktop client (or Zoom's website). The rest of the family can join the call from the Thanksgiving Together app!
 
-
+![Discussion Topic Button](.\Images\discussion-topic-button.png)
 
   ## License
 
