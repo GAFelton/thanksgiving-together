@@ -9,6 +9,15 @@ import { Recipes, RecipeListItem } from "../components/Recipes/index";
 import API from "../utils/API";
 import Input from "../components/Recipes/Input";
 
+// CSS style
+const h1Style = {
+  textShadow: "2px 2px 2px #000000",
+  textAlign: "center",
+  color: "yellow",
+  fontSize: "6vw",
+  fontFamily: "Kaushan Script, cursive",
+};
+
 function RecipesPage() {
   const [recipes, setRecipes] = useState([]);
   const [recipeSearch, setRecipeSearch] = useState("");
@@ -62,7 +71,7 @@ function RecipesPage() {
         <Row>
           <Col size="xs-12">
             {!recipes.length ? (
-              <h1 className="text-center">Our Recipes</h1>
+              <h1 className="text-center" style={h1Style}>Our Recipes</h1>
             ) : (
               <Recipes>
                 {recipes.map((recipe) => (

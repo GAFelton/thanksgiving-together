@@ -1,23 +1,24 @@
 import React from "react";
 
 const h1Style = {
-  textShadow: "2px 2px 2px #aaaaaa",
+  textShadow: "2px 2px 2px #000000",
   textAlign: "center",
-  color: "gold",
+  color: "yellow",
   fontSize: "6vw",
   fontFamily: "Kaushan Script, cursive",
 };
 
 const bStyle = {
   textAlign: "left",
-  color: "black",
+  textShadow: "1px 1px 2px #000000",
+  color: "yellow",
   fontSize: "1.7vw",
 };
 
 const h2Style = {
-  textShadow: "1px 1px 1px #999999",
+  textShadow: "2px 2px 3px #000000",
   textAlign: "left",
-  color: "gold",
+  color: "yellow",
   fontSize: "3.5vw",
   fontFamily: "Kaushan Script, cursive",
 };
