@@ -1,8 +1,11 @@
-/* eslint-disable no-undef */
-/* eslint-disable react/jsx-no-undef */
 import React from "react";
-// Exporting both RecipeList and RecipeListItem from this file
+import {
+  Container, Row, Col,
+} from "react-bootstrap";
 
+// import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
+// // import API from "../utils/API.js";
+// import { useAuth } from "../AuthContext";
 // RecipeList renders a bootstrap list item
 export function Recipes({ children }) {
   return <ul className="list-group">{children}</ul>;
@@ -10,20 +13,18 @@ export function Recipes({ children }) {
 
 // RecipeListItem renders a bootstrap list item containing data from the recipe api call
 export function RecipeListItem({
-  thumbnail,
   title,
   ingredients,
   href,
+  Thumbnail,
 }) {
   return (
     <li className="list-group-item">
       <Container>
         <Row>
-          <Col size="xs-4 sm-2">
-            <Thumbnail src={thumbnail || "https://www.edamam.com/recipes/"} />
-          </Col>
           <Col size="xs-8 sm-9">
             <h3>{title}</h3>
+            <img src={Thumbnail} alt={title} />
             <p>
               Ingredients:
               {ingredients}
@@ -37,5 +38,4 @@ export function RecipeListItem({
     </li>
   );
 }
-
-export default { Recipes, RecipeListItem };
+export default { RecipeListItem, Recipes };
