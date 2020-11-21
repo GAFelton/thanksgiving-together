@@ -9,15 +9,6 @@ import { Recipes, RecipeListItem } from "../components/Recipes/index";
 import API from "../utils/API";
 import Input from "../components/Recipes/Input";
 
-// CSS style
-const h1Style = {
-  textShadow: "2px 2px 2px #000000",
-  textAlign: "center",
-  color: "yellow",
-  fontSize: "6vw",
-  fontFamily: "Kaushan Script, cursive",
-};
-
 function RecipesPage() {
   const [recipes, setRecipes] = useState([]);
   const [recipeSearch, setRecipeSearch] = useState("");
@@ -42,11 +33,12 @@ function RecipesPage() {
     <div>
       <Container>
         <Row>
-          <Col size="md-12">
+          <Col md={12}>
+            <h1 className="text-center mb-4 h1Style">Our Recipes</h1>
             <form>
               <Container>
                 <Row>
-                  <Col size="xs-9 sm-10">
+                  <Col xs={9} sm={10}>
                     <Input
                       name="RecipeSearch"
                       value={recipeSearch}
@@ -54,7 +46,7 @@ function RecipesPage() {
                       placeholder="Search For a Recipe"
                     />
                   </Col>
-                  <Col size="xs-3 sm-2">
+                  <Col xs={3} sm={2}>
                     <Button
                       onClick={handleFormSubmit}
                       type="success"
@@ -69,9 +61,9 @@ function RecipesPage() {
           </Col>
         </Row>
         <Row>
-          <Col size="xs-12">
+          <Col xs={12}>
             {!recipes.length ? (
-              <h1 className="text-center" style={h1Style}>Our Recipes</h1>
+              " "
             ) : (
               <Recipes>
                 {recipes.map((recipe) => (
