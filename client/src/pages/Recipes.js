@@ -60,8 +60,8 @@ function RecipesPage() {
         output.push(ingredientObj)
 
       );
-      setRecipes(output);
     });
+    setRecipes(output);
   };
   return (
     <div>
