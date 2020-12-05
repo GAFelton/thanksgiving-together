@@ -18,7 +18,6 @@ export function RecipeListItem({
   href,
   Thumbnail,
 }) {
-  console.log(ingredients);
   return (
     <li className="list-group-item">
       <Container>
