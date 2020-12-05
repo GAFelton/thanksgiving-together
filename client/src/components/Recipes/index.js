@@ -18,6 +18,7 @@ export function RecipeListItem({
   href,
   Thumbnail,
 }) {
+  console.log(ingredients);
   return (
     <li className="list-group-item">
       <Container>
@@ -27,7 +28,9 @@ export function RecipeListItem({
             <img src={Thumbnail} alt={title} />
             <p>
               Ingredients:
-              {ingredients}
+              <ul>
+                {ingredients.map((ingredient) => (<li>{ingredient}</li>))}
+              </ul>
             </p>
             <a rel="noreferrer noopener" target="_blank" href={href}>
               Go to recipe!

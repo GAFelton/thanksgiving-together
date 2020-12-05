@@ -55,7 +55,7 @@ function RecipesPage() {
       const ingredientObj = {}; (
         ingredientObj.title = hits.recipe.label,
         ingredientObj.Thumbnail = hits.recipe.image,
-        ingredientObj.ingredients = [hits.recipe.ingredientLines],
+        ingredientObj.ingredients = hits.recipe.ingredientLines,
         ingredientObj.href = hits.recipe.source,
         output.push(ingredientObj)
 
