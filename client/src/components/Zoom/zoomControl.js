@@ -18,7 +18,7 @@ const ZoomControl = ({ userId, name, roomSettings }) => {
     const data = JSON.stringify({ id, pwd, name });
 
     // Configuration object for axios request to Zoom client
-    // userId is used to sync unique route w/ zoommClient page/component
+    // userId is used to sync unique route w/ Zoom client page/component
     const config = {
       method: "post",
       url: `https://ttzoomclient.herokuapp.com/create/${userId}`,
