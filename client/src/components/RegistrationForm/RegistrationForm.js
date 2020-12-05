@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 import "./RegistrationForm.css";
-import { withRouter } from "react-router-dom";
-import API from "../../utils/API";
+import {
+  Alert, Button, Card, Col, Form, Row,
+} from "react-bootstrap";
 import { useAuth } from "../AuthContext";
+import API from "../../utils/API";
 
 // The registration form allows users to sign up for a new account.
 // It has functions for both creating a new family and for joining an existing one.
-function RegistrationForm(props) {
-  // Define error handler fn for reference
-  const { showError } = props;
+function RegistrationForm({ match, showError }) {
   // These state parameters are mostly straightforward.
   // familyDetail refers to either a room code or a family Name, depending on the newFamily boolean.
   const [state, setState] = useState({
@@ -21,6 +22,17 @@ function RegistrationForm(props) {
     familyDetail: "",
     successMessage: null,
   });
+
+  // useEffect extracts invite code as soon as the page is loaded.
+  React.useEffect(() => {
+    if (match.params.invitecode) {
+      setState((prevState) => ({
+        ...prevState,
+        newFamily: false,
+        familyDetail: match.params.invitecode,
+      }));
+    }
+  }, []);
 
   const { handleLogin } = useAuth();
   // Handles state updates, accounts for either text input or the checkbox.
@@ -164,11 +176,7 @@ function RegistrationForm(props) {
       showError("Please fill out all form fields");
     }
   };
-  // redirectToLogin handles the Login button at the end of the form.
-  const redirectToLogin = () => {
-    props.updateTitle("Login");
-    props.history.push("/login");
-  };
+
   // When the user submits the registration form, this function checks for password match.
   const handleSubmitClick = (e) => {
     e.preventDefault();
@@ -181,119 +189,94 @@ function RegistrationForm(props) {
   // Rendering the Registration form.
   // TODO: This kind of heavy copy-paste could use some conditional logic to render it.
   return (
-    <div className="container">
-      <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-        <form>
-          <div className="form-group text-left">
-            <label htmlFor="newFamily">
-              Create New Family?
-              <input
-                type="checkbox"
-                className="form-control"
-                id="newFamily"
-                checked={state.newFamily}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-          <div className="form-group text-left">
-            <label htmlFor="firstName">
-              First Name
-              <input
+    <Row>
+      <Col> </Col>
+      <Col xs={12} sm={6} lg={4}>
+        <Card className="login-card mt-2 p-2 hv-center">
+          <Form>
+            <Form.Group controlId="firstName" className="text-left">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control
                 type="text"
-                className="form-control"
-                id="firstName"
                 placeholder="First Name"
                 value={state.firstName}
                 onChange={handleChange}
               />
-            </label>
-          </div>
-          <div className="form-group text-left">
-            <label htmlFor="lastName">
-              Last Name
-              <input
+            </Form.Group>
+            <Form.Group controlId="lastName" className="text-left">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control
                 type="text"
-                className="form-control"
-                id="lastName"
                 placeholder="Last Name"
                 value={state.lastName}
                 onChange={handleChange}
               />
-            </label>
-          </div>
-          <div className="form-group text-left">
-            <label htmlFor="email">
-              Email address
-              <input
+            </Form.Group>
+            <Form.Group controlId="email" className="text-left">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
                 type="email"
-                className="form-control"
-                id="email"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
                 value={state.email}
                 onChange={handleChange}
               />
-            </label>
-            <small id="emailHelp" className="form-text text-muted">We&apos;ll never share your email with anyone else.</small>
-          </div>
-          <div className="form-group text-left">
-            <label htmlFor="password">
-              Password
-              <input
+              <Form.Text id="emailHelp" className="text-muted">We&apos;ll never share your email with anyone else.</Form.Text>
+            </Form.Group>
+            <Form.Group controlId="password" className="text-left">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
                 type="password"
-                className="form-control"
-                id="password"
                 placeholder="Password"
                 value={state.password}
                 onChange={handleChange}
               />
-            </label>
-          </div>
-          <div className="form-group text-left">
-            <label htmlFor="confirmPassword">
-              Confirm Password
-              <input
+            </Form.Group>
+            <Form.Group controlId="confirmPassword" className="text-left">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
                 type="password"
-                className="form-control"
-                id="confirmPassword"
                 placeholder="Confirm Password"
                 value={state.confirmPassword}
                 onChange={handleChange}
               />
-            </label>
-          </div>
-          <div className="form-group text-left">
-            <label htmlFor="familyDetail">
-              {state.newFamily ? "Family Name" : "Family Code"}
-              <input
+            </Form.Group>
+            <Form.Group controlId="newFamily" className="text-left">
+              <Form.Check
+                type="checkbox"
+                checked={state.newFamily}
+                onChange={handleChange}
+                label="Create New Family?"
+              />
+            </Form.Group>
+            <Form.Group controlId="familyDetail" className="text-left">
+              <Form.Label>{state.newFamily ? "Family Name" : "Family Code"}</Form.Label>
+              <Form.Control
                 type="text"
-                className="form-control"
-                id="familyDetail"
                 placeholder={state.newFamily ? "Family Name" : "Family Code"}
                 value={state.familyDetail}
                 onChange={handleChange}
               />
-            </label>
+            </Form.Group>
+            <Button
+              type="submit"
+              className="btn btn-dark"
+              onClick={handleSubmitClick}
+            >
+              Register
+            </Button>
+          </Form>
+          <Alert variant="success" className="mt-2" style={{ display: state.successMessage ? "block" : "none" }} role="alert">
+            {state.successMessage}
+          </Alert>
+          <div className="mt-2">
+            <span>Already have an account? </span>
+            <Link className="loginText" to="/login">Login Here</Link>
           </div>
-          <button
-            type="submit"
-            className="btn btn-dark"
-            onClick={handleSubmitClick}
-          >
-            Register
-          </button>
-        </form>
-        <div className="alert alert-success mt-2" style={{ display: state.successMessage ? "block" : "none" }} role="alert">
-          {state.successMessage}
-        </div>
-        <div className="mt-2">
-          <span>Already have an account? </span>
-          <span className="loginText" onClick={() => redirectToLogin()}>Login here</span> {/* eslint-disable-line */}
-        </div>
-
-      </div>
-    </div>
+        </Card>
+      </Col>
+      <Col> </Col>
+    </Row>
   );
 }
 

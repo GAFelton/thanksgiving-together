@@ -1,8 +1,11 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import { Nav, Navbar } from "react-bootstrap";
 import { useHistory, withRouter } from "react-router-dom";
+import RecipesPage from "../../pages/Recipes";
 import { useAuth } from "../AuthContext";
+import Games from "../Games";
+import ModalComponent from "../ModalComponent";
+import UserSettingsComponent from "../UserSettingsComponent";
 
 function Header() {
   // The history hook gives this component access to the full history object w/out relying on props.
@@ -24,9 +27,8 @@ function Header() {
     }
   }
 
-  // To Do: update links and make sure they route to pages
   return (
-    <div>
+    <div className="mb-4">
       {user
         ? (
           <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
@@ -34,20 +36,29 @@ function Header() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="/games">Games</Nav.Link>
-                <Nav.Link href="/recipes">Recipes</Nav.Link>
+                <Nav.Link href="/about">About</Nav.Link>
+                <Nav.Link href="/how-to">How-to</Nav.Link>
+                <ModalComponent title="Games">
+                  <Games />
+                </ModalComponent>
+                <ModalComponent title="Recipes">
+                  <RecipesPage />
+                </ModalComponent>
+                <UserSettingsComponent />
               </Nav>
             </Navbar.Collapse>
             {renderLogout()}
           </Navbar>
         ) : (
           <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
-            <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
+            <Navbar.Brand href="/about">Thanksgiving Together</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="/about">About</Nav.Link>
-                <Nav.Link href="/register">Login/Register</Nav.Link>
+                <Nav.Link href="/how-to">How-to</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>

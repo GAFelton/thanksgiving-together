@@ -2,7 +2,11 @@ import React from "react";
 
 function Games() {
   return (
-    <h2>Coming Soon</h2>
+    <div>
+      <br />
+      <br />
+      <h1 className="h1Style">Coming Soon</h1>
+    </div>
   );
 }
 

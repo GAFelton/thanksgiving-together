@@ -1,13 +1,23 @@
 
+
+body{
+    
+    background-image: linear-gradient(to top, #d46e0e 0%, #f9d423 100%) ;
+}
 .login-card {
-    min-height: 60vh;
-    background-color: #ff9900;
- 
-
- 
+   
+    min-height: 100vh;
+    background-color: #f5e625;
+   
 }
 
-.registerMessage {
-    margin-top: 10vh;
+.registerText {
+    color: #f4f5f7;
+    font-weight: bold;
+    cursor: pointer;
 }
 
+.successMessage {
+    color: green;
+    font-weight: bold;
+}
