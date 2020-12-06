@@ -5,11 +5,11 @@ import {
   Row,
   Col,
   Button,
+  Tabs,
+  Tab,
 } from "react-bootstrap";
 import axios from "axios";
-import { Recipes, RecipeListItem } from "../components/Recipes/index";
-// import API from "../utils/API";
-import Input from "../components/Recipes/Input";
+import SearchTab from "../components/Recipes/"
 
 function RecipesPage() {
   // eslint-disable-next-line no-unused-vars
@@ -69,48 +69,19 @@ function RecipesPage() {
         <Row>
           <Col md={12}>
             <h1 className="text-center mb-4 h1Style">Our Recipes</h1>
-            <form>
-              <Container>
-                <Row>
-                  <Col xs={9} sm={10}>
-                    <Input
-                      name="RecipeSearch"
-                      value={recipeSearch}
-                      onChange={handleInputChange}
-                      placeholder="Search For a Recipe"
-                    />
-                  </Col>
-                  <Col xs={3} sm={2}>
-                    <Button
-                      onClick={handleFormSubmit}
-                      type="success"
-                      className="input-lg"
-                    >
-                      Search
-                    </Button>
-                  </Col>
-                </Row>
-              </Container>
-            </form>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            {!recipes.length ? (
-              " "
-            ) : (
-              <Recipes>
-                {recipes.map((recipe) => (
-                  <RecipeListItem
-                    key={recipe.title}
-                    title={recipe.title}
-                    ingredients={recipe.ingredients}
-                    href={recipe.href}
-                    Thumbnail={recipe.Thumbnail}
+            <Row>
+              <Tabs>
+                <Tab eventKey="search" title="Search">
+                  <SearchTab
+                    recipeSearch={recipeSearch}
+                    handleInputChange={handleInputChange}
+                    handleFormSubmit={handleFormSubmit}
+                    recipes={recipes}
                   />
-                ))}
-              </Recipes>
-            )}
+                </Tab>
+                <Tab eventKey="saved" title="Saved">Saved</Tab>
+              </Tabs>
+            </Row>
           </Col>
         </Row>
       </Container>
