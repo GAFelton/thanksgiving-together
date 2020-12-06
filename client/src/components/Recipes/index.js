@@ -1,3 +1,4 @@
 import SearchTab from "./Search";
+import SavedTab from "./Saved";
 
-export default SearchTab;
+export { SearchTab, SavedTab };

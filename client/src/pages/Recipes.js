@@ -4,12 +4,11 @@ import {
   Container,
   Row,
   Col,
-  Button,
   Tabs,
   Tab,
 } from "react-bootstrap";
 import axios from "axios";
-import SearchTab from "../components/Recipes/"
+import { SearchTab, SavedTab } from "../components/Recipes/index";
 
 function RecipesPage() {
   // eslint-disable-next-line no-unused-vars
@@ -79,7 +78,11 @@ function RecipesPage() {
                     recipes={recipes}
                   />
                 </Tab>
-                <Tab eventKey="saved" title="Saved">Saved</Tab>
+                <Tab eventKey="saved" title="Saved">
+                  <SavedTab
+                    recipes={recipes}
+                  />
+                </Tab>
               </Tabs>
             </Row>
           </Col>

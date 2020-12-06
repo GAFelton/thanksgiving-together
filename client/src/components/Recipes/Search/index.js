@@ -5,7 +5,7 @@ import {
   Col,
   Button,
 } from "react-bootstrap";
-import { Recipes, RecipeListItem } from "./Search";
+import { RecipeList, RecipeListItem } from "../RecipeList";
 // import API from "../utils/API";
 import Input from "./Input";
 
@@ -45,7 +45,7 @@ function SearchTab({
           {!recipes.length ? (
             " "
           ) : (
-            <Recipes>
+            <RecipeList>
               {recipes.map((recipe) => (
                 <RecipeListItem
                   key={recipe.title}
@@ -55,7 +55,7 @@ function SearchTab({
                   Thumbnail={recipe.Thumbnail}
                 />
               ))}
-            </Recipes>
+            </RecipeList>
           )}
         </Col>
       </Row>

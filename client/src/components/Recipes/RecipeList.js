@@ -1,13 +1,11 @@
 import React from "react";
-import {
-  Container, Row, Col,
-} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 // import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 // // import API from "../utils/API.js";
 // import { useAuth } from "../AuthContext";
 // RecipeList renders a bootstrap list item
-export function Recipes({ children }) {
+export function RecipeList({ children }) {
   return <ul className="list-group">{children}</ul>;
 }
 
@@ -40,4 +38,4 @@ export function RecipeListItem({
     </li>
   );
 }
-export default { RecipeListItem, Recipes };
+export default { RecipeListItem, RecipeList };
