@@ -1,8 +1,9 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { RecipeList, RecipeListItem } from "../RecipeList";
+import { RecipeList, RecipeListItem } from "../Search/RecipeSearchList";
 
-function SavedTab({ recipes }) {
+function SavedTab() {
+  const recipes = [];
   return (
     <Row>
       <Col xs={12}>
