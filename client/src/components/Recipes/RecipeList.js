@@ -15,6 +15,10 @@ export function RecipeListItem({
   ingredients,
   href,
   Thumbnail,
+  description,
+  instructions,
+  prep,
+  cook,
 }) {
   return (
     <li className="list-group-item">
@@ -24,10 +28,23 @@ export function RecipeListItem({
             <h3>{title}</h3>
             {Thumbnail ? <img src={Thumbnail} alt={title} /> : null}
             <p>
+              {description ? (
+                <p>
+                  {description}
+                  <br />
+                  {prep ? `Prep Time: ${prep}` : null}
+                  {cook ? `Cook Time: ${cook}` : null}
+                </p>
+              ) : null}
               Ingredients:
               <ul>
                 {ingredients.map((ingredient) => (<li>{ingredient}</li>))}
               </ul>
+              {instructions ? (
+                <ul>
+                  {instructions.map((instruction) => (<li>{instruction}</li>))}
+                </ul>
+              ) : null }
             </p>
             {href ? (
               <a rel="noreferrer noopener" target="_blank" href={href}>
