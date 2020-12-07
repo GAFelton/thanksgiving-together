@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { React, useState } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Row,
@@ -8,7 +8,6 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { RecipeList, RecipeListItem } from "./RecipeSearchList";
-// import API from "../utils/API";
 import Input from "./Input";
 
 function SearchTab() {
