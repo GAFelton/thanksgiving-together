@@ -22,16 +22,18 @@ export function RecipeListItem({
         <Row>
           <Col size="xs-8 sm-9">
             <h3>{title}</h3>
-            <img src={Thumbnail} alt={title} />
+            {Thumbnail ? <img src={Thumbnail} alt={title} /> : null}
             <p>
               Ingredients:
               <ul>
                 {ingredients.map((ingredient) => (<li>{ingredient}</li>))}
               </ul>
             </p>
-            <a rel="noreferrer noopener" target="_blank" href={href}>
-              Go to recipe!
-            </a>
+            {href ? (
+              <a rel="noreferrer noopener" target="_blank" href={href}>
+                Go to recipe!
+              </a>
+            ) : null}
           </Col>
         </Row>
       </Container>

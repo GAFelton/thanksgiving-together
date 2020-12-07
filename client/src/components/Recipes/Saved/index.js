@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import { RecipeList, RecipeListItem } from "../Search/RecipeSearchList";
+import { RecipeList, RecipeListItem } from "../RecipeList";
 import API from "../../../utils/API";
 import { useAuth } from "../../AuthContext";
 

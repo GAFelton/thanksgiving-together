@@ -7,7 +7,7 @@ import {
   Button,
 } from "react-bootstrap";
 import axios from "axios";
-import { RecipeList, RecipeListItem } from "./RecipeSearchList";
+import { RecipeList, RecipeListItem } from "../RecipeList";
 import Input from "./Input";
 
 function SearchTab() {
