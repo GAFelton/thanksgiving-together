@@ -9,7 +9,7 @@ import How from "../How";
 import ModalComponent from "../ModalComponent";
 import UserSettingsComponent from "../UserSettingsComponent";
 
-function Header() {
+function Header({ showError }) {
   // The history hook gives this component access to the full history object w/out relying on props.
   const history = useHistory();
   const { user, handleLogout } = useAuth();
@@ -50,7 +50,7 @@ function Header() {
                   <Games />
                 </ModalComponent>
                 <ModalComponent title="Recipes">
-                  <RecipesPage />
+                  <RecipesPage showError={showError} />
                 </ModalComponent>
                 <UserSettingsComponent />
               </Nav>

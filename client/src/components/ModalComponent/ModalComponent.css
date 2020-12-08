@@ -3,8 +3,13 @@
   
 }
 
-.modal-content {
+.pageModal {
   background-color: white;
+}
+
+.modal-content {
+  background-color: transparent;
+  border: transparent;
 }
 
 .modal-header {

@@ -30,7 +30,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
-          <Header />
+          <Header showError={updateErrorMessage} />
           <Container fluid>
             <Switch>
               <PublicRoute path="/" exact>
@@ -59,7 +59,7 @@ function App() {
                 <Games />
               </PrivateRoute>
               <PrivateRoute path="/recipes">
-                <RecipesPage />
+                <RecipesPage showError={updateErrorMessage} />
               </PrivateRoute>
             </Switch>
           </Container>

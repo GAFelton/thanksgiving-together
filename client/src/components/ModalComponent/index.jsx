@@ -21,7 +21,7 @@ function ModalComponent({ title, children }) {
         {title}
       </Nav.Link>
 
-      <Modal show={show} onHide={handleClose} dialogClassName="thanksgiving-modal">
+      <Modal show={show} onHide={handleClose} className="pageModal" dialogClassName="thanksgiving-modal">
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>

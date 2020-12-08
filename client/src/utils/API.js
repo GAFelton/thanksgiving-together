@@ -15,7 +15,7 @@ const family = {
   findIdByCode: (data) => API.post("/family/code", data),
   update: (headers, data, params) => API.put(`/family/${params}`, data, headers),
   create: (data) => API.post("/family", data),
-  archive: (headers, params) => API.put(`/family/archive/${params}`, headers),
+  archive: (headers, params) => API.put(`/family/archive/${params}`, "", headers),
 };
 
 // User axios routes
@@ -26,17 +26,18 @@ const users = {
   get: (headers, params) => API.get(`/user/${params}`, headers),
   update: (headers, data, params) => API.put(`/user/${params}`, data, headers),
   create: (data) => API.post("/user/family", data),
-  archive: (headers, params) => API.put(`/user/archive${params}`, headers),
+  archive: (headers, params) => API.put(`/user/archive${params}`, "", headers),
 };
 
 // Recipe axios routes
 // Note that for creating a new recipe, the param must be the FAMILY id.
 // Also for create, data must contain the author's _id (from the user object).
 const recipes = {
+  search: (headers, query) => API.get("/recipe/search", { params: { q: query }, headers }),
   get: (headers, params) => API.get(`/recipe/${params}`, headers),
   update: (headers, data, params) => API.put(`/recipe/${params}`, data, headers),
   create: (headers, data, params) => API.post(`/recipe/family/${params}`, data, headers),
-  archive: (headers, params) => API.put(`/recipe/archive/${params}`, headers),
+  archive: (headers, params) => API.put(`/recipe/archive/${params}`, "", headers),
 };
 
 // Discussion Topics axios routes

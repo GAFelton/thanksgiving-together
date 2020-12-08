@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Button } from "react-bootstrap";
+import { Alert, Button, Modal } from "react-bootstrap";
 import "./AlertComponent.css";
 
 function AlertComponent(props) {
   // Define error message and update state function passed in for easy access
   const { errorMessage, hideError } = props;
-  const [modalDisplay, toggleDisplay] = useState("none");
+  // const [modalDisplay, toggleDisplay] = useState("none");
+  const [show, setShow] = useState(false);
   const openModal = () => {
-    toggleDisplay("block");
+    setShow(true);
   };
   const closeModal = () => {
-    toggleDisplay("none");
+    setShow(false);
     hideError(null);
   };
+  // const openModal = () => {
+  //   toggleDisplay("block");
+  // };
+  // const closeModal = () => {
+  //   toggleDisplay("none");
+  //   hideError(null);
+  // };
   useEffect(() => {
     if (errorMessage !== null) {
       openModal();
@@ -21,20 +29,22 @@ function AlertComponent(props) {
     }
   });
   return (
-    <Alert
-      variant="danger"
-      className="alert-dismissable mt-4"
-      role="alert"
-      id="alertPopUp"
-      style={{ display: modalDisplay }}
-    >
-      <div className="d-flex alertMessage">
-        <span>{errorMessage}</span>
-        <Button type="button" className="close" aria-label="Close" onClick={() => closeModal()}>
-          <span aria-hidden="true">&times;</span>
-        </Button>
-      </div>
-    </Alert>
+    <Modal size="sm" show={show} onHide={closeModal} centered dialogClassName="error-message-modal">
+      <Alert
+        variant="danger"
+        className="alert-dismissable mt-4"
+        role="alert"
+        id="alertPopUp"
+        style={{ display: show }}
+      >
+        <div className="d-flex alertMessage">
+          <span>{errorMessage}</span>
+          <Button type="button" className="close" aria-label="Close Error Message" onClick={() => closeModal()}>
+            <span aria-hidden="true">&times;</span>
+          </Button>
+        </div>
+      </Alert>
+    </Modal>
   );
 }
 export default AlertComponent;
