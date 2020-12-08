@@ -9,7 +9,7 @@ import {
 import { SearchTab, SavedTab } from "../components/Recipes/index";
 import "./recipes.css";
 
-function RecipesPage() {
+function RecipesPage({ showError }) {
   return (
     <div>
       <Container>
@@ -20,10 +20,10 @@ function RecipesPage() {
               <Col>
                 <Tabs>
                   <Tab eventKey="search" title="Search" tabClassName="recipeTab" mountOnEnter unmountOnExit>
-                    <SearchTab />
+                    <SearchTab showError={showError} />
                   </Tab>
                   <Tab eventKey="saved" title="Saved" tabClassName="recipeTab">
-                    <SavedTab />
+                    <SavedTab showError={showError} />
                   </Tab>
                 </Tabs>
               </Col>
