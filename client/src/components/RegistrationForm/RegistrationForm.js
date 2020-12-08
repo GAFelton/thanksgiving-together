@@ -17,7 +17,6 @@ function RegistrationForm({ match, showError }) {
     lastName: "",
     email: "",
     password: "",
-    passwordValid: false,
     confirmPassword: "",
     newFamily: false,
     familyDetail: "",
