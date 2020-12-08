@@ -18,8 +18,10 @@ function RecipesPage({ showError }) {
             <h1 className="text-center mb-4 h1Style">Our Recipes</h1>
             <Row>
               <Col>
-                <Tabs>
-                  <Tab eventKey="search" title="Search" tabClassName="recipeTab" mountOnEnter unmountOnExit>
+                {/* Tabs will unmountOnExit to trigger SavedTab's useEffect & load latest searches.
+                This unloads SearchTab (and the current search), so is not ideal. */}
+                <Tabs mountOnEnter unmountOnExit>
+                  <Tab eventKey="search" title="Search" tabClassName="recipeTab">
                     <SearchTab showError={showError} />
                   </Tab>
                   <Tab eventKey="saved" title="Saved" tabClassName="recipeTab">
