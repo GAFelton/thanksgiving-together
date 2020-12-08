@@ -1,5 +1,11 @@
 .loginText {
-    color: #f4f5f7;
+    color: #fd7e14;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.registerText {
+    color: #fd7e14;
     font-weight: bold;
     cursor: pointer;
 }

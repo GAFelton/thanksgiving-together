@@ -1,9 +1,9 @@
 import React from "react";
 
 const h1Style = {
-  textShadow: "2px 2px 2px #000000",
+  textShadow: "1px 2px 1px #000000",
   textAlign: "center",
-  color: "yellow",
+  color: "#F5E625",
   fontSize: "6vw",
   fontFamily: "Kaushan Script, cursive",
 };

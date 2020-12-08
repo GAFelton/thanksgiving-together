@@ -14,7 +14,7 @@ function About() {
             transform: "translate(-50%, -50%)",
             textShadow: "4px 4px 6px #000000",
             textAlign: "center",
-            color: "gold",
+            color: "#F5E625",
             fontSize: "6vw",
             fontFamily: "Kaushan Script, cursive",
           }}
@@ -28,7 +28,7 @@ function About() {
             transform: "translate(-50%, -50%)",
             textShadow: "2px 2px 4px #000000",
             textAlign: "center",
-            color: "gold",
+            color: "#F5E625",
             fontSize: "2.5vw",
             fontFamily: "Kaushan Script, cursive",
           }}
@@ -38,7 +38,7 @@ function About() {
         </Card.ImgOverlay>
       </Card>
       <br />
-      <div style={{ color: "yellow", textShadow: "1px 1px 2px #000000", fontSize: "1.7vw" }} className="paragraph">
+      <div style={{ color: "black", fontSize: "1.7vw" }} className="paragraph">
         <p>
           With the ever increasing cases of Covid-19 and Thanksgiving coming up,
           it is more important than ever that people wear masks and refrain from
@@ -55,7 +55,7 @@ function About() {
         </p>
         <p>
           If you need a guide on how to register, head on over to
-          <a href="/how-to" style={{ color: "yellow" }}> How-to </a>
+          <a href="/how-to" style={{ color: "#fd7e14" }}> How-to </a>
           for a quick rundown.
         </p>
       </div>
