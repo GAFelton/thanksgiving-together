@@ -8,15 +8,13 @@ import {
 } from "react-bootstrap";
 import DeleteBtn from "../DeleteBtn";
 
-// import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
-// // import API from "../utils/API.js";
-// import { useAuth } from "../AuthContext";
-// RecipeList renders a bootstrap list item
+// RecipeList renders a bootstrap list.
 export function RecipeList({ children }) {
   return <ul className="list-group">{children}</ul>;
 }
 
-// RecipeListItem renders a bootstrap list item containing data from the recipe api call
+// RecipeListItem renders a bootstrap list item containing data from the recipe api call.
+// It contains conditional logic to only display certain elements if they are passed to it.
 export function RecipeListItem({
   unique,
   title,

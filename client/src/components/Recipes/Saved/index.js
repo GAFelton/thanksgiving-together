@@ -5,6 +5,7 @@ import API from "../../../utils/API";
 import { useAuth } from "../../AuthContext";
 import { ACCESS_TOKEN_NAME } from "../../../constants/apiConstants";
 
+// The Saved Tab displays recipes that have been saved to the family's recipe database.
 function SavedTab({ showError }) {
   // Array to receive/store family recipes
   const [recipes, setRecipes] = useState([]);
@@ -26,6 +27,7 @@ function SavedTab({ showError }) {
       });
   }
 
+  // We allow users to archive recipes from their collection via this function.
   async function handleDelete(id) {
     try {
       await API.recipes.archive(
@@ -40,6 +42,7 @@ function SavedTab({ showError }) {
     }
   }
 
+  // JSX contains an area for displaying our saved recipes from the database.
   return (
     <Row>
       <Col xs={12}>
