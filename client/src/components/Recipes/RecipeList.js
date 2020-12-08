@@ -1,5 +1,10 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+} from "react-bootstrap";
 
 // import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 // // import API from "../utils/API.js";
@@ -19,6 +24,8 @@ export function RecipeListItem({
   instructions,
   prep,
   cook,
+  checkbox,
+  saved,
 }) {
   return (
     <li className="list-group-item">
@@ -27,29 +34,33 @@ export function RecipeListItem({
           <Col size="xs-8 sm-9">
             <h3>{title}</h3>
             {Thumbnail ? <img src={Thumbnail} alt={title} /> : null}
-            <p>
-              {description ? (
-                <p>
-                  {description}
-                  <br />
-                  {prep ? `Prep Time: ${prep}` : null}
-                  {cook ? `Cook Time: ${cook}` : null}
-                </p>
-              ) : null}
-              Ingredients:
+            {description ? (
+              <p>
+                {description}
+                <br />
+                {prep ? `Prep Time: ${prep}` : null}
+                {cook ? `Cook Time: ${cook}` : null}
+              </p>
+            ) : null}
+            Ingredients:
+            <ul>
+              {ingredients.map((ingredient) => (<li>{ingredient}</li>))}
+            </ul>
+            {instructions ? (
               <ul>
-                {ingredients.map((ingredient) => (<li>{ingredient}</li>))}
+                {instructions.map((instruction) => (<li>{instruction}</li>))}
               </ul>
-              {instructions ? (
-                <ul>
-                  {instructions.map((instruction) => (<li>{instruction}</li>))}
-                </ul>
-              ) : null }
-            </p>
+            ) : null}
             {href ? (
               <a rel="noreferrer noopener" target="_blank" href={href}>
                 Go to recipe!
               </a>
+            ) : null}
+            {checkbox ? (
+              <Form>
+                <Form.Text muted>Save Recipe?</Form.Text>
+                <Form.Check aria-label={`Save Recipe: ${title}`} onChange={checkbox} checked={saved ? !!saved : undefined} />
+              </Form>
             ) : null}
           </Col>
         </Row>
