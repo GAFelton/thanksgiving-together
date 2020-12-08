@@ -13,7 +13,7 @@ import Input from "./Input";
 import API from "../../../utils/API";
 import { ACCESS_TOKEN_NAME } from "../../../constants/apiConstants";
 
-function SearchTab() {
+function SearchTab({ showError }) {
   // eslint-disable-next-line no-unused-vars
   const [recipes, setRecipes] = useState([]);
   const [recipeSearch, setRecipeSearch] = useState("");
@@ -40,16 +40,12 @@ function SearchTab() {
 
     axios(config)
       .then((response) => {
-        console.log(response.data);
         // eslint-disable-next-line no-use-before-define
         recipeData(response.data.hits);
       })
       .catch((error) => {
         console.log(error);
       });
-    // API.recipes.get(recipeSearch)
-    //   .then((res) => setRecipes(res.data))
-    //   .catch((err) => console.log(err));
   };
 
   // eslint-disable-next-line no-unused-vars
@@ -74,24 +70,58 @@ function SearchTab() {
     return recipes.filter((item) => item.key === id);
   }
 
-  function handleRecipeSave(key) {
+  function updateRecipeInState(idx, update) {
+    const items = [...recipes];
+    const item = { ...items[idx] };
+    item.saved = update;
+    items[idx] = item;
+    setRecipes(items);
+  }
+
+  async function handleRecipeSave(key) {
     const familyID = user.family;
-    const unsanitizedRecipe = findRecipeInState(key);
-    const recipeToSave = {};
-    if (unsanitizedRecipe[0]) {
-      recipeToSave.title = unsanitizedRecipe[0].title;
-      recipeToSave.src = unsanitizedRecipe[0].href;
-      recipeToSave.photo = unsanitizedRecipe[0].Thumbnail;
-      recipeToSave.author = user.id;
-    }
-    try {
-      API.recipes.create(
-        { headers: { token: storedJWT } },
-        recipeToSave,
-        familyID,
-      );
-    } catch (error) {
-      console.log(error);
+    const unsanitizedRecipe = findRecipeInState(key)[0];
+    const recipeIdx = recipes.findIndex((element) => element.key === key);
+
+    if (unsanitizedRecipe.saved === false) {
+      const recipeToSave = {};
+      if (unsanitizedRecipe) {
+        recipeToSave.title = unsanitizedRecipe.title;
+        recipeToSave.src = unsanitizedRecipe.href;
+        recipeToSave.photo = unsanitizedRecipe.thumbnail;
+        recipeToSave.author = user.id;
+      }
+      try {
+        await API.recipes.create(
+          { headers: { token: storedJWT } },
+          recipeToSave,
+          familyID,
+        );
+        // Sets saved to true for this recipe.
+        updateRecipeInState(recipeIdx, true);
+        showError(null);
+      } catch (error) {
+        showError("An error occurred while saving the recipe.");
+        console.log(error);
+      }
+    } else if (unsanitizedRecipe.saved === true) {
+      try {
+        const query = unsanitizedRecipe.href;
+        const { data } = await API.recipes.search(
+          { token: storedJWT },
+          query,
+        );
+        await API.recipes.archive(
+          { headers: { token: storedJWT } },
+          data[0].id,
+        );
+        // Sets saved to false for this recipe.
+        updateRecipeInState(recipeIdx, false);
+        showError(null);
+      } catch (error) {
+        showError("An error occurred while unsaving the recipe.");
+        console.log(error);
+      }
     }
   }
 
@@ -128,6 +158,7 @@ function SearchTab() {
             <RecipeList>
               {recipes.map((recipe) => (
                 <RecipeListItem
+                  key={recipe.key}
                   unique={recipe.key}
                   title={recipe.title}
                   ingredients={recipe.ingredients}
