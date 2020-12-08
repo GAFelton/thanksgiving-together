@@ -6,6 +6,7 @@ import {
   Form,
   Image,
 } from "react-bootstrap";
+import DeleteBtn from "../DeleteBtn";
 
 // import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 // // import API from "../utils/API.js";
@@ -28,12 +29,13 @@ export function RecipeListItem({
   cook,
   checkbox,
   saved,
+  handleDelete,
 }) {
   return (
     <li className="list-group-item" key={unique}>
       <Container>
         <Row>
-          <Col size="xs-8 sm-9">
+          <Col xs={8} sm={9}>
             <Row>
               <Col sm={2}>
                 {thumbnail ? <Image src={thumbnail} alt={title} fluid rounded style={{ maxWidth: "100%", height: "auto" }} /> : null}
@@ -77,6 +79,12 @@ export function RecipeListItem({
               </Col>
             </Row>
           </Col>
+          {handleDelete ? (
+            <Col xs={1}>
+              <DeleteBtn onClick={handleDelete} />
+            </Col>
+          )
+            : " "}
         </Row>
       </Container>
     </li>
