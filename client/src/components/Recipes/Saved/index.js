@@ -31,8 +31,8 @@ function SavedTab() {
                 key={recipe.title}
                 title={recipe.title}
                 ingredients={recipe.ingredients}
-                href={recipe.href}
-                Thumbnail={recipe.Thumbnail}
+                href={recipe.src}
+                Thumbnail={recipe.photo}
               />
             ))}
           </RecipeList>
