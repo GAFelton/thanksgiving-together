@@ -73,7 +73,7 @@ export function RecipeListItem({
                 {checkbox ? (
                   <Form inline>
                     <Form.Text muted>Save Recipe?  </Form.Text>
-                    <Form.Check aria-label={`Save Recipe: ${title}`} onChange={checkbox} checked={saved ? !!saved : undefined} />
+                    <Form.Check aria-label={`Save Recipe: ${title}`} onChange={checkbox} checked={saved ? !!saved : false} />
                   </Form>
                 ) : null}
               </Col>
