@@ -1,7 +1,12 @@
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { useHistory, withRouter } from "react-router-dom";
+import RecipesPage from "../../pages/Recipes";
 import { useAuth } from "../AuthContext";
+import Games from "../Games";
+import About from "../About";
+import How from "../How";
+import ModalComponent from "../ModalComponent";
 import UserSettingsComponent from "../UserSettingsComponent";
 
 function Header() {
@@ -24,33 +29,47 @@ function Header() {
     }
   }
 
-  // To Do: update links and make sure they route to pages
   return (
-    <div>
+    <div className="mb-4">
       {user
         ? (
+          // This is the PrivateRoute Navbar - It displays only for logged-in users.
           <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
             <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="/about">About</Nav.Link>
-                <Nav.Link href="/how-to">How-to</Nav.Link>
-                <Nav.Link href="/games">Games</Nav.Link>
-                <Nav.Link href="/recipes">Recipes</Nav.Link>
+                {/* Private Nav components are modals so Zoom call is never navigated away from. */}
+                <ModalComponent title="About">
+                  <About />
+                </ModalComponent>
+                <ModalComponent title="How-to">
+                  <How />
+                </ModalComponent>
+                <ModalComponent title="Games">
+                  <Games />
+                </ModalComponent>
+                <ModalComponent title="Recipes">
+                  <RecipesPage />
+                </ModalComponent>
                 <UserSettingsComponent />
               </Nav>
             </Navbar.Collapse>
             {renderLogout()}
           </Navbar>
         ) : (
+          // This is the PublicRoute Navbar - It displays only for non-logged users
           <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
-            <Navbar.Brand href="/about">Thanksgiving Together</Navbar.Brand>
+            <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="/about">About</Nav.Link>
-                <Nav.Link href="/how-to">How-to</Nav.Link>
+                <ModalComponent title="About">
+                  <About />
+                </ModalComponent>
+                <ModalComponent title="How-to">
+                  <How />
+                </ModalComponent>
                 <Nav.Link href="/register">Register</Nav.Link>
                 <Nav.Link href="/login">Login</Nav.Link>
               </Nav>

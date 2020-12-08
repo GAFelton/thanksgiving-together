@@ -13,7 +13,7 @@ function Games() {
     <div>
       <br />
       <br />
-      <h1 style={h1Style}>Coming Soon</h1>
+      <h1 className="h1Style">Coming Soon</h1>
     </div>
   );
 }

@@ -1,0 +1,9 @@
+.nav-tabs {
+  flex-direction: row;
+  border-bottom: hidden;
+  margin-bottom: 1px;
+}
+
+a.recipeTab.nav-item.nav-link{
+  padding: 5px;
+}
