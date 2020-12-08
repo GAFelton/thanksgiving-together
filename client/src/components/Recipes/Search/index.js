@@ -13,12 +13,15 @@ import Input from "./Input";
 import API from "../../../utils/API";
 import { ACCESS_TOKEN_NAME } from "../../../constants/apiConstants";
 
+// The Search Tab allows users to search for recipes through the edamam api
+// and save them to the family recipes db.
 function SearchTab({ showError }) {
-  // eslint-disable-next-line no-unused-vars
+  // recipes returned from the edamam API Search.
   const [recipes, setRecipes] = useState([]);
+  // The recipe search field, so the user can set the search query.
   const [recipeSearch, setRecipeSearch] = useState("");
 
-  const { user } = useAuth();
+  const { user, handleLogout } = useAuth();
   const storedJWT = localStorage.getItem(ACCESS_TOKEN_NAME);
 
   const handleInputChange = (event) => {
@@ -101,8 +104,11 @@ function SearchTab({ showError }) {
         updateRecipeInState(recipeIdx, true);
         showError(null);
       } catch (error) {
-        showError("An error occurred while saving the recipe.");
         console.log(error);
+        if (error.response.status !== 200) {
+          showError("Your session has ended. Please log in again.");
+          handleLogout();
+        } else showError("An error occurred while saving the recipe.");
       }
     } else if (unsanitizedRecipe.saved === true) {
       try {
@@ -119,8 +125,11 @@ function SearchTab({ showError }) {
         updateRecipeInState(recipeIdx, false);
         showError(null);
       } catch (error) {
-        showError("An error occurred while unsaving the recipe.");
         console.log(error);
+        if (error.response.status !== 200) {
+          showError("Your session has ended. Please log in again.");
+          handleLogout();
+        } else showError("An error occurred while unsaving the recipe.");
       }
     }
   }
