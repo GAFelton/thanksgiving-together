@@ -3,8 +3,8 @@ import Card from "react-bootstrap/Card";
 
 function About() {
   return (
-    <div className="container cardText">
-      <Card className="bg-dark">
+    <div className="container">
+      <Card className="bg-dark cardText">
         <Card.Img src="https://images.pexels.com/photos/5662351/pexels-photo-5662351.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Thanksgiving Table" />
         <Card.ImgOverlay>
           <Card.Header style={{
@@ -12,11 +12,7 @@ function About() {
             left: "50%",
             top: "45%",
             transform: "translate(-50%, -50%)",
-            textShadow: "4px 4px 6px #000000",
-            textAlign: "center",
-            color: "#F5E625",
             fontSize: "6vw",
-            fontFamily: "Kaushan Script, cursive",
           }}
           >
             Thanksgiving Together
@@ -26,11 +22,7 @@ function About() {
             left: "50%",
             top: "35%",
             transform: "translate(-50%, -50%)",
-            textShadow: "2px 2px 4px #000000",
-            textAlign: "center",
-            color: "#F5E625",
             fontSize: "2.5vw",
-            fontFamily: "Kaushan Script, cursive",
           }}
           >
             Celebrate Thanksgiving with your loved ones virtually this year

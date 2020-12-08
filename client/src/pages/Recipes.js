@@ -5,23 +5,6 @@ import {
   Col,
   Tabs,
 } from "react-bootstrap";
-<<<<<<< HEAD
-=======
-
-import { Recipes, RecipeListItem } from "../components/Recipes/index";
-import API from "../utils/API";
-import Input from "../components/Recipes/Input";
-
-// CSS style
-const h1Style = {
-  textShadow: "1px 2px 1px #000000",
-  textAlign: "center",
-  color: "#F5E625",
-  fontSize: "6vw",
-  fontFamily: "Kaushan Script, cursive",
-};
-
->>>>>>> 9257b4cb51f5d4dbd9d62465e624ed377c08a8ff
 import { SearchTab, SavedTab } from "../components/Recipes/index";
 import "./recipes.css";
 

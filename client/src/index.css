@@ -1,7 +1,21 @@
-body .paragraph{
+body .paragraph {
   text-align: left;
   color: black;
   font-size: 1.3vw;
+}
+
+body .cardText {
+  font-family: Kaushan Script, cursive;
+  text-align: center;
+  color: #F5E625;
+  text-shadow: 4px 4px 6px #000000;
+}
+
+body h2 {
+  text-align: left;
+  color: #fd7e14;
+  font-size: 3.5vw;
+  font-family: Kaushan Script, cursive;
 }
 
 .h1Style {
