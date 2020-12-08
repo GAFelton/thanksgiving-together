@@ -22,6 +22,13 @@ function How() {
         Open up user settings and input your Zoom room code and password. Those that join your
         family group will have access to join the Zoom call.
       </p>
+      <p>
+        When you want to start a call, you&#39;ll need to first open the room from
+        your Desktop Zoom app. Make sure to turn off the waiting room feature.
+      </p>
+      <p>
+        Now anyone with your link can join your call through Thanksgiving Together!
+      </p>
       <br />
       <h2 className="h2Style">Step 3: Thanksgiving Together </h2>
       <p>
