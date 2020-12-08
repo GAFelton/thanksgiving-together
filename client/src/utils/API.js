@@ -33,6 +33,7 @@ const users = {
 // Note that for creating a new recipe, the param must be the FAMILY id.
 // Also for create, data must contain the author's _id (from the user object).
 const recipes = {
+  search: (headers, query) => API.get("/recipe/search", { params: { q: query }, headers }),
   get: (headers, params) => API.get(`/recipe/${params}`, headers),
   update: (headers, data, params) => API.put(`/recipe/${params}`, data, headers),
   create: (headers, data, params) => API.post(`/recipe/family/${params}`, data, headers),

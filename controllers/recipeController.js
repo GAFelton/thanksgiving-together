@@ -1,17 +1,24 @@
 const db = require("../models");
 
-// TODO: Set up routes. Remember that sorting by Family can help with querying.
+// Recipes Routes.
 // Always sort by archived: false.
 module.exports = {
-  // TODO findById "GET /api/v1/recipe/:id"
+  //  findById "GET /api/v1/recipe/:id"
   findById(req, res) {
     db.Recipe
       .findById(req.params.id)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  // TODO findAllIngredients
-
+  //  search "GET /api/v1/recipe/search"
+  search(req, res) {
+    db.Recipe
+      .find({
+        src: { $regex: new RegExp(req.query.q, "i") },
+      })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
   // TODO findAllByAuthor
 
   // create (adding recipe to correct family) "POST /api/v1/recipe/family/:(family)id"
