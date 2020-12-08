@@ -1,5 +1,10 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Image,
+} from "react-bootstrap";
 
 // import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 // // import API from "../utils/API.js";
@@ -14,7 +19,7 @@ export function RecipeListItem({
   title,
   ingredients,
   href,
-  Thumbnail,
+  thumbnail,
   description,
   instructions,
   prep,
@@ -25,32 +30,42 @@ export function RecipeListItem({
       <Container>
         <Row>
           <Col size="xs-8 sm-9">
-            <h3>{title}</h3>
-            {Thumbnail ? <img src={Thumbnail} alt={title} /> : null}
-            <p>
-              {description ? (
+            <Row>
+              <Col sm={2}>
+                {thumbnail ? <Image src={thumbnail} alt={title} fluid rounded style={{ maxWidth: "100%", height: "auto" }} /> : null}
+              </Col>
+              <Col>
+                <h3>{title}</h3>
                 <p>
-                  {description}
-                  <br />
-                  {prep ? `Prep Time: ${prep}` : null}
-                  {cook ? `Cook Time: ${cook}` : null}
+                  {description ? (
+                    <p>
+                      {description}
+                      <br />
+                      {prep ? `Prep Time: ${prep}` : null}
+                      {cook ? `Cook Time: ${cook}` : null}
+                    </p>
+                  ) : null}
+                  {ingredients ? (
+                    <p>
+                      Ingredients:
+                      <ul>
+                        {ingredients.map((ingredient) => (<li>{ingredient}</li>))}
+                      </ul>
+                    </p>
+                  ) : null}
+                  {instructions ? (
+                    <ul>
+                      {instructions.map((instruction) => (<li>{instruction}</li>))}
+                    </ul>
+                  ) : null }
                 </p>
-              ) : null}
-              Ingredients:
-              <ul>
-                {ingredients.map((ingredient) => (<li>{ingredient}</li>))}
-              </ul>
-              {instructions ? (
-                <ul>
-                  {instructions.map((instruction) => (<li>{instruction}</li>))}
-                </ul>
-              ) : null }
-            </p>
-            {href ? (
-              <a rel="noreferrer noopener" target="_blank" href={href}>
-                Go to recipe!
-              </a>
-            ) : null}
+                {href ? (
+                  <a rel="noreferrer noopener" target="_blank" href={href}>
+                    Go to recipe!
+                  </a>
+                ) : null}
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>
