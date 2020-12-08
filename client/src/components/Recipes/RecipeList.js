@@ -14,19 +14,20 @@ export function RecipeListItem({
   title,
   ingredients,
   href,
-  Thumbnail,
+  thumbnail,
   description,
   instructions,
   prep,
   cook,
 }) {
+  console.log(href);
   return (
     <li className="list-group-item">
       <Container>
         <Row>
           <Col size="xs-8 sm-9">
             <h3>{title}</h3>
-            {Thumbnail ? <img src={Thumbnail} alt={title} /> : null}
+            {thumbnail ? <img src={thumbnail} alt={title} /> : null}
             <p>
               {description ? (
                 <p>
@@ -36,10 +37,14 @@ export function RecipeListItem({
                   {cook ? `Cook Time: ${cook}` : null}
                 </p>
               ) : null}
-              Ingredients:
-              <ul>
-                {ingredients.map((ingredient) => (<li>{ingredient}</li>))}
-              </ul>
+              {ingredients ? (
+                <p>
+                  Ingredients:
+                  <ul>
+                    {ingredients.map((ingredient) => (<li>{ingredient}</li>))}
+                  </ul>
+                </p>
+              ) : null}
               {instructions ? (
                 <ul>
                   {instructions.map((instruction) => (<li>{instruction}</li>))}

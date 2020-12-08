@@ -53,9 +53,9 @@ function SearchTab() {
     data.map((hits) => {
       const ingredientObj = {}; (
         ingredientObj.title = hits.recipe.label,
-        ingredientObj.Thumbnail = hits.recipe.image,
-        ingredientObj.ingredients = hits.recipe.ingredientLines,
-        ingredientObj.href = hits.recipe.source,
+        ingredientObj.thumbnail = hits.recipe.image,
+        // ingredientObj.ingredients = hits.recipe.ingredientLines,
+        ingredientObj.href = hits.recipe.url,
         output.push(ingredientObj)
       );
     });
@@ -99,7 +99,7 @@ function SearchTab() {
                   title={recipe.title}
                   ingredients={recipe.ingredients}
                   href={recipe.href}
-                  Thumbnail={recipe.Thumbnail}
+                  thumbnail={recipe.thumbnail}
                 />
               ))}
             </RecipeList>
