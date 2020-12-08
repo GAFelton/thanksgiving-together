@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import { RecipeList, RecipeListItem } from "../RecipeList";
 import Input from "./Input";
+import API from "../../../utils/API";
 
 function SearchTab() {
   // eslint-disable-next-line no-unused-vars
@@ -52,15 +53,26 @@ function SearchTab() {
     // eslint-disable-next-line array-callback-return
     data.map((hits) => {
       const ingredientObj = {}; (
+        ingredientObj.key = hits.recipe.uri,
         ingredientObj.title = hits.recipe.label,
         ingredientObj.Thumbnail = hits.recipe.image,
         ingredientObj.ingredients = hits.recipe.ingredientLines,
         ingredientObj.href = hits.recipe.source,
+        ingredientObj.saved = false,
         output.push(ingredientObj)
       );
     });
     setRecipes(output);
   };
+
+  function findRecipeInState(id) {
+    return recipes.filter((item) => item.key === id);
+  }
+
+  function handleRecipeSave(key) {
+    const recipeToSave = findRecipeInState(key);
+    API.recipes.create(recipeToSave[0]);
+  }
 
   return (
     <>
@@ -95,11 +107,13 @@ function SearchTab() {
             <RecipeList>
               {recipes.map((recipe) => (
                 <RecipeListItem
-                  key={recipe.title}
+                  key={recipe.key}
                   title={recipe.title}
                   ingredients={recipe.ingredients}
                   href={recipe.href}
                   Thumbnail={recipe.Thumbnail}
+                  checkbox={() => handleRecipeSave(recipe.key)}
+                  saved={recipe.saved}
                 />
               ))}
             </RecipeList>
