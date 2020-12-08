@@ -17,6 +17,7 @@ function ZoomClient({ userId }) {
     <>
       <iframe
         src={`https://ttzoomclient.herokuapp.com/${userId}`}
+        allow="camera;microphone"
         title="Zoom Client"
         style={frameStyle}
       />

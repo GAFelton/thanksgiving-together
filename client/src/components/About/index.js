@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 
 function About() {
   return (
-    <div className="container">
+    <div className="container cardText">
       <Card className="bg-dark">
         <Card.Img src="https://images.pexels.com/photos/5662351/pexels-photo-5662351.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Thanksgiving Table" />
         <Card.ImgOverlay>
@@ -38,7 +38,7 @@ function About() {
         </Card.ImgOverlay>
       </Card>
       <br />
-      <div style={{ color: "black", fontSize: "1.7vw" }} className="paragraph">
+      <div className="paragraph">
         <p>
           With the ever increasing cases of Covid-19 and Thanksgiving coming up,
           it is more important than ever that people wear masks and refrain from

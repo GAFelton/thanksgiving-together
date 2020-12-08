@@ -33,7 +33,7 @@ function InviteButton() {
 
     <>
       <Button onClick={handleClick}>
-        Generate Invite Link
+        Generate Family Invite Link
       </Button>
       {show ? (
         <Alert className="mt2" style={{ width: "fit-content" }} variant="success">

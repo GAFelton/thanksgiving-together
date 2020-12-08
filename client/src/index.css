@@ -1,0 +1,13 @@
+body .paragraph{
+  text-align: left;
+  color: black;
+  font-size: 1.3vw;
+}
+
+.h1Style {
+  text-shadow: 1px 2px 1px #000000;
+  text-align: center;
+  color: #F5E625;
+  font-size: 6vw;
+  font-family: Kaushan Script, cursive;
+};

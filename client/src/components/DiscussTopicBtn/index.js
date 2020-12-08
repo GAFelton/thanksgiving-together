@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import API from "../../utils/API";
 
@@ -38,9 +39,9 @@ function DiscussTopicBtn() {
   // Topics should be displayed in a child component, which can be placed elsewhere on the page.
   return (
     <Col>
-      <button className="DiscussTopicBtn" onClick={showDiscussionTopic} type="button" name="DiscussTopicBtn">
+      <Button variant="primary" className="DiscussTopicBtn" onClick={showDiscussionTopic} type="button" name="DiscussTopicBtn">
         Help! I need a discussion topic.
-      </button>
+      </Button>
       { // TODO: Figure out where to display the fetched discussion topic.
       }
       <div className="DiscussTopicArea">

@@ -1,19 +1,5 @@
 import React from "react";
 
-const h1Style = {
-  textShadow: "1px 2px 1px #000000",
-  textAlign: "center",
-  color: "#F5E625",
-  fontSize: "6vw",
-  fontFamily: "Kaushan Script, cursive",
-};
-
-const bStyle = {
-  textAlign: "left",
-  color: "black",
-  fontSize: "1.7vw",
-};
-
 const h2Style = {
   textAlign: "left",
   color: "#fd7e14",
@@ -23,8 +9,8 @@ const h2Style = {
 
 function How() {
   return (
-    <div className="flex-container" style={bStyle}>
-      <h1 style={h1Style}>
+    <div className="paragraph flex-container">
+      <h1 className="h1Style">
         How-To
       </h1>
       <br />
