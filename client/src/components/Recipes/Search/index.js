@@ -7,14 +7,19 @@ import {
   Button,
 } from "react-bootstrap";
 import axios from "axios";
+import { useAuth } from "../../AuthContext";
 import { RecipeList, RecipeListItem } from "../RecipeList";
 import Input from "./Input";
 import API from "../../../utils/API";
+import { ACCESS_TOKEN_NAME } from "../../../constants/apiConstants";
 
 function SearchTab() {
   // eslint-disable-next-line no-unused-vars
   const [recipes, setRecipes] = useState([]);
   const [recipeSearch, setRecipeSearch] = useState("");
+
+  const { user } = useAuth();
+  const storedJWT = localStorage.getItem(ACCESS_TOKEN_NAME);
 
   const handleInputChange = (event) => {
     // Destructure the name and value properties off of event.target
@@ -30,7 +35,7 @@ function SearchTab() {
     const config = {
       method: "get",
       url: `https://api.edamam.com/search?q=${recipeSearch}&app_id=769d4a23&app_key=39e4c3da53f52a122f17c5947c2f73fb&ingredients`,
-      headers: { },
+      headers: {},
     };
 
     axios(config)
@@ -70,8 +75,24 @@ function SearchTab() {
   }
 
   function handleRecipeSave(key) {
-    const recipeToSave = findRecipeInState(key);
-    API.recipes.create(recipeToSave[0]);
+    const familyID = user.family;
+    const unsanitizedRecipe = findRecipeInState(key);
+    const recipeToSave = {};
+    if (unsanitizedRecipe[0]) {
+      recipeToSave.title = unsanitizedRecipe[0].title;
+      recipeToSave.src = unsanitizedRecipe[0].href;
+      recipeToSave.photo = unsanitizedRecipe[0].Thumbnail;
+      recipeToSave.author = user.id;
+    }
+    try {
+      API.recipes.create(
+        { headers: { token: storedJWT } },
+        recipeToSave,
+        familyID,
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -107,7 +128,7 @@ function SearchTab() {
             <RecipeList>
               {recipes.map((recipe) => (
                 <RecipeListItem
-                  key={recipe.key}
+                  unique={recipe.key}
                   title={recipe.title}
                   ingredients={recipe.ingredients}
                   href={recipe.href}
