@@ -180,10 +180,12 @@ function RegistrationForm({ match, showError }) {
   // When the user submits the registration form, this function checks for password match.
   const handleSubmitClick = (e) => {
     e.preventDefault();
-    if (state.password === state.confirmPassword) {
+    if (state.password === state.confirmPassword && state.password.length >= 6) {
       sendDetailsToServer();
-    } else {
+    } else if (state.password !== state.confirmPassword) {
       showError("Passwords do not match");
+    } else if (state.password.length < 6) {
+      showError("Password is not long enough (minimum 6 characters)");
     }
   };
   // Rendering the Registration form.

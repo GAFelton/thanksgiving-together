@@ -1,13 +1,16 @@
-
-
 body{
     
     background-image: linear-gradient(to top, #d46e0e 0%, #f9d423 100%) ;
 }
+
+.btn {
+    background-color: #fd7e14;
+}
+
 .login-card {
    
-    min-height: 100vh;
-    background-color: #f5e625;
+    min-height: 80vh;
+    background-color: #F5E625;
    
 }
 
