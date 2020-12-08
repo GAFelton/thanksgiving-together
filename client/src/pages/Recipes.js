@@ -4,6 +4,7 @@ import {
   Row,
   Col,
   Tabs,
+  Tab,
 } from "react-bootstrap";
 import { SearchTab, SavedTab } from "../components/Recipes/index";
 import "./recipes.css";
@@ -18,12 +19,12 @@ function RecipesPage() {
             <Row>
               <Col>
                 <Tabs>
-                  <Tabs.Tab eventKey="search" title="Search" tabClassName="recipeTab">
+                  <Tab eventKey="search" title="Search" tabClassName="recipeTab" mountOnEnter unmountOnExit>
                     <SearchTab />
-                  </Tabs.Tab>
-                  <Tabs.Tab eventKey="saved" title="Saved" tabClassName="recipeTab">
+                  </Tab>
+                  <Tab eventKey="saved" title="Saved" tabClassName="recipeTab">
                     <SavedTab />
-                  </Tabs.Tab>
+                  </Tab>
                 </Tabs>
               </Col>
             </Row>
