@@ -16,6 +16,7 @@ export function RecipeList({ children }) {
 
 // RecipeListItem renders a bootstrap list item containing data from the recipe api call
 export function RecipeListItem({
+  unique,
   title,
   ingredients,
   href,
@@ -28,7 +29,7 @@ export function RecipeListItem({
   saved,
 }) {
   return (
-    <li className="list-group-item">
+    <li className="list-group-item" key={unique}>
       <Container>
         <Row>
           <Col size="xs-8 sm-9">
@@ -57,8 +58,8 @@ export function RecipeListItem({
               </a>
             ) : null}
             {checkbox ? (
-              <Form>
-                <Form.Text muted>Save Recipe?</Form.Text>
+              <Form inline>
+                <Form.Text muted>Save Recipe?  </Form.Text>
                 <Form.Check aria-label={`Save Recipe: ${title}`} onChange={checkbox} checked={saved ? !!saved : undefined} />
               </Form>
             ) : null}
