@@ -4,9 +4,9 @@ import {
   Row,
   Col,
   Tabs,
-  Tab,
 } from "react-bootstrap";
 import { SearchTab, SavedTab } from "../components/Recipes/index";
+import "./recipes.css";
 
 function RecipesPage() {
   return (
@@ -16,14 +16,16 @@ function RecipesPage() {
           <Col md={12}>
             <h1 className="text-center mb-4 h1Style">Our Recipes</h1>
             <Row>
-              <Tabs>
-                <Tab eventKey="search" title="Search">
-                  <SearchTab />
-                </Tab>
-                <Tab eventKey="saved" title="Saved">
-                  <SavedTab />
-                </Tab>
-              </Tabs>
+              <Col>
+                <Tabs>
+                  <Tabs.Tab eventKey="search" title="Search" tabClassName="recipeTab">
+                    <SearchTab />
+                  </Tabs.Tab>
+                  <Tabs.Tab eventKey="saved" title="Saved" tabClassName="recipeTab">
+                    <SavedTab />
+                  </Tabs.Tab>
+                </Tabs>
+              </Col>
             </Row>
           </Col>
         </Row>
