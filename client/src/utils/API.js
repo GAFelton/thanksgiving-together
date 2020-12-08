@@ -15,7 +15,7 @@ const family = {
   findIdByCode: (data) => API.post("/family/code", data),
   update: (headers, data, params) => API.put(`/family/${params}`, data, headers),
   create: (data) => API.post("/family", data),
-  archive: (headers, params) => API.put(`/family/archive/${params}`, headers),
+  archive: (headers, params) => API.put(`/family/archive/${params}`, "", headers),
 };
 
 // User axios routes
@@ -26,7 +26,7 @@ const users = {
   get: (headers, params) => API.get(`/user/${params}`, headers),
   update: (headers, data, params) => API.put(`/user/${params}`, data, headers),
   create: (data) => API.post("/user/family", data),
-  archive: (headers, params) => API.put(`/user/archive${params}`, headers),
+  archive: (headers, params) => API.put(`/user/archive${params}`, "", headers),
 };
 
 // Recipe axios routes
@@ -36,7 +36,7 @@ const recipes = {
   get: (headers, params) => API.get(`/recipe/${params}`, headers),
   update: (headers, data, params) => API.put(`/recipe/${params}`, data, headers),
   create: (headers, data, params) => API.post(`/recipe/family/${params}`, data, headers),
-  archive: (headers, params) => API.put(`/recipe/archive/${params}`, headers),
+  archive: (headers, params) => API.put(`/recipe/archive/${params}`, "", headers),
 };
 
 // Discussion Topics axios routes
