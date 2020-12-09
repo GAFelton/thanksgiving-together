@@ -106,7 +106,7 @@ function UserSettingsComponent() {
       </Button>
 
       {/* This is the User settings form on the modal. */}
-      <Modal show={show} onHide={handleClose}>
+      <Modal className="pageModal" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Adjust User Details</Modal.Title>
         </Modal.Header>
