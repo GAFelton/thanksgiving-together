@@ -13,7 +13,11 @@ This project was initially built in Nov. 2020 over 20 days by 5 people. Our goal
 
 [Link to the Deployed Site](https://thanksgiving-together.herokuapp.com/)     ||    [Link to the GitHub Repo](https://github.com/GAFelton/thanksgiving-together)
 
+
+
 ![Recipes-Screenshot](./Images/recipes-screenshot.png)
+
+
 
   ## Table of Contents
 
