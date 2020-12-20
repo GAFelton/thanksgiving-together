@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import "./RegistrationForm.css";
 import {
   Alert, Button, Card, Col, Form, Row,
 } from "react-bootstrap";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import API from "../../utils/API";
 
 // The registration form allows users to sign up for a new account.

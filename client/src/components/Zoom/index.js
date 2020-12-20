@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import API from "../../utils/API";
 import ZoomClient from "./zoomClient";
 import ZoomControl from "./zoomControl";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 // Exports a div containing our zoom client and join meeting button
 function Zoom() {

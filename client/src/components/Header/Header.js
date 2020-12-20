@@ -2,7 +2,7 @@ import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { useHistory, withRouter } from "react-router-dom";
 import RecipesPage from "../../pages/Recipes";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import Games from "../Games";
 import About from "../About";
 import How from "../How";

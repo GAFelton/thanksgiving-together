@@ -3,7 +3,7 @@ import {
   Button, Alert,
 } from "react-bootstrap";
 import API from "../../utils/API";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 function InviteButton() {
   const [inviteURL, setInviteURL] = useState();
