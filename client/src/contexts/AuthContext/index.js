@@ -1,7 +1,7 @@
 import React from "react";
 import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 import API from "../../utils/API";
-import LoadingComponent from "../LoadingComponent";
+import LoadingComponent from "../../components/LoadingComponent";
 
 const AuthContext = React.createContext(
   { user: null },
