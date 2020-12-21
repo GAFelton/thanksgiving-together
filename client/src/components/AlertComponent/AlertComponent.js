@@ -14,13 +14,7 @@ function AlertComponent(props) {
     setShow(false);
     hideError(null);
   };
-  // const openModal = () => {
-  //   toggleDisplay("block");
-  // };
-  // const closeModal = () => {
-  //   toggleDisplay("none");
-  //   hideError(null);
-  // };
+
   useEffect(() => {
     if (errorMessage !== null) {
       openModal();

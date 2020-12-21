@@ -1,3 +1,13 @@
+:root {
+  --titleText: Kaushan Script, cursive;
+  --titleColor: #F5E625;
+}
+
+body{
+  background-image: linear-gradient(to top, #ffffff 0%, #ffffff 50%) ;
+  min-height: 100vh;
+}
+
 body .paragraph {
   text-align: left;
   color: black;
@@ -5,9 +15,9 @@ body .paragraph {
 }
 
 body .cardText {
-  font-family: Kaushan Script, cursive;
+  font-family: var(--titleText);
   text-align: center;
-  color: #F5E625;
+  color: var(--titleColor);
   text-shadow: 4px 4px 6px #000000;
 }
 
@@ -15,13 +25,62 @@ body h2 {
   text-align: left;
   color: #fd7e14;
   font-size: 3.5vw;
-  font-family: Kaushan Script, cursive;
+  font-family: var(--titleText);
 }
 
 .h1Style {
   text-shadow: 1px 2px 1px #000000;
   text-align: center;
-  color: #F5E625;
+  color: var(--titleColor);
   font-size: 6vw;
-  font-family: Kaushan Script, cursive;
-};
+  font-family: var(--titleText);
+}
+
+.loginText {
+  color: #fd7e14;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.registerText {
+  color: #fd7e14;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.successMessage {
+  color: green;
+  font-weight: bold;
+}
+
+.btn {
+  background-color: #fd7e14;
+}
+
+.login-card {
+  min-height: 80vh;
+  background-color: #F5E625;
+}
+
+.delete-btn {
+  float: right;
+  color: #e74944;
+}
+
+.appModal {
+  min-width: 90vw;
+  background-color: white;
+}
+
+.modal-content {
+  background-color: transparent;
+  border: transparent;
+}
+
+.modal-header {
+  border-bottom: 0px;
+}
+
+.modal-footer {
+  border-top: 0px;
+}

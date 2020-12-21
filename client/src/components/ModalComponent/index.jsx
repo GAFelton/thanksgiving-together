@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./ModalComponent.css";
 import {
   Button, Modal, Nav,
 } from "react-bootstrap";
@@ -21,7 +20,7 @@ function ModalComponent({ title, children }) {
         {title}
       </Nav.Link>
 
-      <Modal show={show} onHide={handleClose} className="pageModal" dialogClassName="thanksgiving-modal">
+      <Modal show={show} onHide={handleClose} className="pageModal" dialogClassName="appModal">
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
