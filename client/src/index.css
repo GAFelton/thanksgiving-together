@@ -1,3 +1,5 @@
+/* To create a new theme, copy these :root variables to the end of the ThemeContext file,
+convert to a JS array, and change values accordingly. DO NOT ALTER THE VARIABLES HERE. */
 :root {
   --titleFont: 'Kaushan Script', cursive;
   --bodyFont: 'Merriweather', serif;
