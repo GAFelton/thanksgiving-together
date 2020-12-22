@@ -59,7 +59,7 @@ function Header({ showError }) {
           </Navbar>
         ) : (
           // This is the PublicRoute Navbar - It displays only for non-logged users
-          <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
+          <Navbar collapseOnSelect fixed="sticky" expand="lg" className="headerBackground" variant="light">
             <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
