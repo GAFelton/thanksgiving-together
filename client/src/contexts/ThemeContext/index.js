@@ -60,14 +60,14 @@ export { ThemeProvider, useTheme };
 // styles
 const styles = {
   basicTheme: [
-    // "--border: rgba(0,0,0,.2)",
-    // "--shadow: #000",
-    // "--heading: rgba(255,100,0,1)",
-    // "--main: #1d8f13",
-    // "--text: #000",
-    // "--textAlt: #fff",
-    // "--inactive: rgba(0,0,0,.3)",
-    // "--background: white",
+    "--titleFont: 'Kaushan Script', cursive",
+    "--bodyFont: 'Merriweather', serif",
+    "--primaryColor: #F5E625",
+    "--secondaryColor: #fd7e14",
+    "--textColor: #1a1919",
+    "--backgroundColor: #f3f3f3",
+    "--pageBackground: linear-gradient(to top, #ffffff 0%, #f3f3f3 50%)",
+    "--modalBackground: #f3f3f3",
   ],
   thanksgivingTheme: [
     "--border: rgba(255,255,255,.1)",
