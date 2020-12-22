@@ -1,49 +1,60 @@
 :root {
-  --titleText: Kaushan Script, cursive;
-  --titleColor: #F5E625;
+  --titleFont: 'Kaushan Script', cursive;
+  --bodyFont: 'Merriweather', serif;
+  --primaryColor: #F5E625;
+  --secondaryColor: #fd7e14;
+  --textColor: #1a1919;
+  --backgroundColor: #f3f3f3;
+  --pageBackground: linear-gradient(to top, #ffffff 0%, #f3f3f3 50%);
+  --modalBackground: #f3f3f3;
 }
 
 body{
-  background-image: linear-gradient(to top, #ffffff 0%, #ffffff 50%) ;
+  background-image: var(--pageBackground);
   min-height: 100vh;
+  font-family: var(--bodyFont);
+  color: var(--textColor);
 }
 
-body .paragraph {
+body .aboutParagraph {
   text-align: left;
-  color: black;
   font-size: 1.3vw;
 }
 
 body .cardText {
-  font-family: var(--titleText);
+  color: var(--primaryColor);
+  font-family: var(--titleFont);
   text-align: center;
-  color: var(--titleColor);
   text-shadow: 4px 4px 6px #000000;
 }
 
 body h2 {
+  color: var(--secondaryColor);
+  font-family: var(--titleFont);
   text-align: left;
-  color: #fd7e14;
   font-size: 3.5vw;
-  font-family: var(--titleText);
+}
+
+.headerBackground {
+  background-color: var(--primaryColor);
 }
 
 .h1Style {
-  text-shadow: 1px 2px 1px #000000;
+  color: var(--primaryColor);
+  font-family: var(--titleFont);
   text-align: center;
-  color: var(--titleColor);
   font-size: 6vw;
-  font-family: var(--titleText);
+  text-shadow: 1px 2px 1px #000000;
 }
 
 .loginText {
-  color: #fd7e14;
+  color: var(--secondaryColor);
   font-weight: bold;
   cursor: pointer;
 }
 
 .registerText {
-  color: #fd7e14;
+  color: var(--secondaryColor);
   font-weight: bold;
   cursor: pointer;
 }
@@ -54,12 +65,12 @@ body h2 {
 }
 
 .btn {
-  background-color: #fd7e14;
+  background-color: var(--secondaryColor);
 }
 
 .login-card {
   min-height: 80vh;
-  background-color: #F5E625;
+  background-color: var(--primaryColor);
 }
 
 .delete-btn {
@@ -69,7 +80,7 @@ body h2 {
 
 .appModal {
   min-width: 90vw;
-  background-color: white;
+  background-color: var(--modalBackground);
 }
 
 .modal-content {
