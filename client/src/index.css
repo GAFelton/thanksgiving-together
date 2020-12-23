@@ -1,27 +1,99 @@
-body .paragraph {
+/* To create a new theme, copy these :root variables to the end of the ThemeContext file,
+convert to a JS array, and change values accordingly. DO NOT ALTER THE VARIABLES HERE. */
+:root {
+  --titleFont: 'Kaushan Script', cursive;
+  --bodyFont: 'Merriweather', serif;
+  --primaryColor: #F5E625;
+  --secondaryColor: #fd7e14;
+  --textColor: #1a1919;
+  --backgroundColor: #f3f3f3;
+  --pageBackground: linear-gradient(to top, #ffffff 0%, #f3f3f3 50%);
+  --modalBackground: #f3f3f3;
+}
+
+body{
+  background-image: var(--pageBackground);
+  min-height: 100vh;
+  font-family: var(--bodyFont);
+  color: var(--textColor);
+}
+
+body .aboutParagraph {
   text-align: left;
-  color: black;
   font-size: 1.3vw;
 }
 
 body .cardText {
-  font-family: Kaushan Script, cursive;
+  color: var(--primaryColor);
+  font-family: var(--titleFont);
   text-align: center;
-  color: #F5E625;
   text-shadow: 4px 4px 6px #000000;
 }
 
 body h2 {
+  color: var(--secondaryColor);
+  font-family: var(--titleFont);
   text-align: left;
-  color: #fd7e14;
   font-size: 3.5vw;
-  font-family: Kaushan Script, cursive;
+}
+
+.headerBackground {
+  background-color: var(--primaryColor);
 }
 
 .h1Style {
-  text-shadow: 1px 2px 1px #000000;
+  color: var(--primaryColor);
+  font-family: var(--titleFont);
   text-align: center;
-  color: #F5E625;
   font-size: 6vw;
-  font-family: Kaushan Script, cursive;
-};
+  text-shadow: 1px 2px 1px #000000;
+}
+
+.loginText {
+  color: var(--secondaryColor);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.registerText {
+  color: var(--secondaryColor);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.successMessage {
+  color: green;
+  font-weight: bold;
+}
+
+.btn {
+  background-color: var(--secondaryColor);
+}
+
+.login-card {
+  min-height: 80vh;
+  background-color: var(--primaryColor);
+}
+
+.delete-btn {
+  float: right;
+  color: #e74944;
+}
+
+.appModal {
+  min-width: 90vw;
+  background-color: var(--modalBackground);
+}
+
+.modal-content {
+  background-color: transparent;
+  border: transparent;
+}
+
+.modal-header {
+  border-bottom: 0px;
+}
+
+.modal-footer {
+  border-top: 0px;
+}

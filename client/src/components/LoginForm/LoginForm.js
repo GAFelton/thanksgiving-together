@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import "./LoginForm.css";
 import { Link, withRouter } from "react-router-dom";
 import {
   Alert, Button, Card, Col, Form, Row,
 } from "react-bootstrap";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import API from "../../utils/API";
 
 // The Login Form is for users who already have an account.

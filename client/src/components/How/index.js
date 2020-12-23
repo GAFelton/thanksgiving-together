@@ -2,7 +2,7 @@ import React from "react";
 
 function How() {
   return (
-    <div className="paragraph flex-container">
+    <div className="aboutParagraph flex-container">
       <h1 className="h1Style">
         How-To
       </h1>

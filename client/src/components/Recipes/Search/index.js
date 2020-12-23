@@ -7,7 +7,7 @@ import {
   Button,
 } from "react-bootstrap";
 import axios from "axios";
-import { useAuth } from "../../AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import { RecipeList, RecipeListItem } from "../RecipeList";
 import Input from "./Input";
 import API from "../../../utils/API";

@@ -30,7 +30,7 @@ function About() {
         </Card.ImgOverlay>
       </Card>
       <br />
-      <div className="paragraph">
+      <div className="aboutParagraph">
         <p>
           With the ever increasing cases of Covid-19 and Thanksgiving coming up,
           it is more important than ever that people wear masks and refrain from
