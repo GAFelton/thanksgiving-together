@@ -21,7 +21,7 @@ export function TextArea(props) {
 export function FormBtn(props) {
   const { children } = props;
   return (
-    <button {...props} type="submit" style={{ float: "right", marginBottom: 10 }} className="btn btn-success">
+    <button {...props} type="submit" style={{ float: "right", marginBottom: 10 }} className="btn">
       {children}
     </button>
   );

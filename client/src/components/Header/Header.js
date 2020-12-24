@@ -23,7 +23,7 @@ function Header({ showError }) {
     if (user) {
       return (
         <div className="ml-auto">
-          <button className="btn btn-danger" type="button" onClick={() => onLogout()}>Logout</button>
+          <button className="btn btn-secondary" type="button" onClick={() => onLogout()}>Logout</button>
         </div>
       );
     }
@@ -34,7 +34,7 @@ function Header({ showError }) {
       {user
         ? (
           // This is the PrivateRoute Navbar - It displays only for logged-in users.
-          <Navbar collapseOnSelect fixed="sticky" expand="lg" bg="warning" variant="light">
+          <Navbar collapseOnSelect fixed="sticky" expand="lg" className="headerBackground headerText">
             <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
@@ -59,7 +59,7 @@ function Header({ showError }) {
           </Navbar>
         ) : (
           // This is the PublicRoute Navbar - It displays only for non-logged users
-          <Navbar collapseOnSelect fixed="sticky" expand="lg" className="headerBackground" variant="light">
+          <Navbar collapseOnSelect fixed="sticky" expand="lg" className="headerBackground headerText">
             <Navbar.Brand href="/">Thanksgiving Together</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">

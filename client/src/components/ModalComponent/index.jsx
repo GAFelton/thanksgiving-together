@@ -28,7 +28,7 @@ function ModalComponent({ title, children }) {
           {children}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>

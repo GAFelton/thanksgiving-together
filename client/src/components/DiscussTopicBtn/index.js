@@ -39,7 +39,7 @@ function DiscussTopicBtn() {
   // Topics should be displayed in a child component, which can be placed elsewhere on the page.
   return (
     <Col>
-      <Button variant="primary" className="DiscussTopicBtn" onClick={showDiscussionTopic} type="button" name="DiscussTopicBtn">
+      <Button className="DiscussTopicBtn" onClick={showDiscussionTopic} type="button" name="DiscussTopicBtn">
         Help! I need a discussion topic.
       </Button>
       { // TODO: Figure out where to display the fetched discussion topic.

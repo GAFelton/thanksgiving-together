@@ -261,7 +261,7 @@ function RegistrationForm({ match, showError }) {
             </Form.Group>
             <Button
               type="submit"
-              className="btn btn-dark"
+              className="btn"
               onClick={handleSubmitClick}
             >
               Register

@@ -41,6 +41,14 @@ body h2 {
   background-color: var(--primaryColor);
 }
 
+.headerText .navbar-brand {
+  color: var(--headerText);
+}
+
+.nav-link {
+  color: var(--headerText) !important;
+}
+
 .h1Style {
   color: var(--primaryColor);
   font-family: var(--titleFont);
@@ -68,6 +76,7 @@ body h2 {
 
 .btn {
   background-color: var(--secondaryColor);
+  border-color: var(--secondaryColor);
 }
 
 .login-card {

@@ -2,7 +2,7 @@
 import React, { useState, useLayoutEffect } from "react";
 
 const ThemeContext = React.createContext({
-  holiday: "",
+  holiday: "winter",
 });
 
 function ThemeProvider({ children }) {
@@ -65,6 +65,7 @@ const styles = {
     "--primaryColor: #F5E625",
     "--secondaryColor: #fd7e14",
     "--textColor: #1a1919",
+    "--headerText: #000000",
     "--backgroundColor: #f3f3f3",
     "--pageBackground: linear-gradient(to top, #ffffff 0%, #f3f3f3 50%)",
     "--modalBackground: #f3f3f3",
@@ -80,13 +81,14 @@ const styles = {
     "--background: #2D2D2D",
   ],
   winterTheme: [
-    "--border: rgba(255,255,255,.1)",
-    "--shadow: #000",
-    "--heading: rgba(255,255,5,.9)",
-    "--main: #79248f",
-    "--text: rgb(255, 255, 255)",
-    "--textAlt: #fff",
-    "--inactive: rgba(255,255,255,.3)",
-    "--background: #2D2D2D",
+    "--titleFont: 'Kaushan Script', cursive",
+    "--bodyFont: 'Merriweather', serif",
+    "--primaryColor: #921515",
+    "--secondaryColor: #225f0f",
+    "--textColor: #1a1919",
+    "--headerText: #f3f3f3",
+    "--backgroundColor: #f3f3f3",
+    "--pageBackground: linear-gradient(to top, #ffffff 0%, #f3f3f3 50%)",
+    "--modalBackground: #f3f3f3",
   ],
 };
