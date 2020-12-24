@@ -4,6 +4,10 @@
   margin-bottom: 1px;
 }
 
+.recipesTabs {
+  padding-left: 1em;
+}
+
 a.recipeTab.nav-item.nav-link{
   padding: 5px;
 }

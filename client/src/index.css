@@ -41,12 +41,12 @@ body h2 {
   background-color: var(--primaryColor);
 }
 
-.headerText .navbar-brand {
+.headerText .navbar-brand{
   color: var(--headerText);
 }
 
-.nav-link {
-  color: var(--headerText) !important;
+.headerText .navbar-nav .nav-link {
+  color: var(--headerText);
 }
 
 .h1Style {

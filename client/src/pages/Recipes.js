@@ -20,7 +20,7 @@ function RecipesPage({ showError }) {
               <Col>
                 {/* Tabs will unmountOnExit to trigger SavedTab's useEffect & load latest searches.
                 This unloads SearchTab (and the current search), so is not ideal. */}
-                <Tabs mountOnEnter unmountOnExit>
+                <Tabs className="recipesTabs" mountOnEnter unmountOnExit>
                   <Tab eventKey="search" title="Search" tabClassName="recipeTab">
                     <SearchTab showError={showError} />
                   </Tab>
