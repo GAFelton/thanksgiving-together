@@ -11,7 +11,7 @@ The app is built on the MERN stack, uses react-bootstrap as a CSS framework, and
 
 This project was initially built in Nov. 2020 over 20 days by 5 people. Our goal is to help families share this holiday *no matter the distance*.
 
-[Link to the Deployed Site](https://thanksgiving-together.herokuapp.com/)     ||    [Link to the GitHub Repo](https://github.com/GAFelton/thanksgiving-together)
+[Link to the GitHub Repo](https://github.com/GAFelton/thanksgiving-together)
 
 
 
